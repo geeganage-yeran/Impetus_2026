@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import HeroSection from './components/HeroSection'
 import NavBar from './components/NavBar'
@@ -15,8 +13,6 @@ import VenueSection from './components/VenueSection'
 import ContactSection from './components/ContactSection'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
     <NavBar/>
