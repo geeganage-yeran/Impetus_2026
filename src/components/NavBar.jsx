@@ -48,8 +48,8 @@ export default function Navigation() {
                 <img
                   src={
                     isScrolled
-                      ? "./src/assets/blacklogo.png"
-                      : "./src/assets/whitelogo.png"
+                      ? "../assets/blacklogo.png"
+                      : "../assets/whitelogo.png"
                   }
                   alt="IMPETUS IEEE UWU"
                   className="w-full h-full object-contain transition-opacity duration-300"
