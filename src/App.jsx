@@ -1,33 +1,32 @@
-import { useState } from 'react'
-import './App.css'
-import HeroSection from './components/HeroSection'
-import NavBar from './components/NavBar'
-import ThemeSection from './components/ThemeSection'
-import TargetAudience from './components/TargetAudience'
-import ImportantDates from './components/ImportantDates'
-import SubmissionSection from './components/SubmissionSection'
-import SpeakersSection from './components/SpeakersSection'
-import SponsorsSection from './components/SponsorsSection'
-import Footer from './components/Footer'
-import VenueSection from './components/VenueSection'
-import ContactSection from './components/ContactSection'
+import { Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+
+// Pages
+import Home from './pages/Home';
+import CallForPapers from './pages/CallForPapers';
+import Registration from './pages/Registration';
+import Committee from './pages/Committe';
+import Contact from './pages/Contact';
+
+import './App.css';
 
 function App() {
   return (
-    <>
-    <NavBar/>
-    <HeroSection/>
-    <ThemeSection/>
-    <TargetAudience/>
-    <ImportantDates/>
-    <SubmissionSection/>
-    <SpeakersSection/>
-    <SponsorsSection/>
-    <VenueSection/>
-    <ContactSection/>
-    <Footer/>
-    </>
-  )
+    <div className="flex flex-col min-h-screen">
+      <NavBar />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cfp" element={<CallForPapers />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/committee" element={<Committee />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
