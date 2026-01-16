@@ -166,7 +166,7 @@ export default function HeroAndCountdown() {
               onClick={() => scrollToSection('submission')}
               className="px-8 py-4 cursor-pointer bg-white/15 backdrop-blur-md border-2 border-white/30 text-white rounded-lg font-semibold text-base transition-all hover:bg-white/20 w-full sm:w-auto"
             >
-              Submit Abstract
+              Submit Papers
             </button>
           </div>
         </div>

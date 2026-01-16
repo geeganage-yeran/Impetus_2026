@@ -26,14 +26,14 @@ export default function Contact() {
         <h2 className="text-2xl font-bold text-center mb-8">Coordinators</h2>
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto text-center">
             <div className="p-6 bg-gray-50 rounded-xl">
-                <h3 className="font-bold text-lg">Dr. Coordinator Name</h3>
-                <p className="text-blue-600">Program Coordinator</p>
-                <p className="text-gray-500">+94 71 234 5678</p>
+                <h3 className="font-bold text-lg">Prof. Sandya Kumari</h3>
+                <p className="text-blue-600">Coordinator</p>
+                <p className="text-gray-500">sandya@uwu.ac.lk</p>
             </div>
             <div className="p-6 bg-gray-50 rounded-xl">
-                <h3 className="font-bold text-lg">Ms. Secretary Name</h3>
+                <h3 className="font-bold text-lg">Ms. Rashmi Abeywardhana</h3>
                 <p className="text-blue-600">Secretary</p>
-                <p className="text-gray-500">+94 77 123 4567</p>
+                <p className="text-gray-500">shinrashmi97@gmail.com</p>
             </div>
         </div>
       </div>
