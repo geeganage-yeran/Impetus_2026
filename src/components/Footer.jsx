@@ -1,5 +1,5 @@
 import React from "react";
-
+import whiteLogo from "../assets/whitelogo.png"; 
 export default function Footer() {
   return (
     <footer className="bg-[#002b4b] text-white py-8 sm:py-12">
@@ -13,7 +13,7 @@ export default function Footer() {
             >
               <div className="w-40 h-12 flex items-center">
                 <img
-                  src="./src/assets/whitelogo.png"
+                  src={whiteLogo}
                   alt="IMPETUS IEEE UWU"
                   className="w-full h-full object-contain"
                 />

@@ -1,5 +1,7 @@
 import React from "react";
 import { Handshake, Award, Building2, Users } from "lucide-react";
+import ieeeLogo from "../assets/ieee.png";
+import uniLogo from "../assets/university.png";  
 
 const sponsors = [
   { name: "Microsoft", placeholder: "MS" },
@@ -46,7 +48,7 @@ export default function SponsorsSection() {
               >
                 <div className="relative w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-2xl transition-all duration-300 overflow-hidden">
                   <img
-                    src="./src/assets/ieee.png"
+                    src={ieeeLogo}
                     alt="IEEE Uva Wellassa University"
                     className="w-full h-full object-cover"
                   />
@@ -69,7 +71,7 @@ export default function SponsorsSection() {
               >
                 <div className="relative w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-2xl transition-all duration-300 overflow-hidden">
                   <img
-                    src="./src/assets/university.png"
+                    src={uniLogo}
                     alt="Faculty of Applied Sciences"
                     className="w-full h-full object-cover"
                   />
