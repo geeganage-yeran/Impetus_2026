@@ -14,6 +14,7 @@ const programCommittee = [
   { name: "Prof. E. M. U. W. J. B. Ekanayake", role: "Program Chair", img: "/committee/ekanayake.jpg" },
   { name: "Dr. H. M. S. N. Ariyadasa", role: "Editor-In-Chief", img: "/committee/Ariyadasa.jpg" },
   { name: "Dr. N. P. Samarasinghe", role: "Co-Editor", img: "/committee/Samarasinghe.jpg" },
+  { name: "Ms. Rashmi Abeywardhana", role: "Secretary", img: "/committee/rashmi.jpg" },
   { name: "Ms. D. P. Jayathunga", role: "Academic Treasurer", img: "/committee/poornima.jpg" },
   { name: "Mr. S. J. M. D. P. Samarakoon", role: "Student Activities Chair", img: "/committee/deepal.jpg" },
 ];
