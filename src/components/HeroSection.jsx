@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { Calendar, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 export default function HeroAndCountdown() {
+  const navigate = useNavigate(); // Initialize hook
   const targetDate = new Date('2026-02-25T00:00:00').getTime();
+  
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -12,12 +15,14 @@ export default function HeroAndCountdown() {
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(false);
   const [showFloatingCountdown, setShowFloatingCountdown] = useState(true);
+  
+  // Typing effect configuration
   const fullText = 'IMPETUS 2026';
-  const keepText = 'I'; // Text to keep (only the "I" letter)
-  const typingSpeed = 150; // milliseconds per character
-  const deletingSpeed = 100; // milliseconds per character when deleting
-  const pauseBeforeDelete = 2000; // pause before starting to delete
-  const pauseBeforeRetype = 500; // pause before retyping
+  const keepText = 'I'; 
+  const typingSpeed = 150; 
+  const deletingSpeed = 100; 
+  const pauseBeforeDelete = 2000; 
+  const pauseBeforeRetype = 500; 
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -40,12 +45,10 @@ export default function HeroAndCountdown() {
     return () => clearInterval(timer);
   }, []);
 
-  // Handle scroll to show/hide floating countdown
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const heroHeight = window.innerHeight * 0.3; // Hide when scrolled 70% of viewport
-      
+      const heroHeight = window.innerHeight * 0.3; 
       setShowFloatingCountdown(scrollPosition < heroHeight);
     };
 
@@ -58,7 +61,6 @@ export default function HeroAndCountdown() {
     let isDeleting = false;
     let timeoutId;
 
-    // Start by showing the kept text (just "I")
     setTypedText(keepText);
 
     const type = () => {
@@ -67,18 +69,15 @@ export default function HeroAndCountdown() {
         currentIndex++;
         timeoutId = setTimeout(type, typingSpeed);
       } else if (!isDeleting && currentIndex > fullText.length) {
-        // Finished typing, wait before deleting
         timeoutId = setTimeout(() => {
           isDeleting = true;
           type();
         }, pauseBeforeDelete);
       } else if (isDeleting && currentIndex > keepText.length) {
-        // Deleting (but keep the "I" letter)
         currentIndex--;
         setTypedText(fullText.slice(0, currentIndex));
         timeoutId = setTimeout(type, deletingSpeed);
       } else if (isDeleting && currentIndex === keepText.length) {
-        // Finished deleting to the keep point (just "I"), wait before retyping
         isDeleting = false;
         timeoutId = setTimeout(() => {
           type();
@@ -87,16 +86,8 @@ export default function HeroAndCountdown() {
     };
 
     timeoutId = setTimeout(type, typingSpeed);
-
     return () => clearTimeout(timeoutId);
   }, []);
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <div className="min-h-screen">
@@ -111,24 +102,16 @@ export default function HeroAndCountdown() {
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="intro.mp4" type="video/mp4" />
-          {/* Fallback for browsers that don't support video */}
         </video>
 
-        {/* Dark Overlay for better text readability */}
+        {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/10"></div>
-
-        {/* Subtle Pattern Overlay (optional) */}
-        {/* <div className="absolute inset-0 opacity-[0.05]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div> */}
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-30 text-center">
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-3 mb-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-sm font-medium transition-all hover:bg-white/15 animate-fade-in">
             <Calendar className="w-4 h-4 text-white" />
-            <span className="text-white">February 25, 2026 (Tentative)</span>
+            <span className="text-white">February 25, 2026 | Hybrid Mode</span>
           </div>
 
           {/* Main Heading */}
@@ -150,20 +133,25 @@ export default function HeroAndCountdown() {
             IMPETUS is an International Research Symposium organized by the IEEE Uva Wellassa University Student Branch and the Faculty of Applied Sciences at Uva Wellassa University, Sri Lanka.
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - UPDATED */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <button
-              onClick={() => scrollToSection('registration')}
-              className="group px-8 py-4 bg-[#005596] text-white rounded-lg font-semibold text-base transition-all hover:bg-[#003b69] cursor-pointer hover:shadow-xl w-full sm:w-auto"
+            
+            {/* Register Button -> External CMT Portal */}
+            <a
+              href="https://cmt3.research.microsoft.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group px-8 py-4 bg-[#005596] text-white rounded-lg font-semibold text-base transition-all hover:bg-[#003b69] cursor-pointer hover:shadow-xl w-full sm:w-auto inline-flex items-center justify-center"
             >
               <span className="flex items-center justify-center gap-2">
-                Register Now
+                Register via CMT
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
-            </button>
+            </a>
             
+            {/* Submit Papers Button -> Internal Author Page */}
             <button
-              onClick={() => scrollToSection('submission')}
+              onClick={() => navigate('/author')}
               className="px-8 py-4 cursor-pointer bg-white/15 backdrop-blur-md border-2 border-white/30 text-white rounded-lg font-semibold text-base transition-all hover:bg-white/20 w-full sm:w-auto"
             >
               Submit Papers
@@ -214,7 +202,6 @@ export default function HeroAndCountdown() {
         </div>
 
         <div data-aos="fade-up" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-2">
               Event Countdown
@@ -224,7 +211,6 @@ export default function HeroAndCountdown() {
             </p>
           </div>
 
-          {/* Countdown Single Line */}
           <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto">
             {[
               { value: timeLeft.days, label: 'Days' },
@@ -233,9 +219,7 @@ export default function HeroAndCountdown() {
               { value: timeLeft.seconds, label: 'Seconds' },
             ].map((item, index) => (
               <div key={index} className="group relative">
-                {/* Card */}
                 <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 sm:p-8 transition-all duration-300 hover:bg-slate-800/70 hover:border-slate-600 min-w-[110px] sm:min-w-[130px]">
-                  {/* Content */}
                   <div className="text-center">
                     <div className="text-5xl sm:text-6xl font-bold mb-2 text-white transition-all duration-300 group-hover:scale-105">
                       {String(item.value).padStart(2, '0')}
@@ -245,8 +229,6 @@ export default function HeroAndCountdown() {
                     </div>
                   </div>
                 </div>
-
-                {/* Separator (except last item) */}
                 {index < 3 && (
                   <div className="hidden md:block absolute top-1/2 -right-5 -translate-y-1/2 text-2xl font-light text-slate-600">
                     :
@@ -260,45 +242,20 @@ export default function HeroAndCountdown() {
 
       <style jsx>{`
         @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
-
         @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes blink {
-          0%, 50% {
-            opacity: 1;
-          }
-          51%, 100% {
-            opacity: 0;
-          }
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
         }
-
-        .animate-fade-in {
-          animation: fade-in 0.6s ease-out forwards;
-        }
-
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
-        }
-
-        .animate-blink {
-          animation: blink 1s step-end infinite;
-        }
+        .animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+        .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+        .animate-blink { animation: blink 1s step-end infinite; }
       `}</style>
     </div>
   );

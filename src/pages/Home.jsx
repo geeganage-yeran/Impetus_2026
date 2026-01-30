@@ -3,6 +3,8 @@ import HeroSection from '../components/HeroSection';
 import ThemeSection from '../components/ThemeSection'; // Using this as the brief intro
 import SponsorsSection from '../components/SponsorsSection';
 import CmtAcknowledgment from '../components/CmtAcknowledgment';
+import AboutSection from '../components/AboutSection';
+import KeynoteSection from '../components/KeynoteSection';
 import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
@@ -10,16 +12,22 @@ export default function Home() {
     <div className="pt-16">
       <HeroSection />
 
+      {/* About Section: Organizers */}
+      <AboutSection />
+
       {/* Brief Introduction / Theme */}
       <ThemeSection />
+
+      {/* Keynote Speaker */}
+      <KeynoteSection />
 
       {/* Sponsors */}
       <SponsorsSection />
       
       {/* Microsoft Acknowledgment */}
-      <CmtAcknowledgment />
+      {/* <CmtAcknowledgment /> */}
       {/* CMT Message CTA */}
-      <section className="py-16 bg-[#002b4b] text-white text-center">
+      {/* <section className="py-16 bg-[#002b4b] text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6">Ready to Submit Your Research?</h2>
           <p className="text-lg text-white/80 mb-8">
@@ -35,7 +43,7 @@ export default function Home() {
             Go to CMT Portal <ArrowRight className="w-5 h-5" />
           </a>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

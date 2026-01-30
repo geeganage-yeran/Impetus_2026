@@ -18,7 +18,8 @@ export default function Navigation() {
 
   const navItems = [
     { path: "/", label: "Home" },
-    { path: "/cfp", label: "Call for Papers" },
+    { path: "/author", label: "Author" },
+    { path: "/program", label: "Program Details" },
     { path: "/committee", label: "Committee" },
     { path: "/contact", label: "Contact Us" },
   ];

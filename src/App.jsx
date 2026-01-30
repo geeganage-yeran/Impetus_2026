@@ -4,8 +4,10 @@ import Footer from './components/Footer';
 
 // Pages
 import Home from './pages/Home';
-import CallForPapers from './pages/CallForPapers';
+import Author from './pages/Author';
+
 import Registration from './pages/Registration';
+import ProgramDetails from './pages/ProgramDetails';
 import Committee from './pages/Committe';
 import Contact from './pages/Contact';
 
@@ -18,8 +20,9 @@ function App() {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/cfp" element={<CallForPapers />} />
+          <Route path="/author" element={<Author />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/program" element={<ProgramDetails />} />
           <Route path="/committee" element={<Committee />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

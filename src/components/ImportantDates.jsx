@@ -1,96 +1,100 @@
 import React from 'react';
-import { Calendar, CheckCircle2 } from 'lucide-react';
+import { Calendar, CheckCircle2, Star } from 'lucide-react';
 
 const dates = [
-  { label: 'Abstract Submission Opens', date: '12th Nov 2025' },
-  { label: 'Abstract Submission Deadline', date: '10th Dec 2025' },
-  { label: 'Notification of Acceptance', date: '7th Jan 2026' },
-  { label: 'Camera-Ready Submission', date: '31st Jan 2026' },
-  { label: 'Early Bird Registration', date: '1st–9th Feb 2026' },
-  { label: 'Regular Registration', date: '10th–20th Feb 2026' },
-  { label: 'Symposium Date', date: '25th Feb 2026', highlight: true },
+  { day: '06', month: 'Feb 2026', label: 'Call for Paper', status: 'upcoming' },
+  { day: '30', month: 'Mar 2026', label: 'Full Paper Deadline', status: 'upcoming' },
+  { day: '05', month: 'Apr 2026', label: 'Early Bird Opens', sub: 'Until May 10', status: 'upcoming' },
+  { day: '27', month: 'Apr 2026', label: 'Author Notification', status: 'upcoming' },
+  { day: '27', month: 'Apr 2026', label: 'Regular Reg Opens', sub: 'Until May 20', status: 'upcoming' },
+  { day: '10', month: 'May 2026', label: 'Camera Ready', status: 'upcoming' },
+  { day: '27', month: 'May 2026', label: 'Symposium Date', highlight: true, status: 'upcoming' },
 ];
 
 export default function ImportantDates() {
   return (
-    <section className="py-10 sm:py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div data-aos="fade-up" className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl font-semibold sm:text-4xl md:text-5xl text-gray-900 mb-4">
+    <section className="py-20 relative bg-[#001e35] overflow-hidden">
+      {/* Background Decorative Glows */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px]"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
             Important Dates
           </h2>
-          <p className="text-base sm:text-lg text-gray-600">
-            Mark your calendar and stay on track with key deadlines
+          <div className="h-1 w-24 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full mb-4"></div>
+          <p className="text-blue-200 text-lg">
+            Don't miss a deadline. Keep track of your submission journey.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 transform -translate-x-1/2" />
-
-            <div className="space-y-8 sm:space-y-12">
+        {/* Timeline Scroll Container */}
+        <div className="relative">
+          {/* Connecting Line (Absolute) */}
+          <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-white/10 -translate-y-8 rounded-full"></div>
+          
+          <div className="overflow-x-auto pb-12 pt-4 hide-scrollbar cursor-grab active:cursor-grabbing">
+            <div className="flex justify-between items-start min-w-[1100px] px-4 md:px-10 gap-4">
+              
               {dates.map((item, index) => (
-                <div
-                  key={index}
-                  className={`relative flex flex-col md:flex-row items-center gap-4 md:gap-8 ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
-                >
-                  {/* Content Card */}
-                  <div data-aos="fade-up" className="w-full md:w-5/12">
-                    <div
-                      className={`p-4 sm:p-6 rounded-lg border ${
-                        item.highlight
-                          ? 'bg-[#005596] animate-pulse text-white border-[#3377ab] shadow-lg'
-                          : 'bg-gray-100 border-gray-200 hover:border-[#3377ab] transition-all duration-300'
-                      }`}
-                    >
-                      <div className="flex items-start gap-3 sm:gap-4">
-                        <div
-                          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                            item.highlight
-                              ? 'bg-white/20'
-                              : 'bg-blue-50'
-                          }`}
-                        >
-                          {item.highlight ? (
-                            <CheckCircle2
-                              className={`w-5 h-5 sm:w-6 sm:h-6 ${
-                                item.highlight ? 'text-white' : 'text-[#1a66a1]'
-                              }`}
-                            />
-                          ) : (
-                            <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-[#3377ab]" />
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <h4
-                            className={`mb-1 font-semibold ${
-                              item.highlight ? 'text-white' : 'text-gray-900'
-                            }`}
-                          >
-                            {item.label}
-                          </h4>
-                          <p
-                            className={`text-sm sm:text-base ${
-                              item.highlight ? 'text-white/90' : 'text-gray-600'
-                            }`}
-                          >
-                            {item.date}
-                          </p>
-                        </div>
+                <div key={index} className="relative group flex flex-col items-center flex-1">
+                  
+                  {/* Date Card (Top) */}
+                  <div className={`
+                    relative mb-8 w-32 sm:w-36 p-4 rounded-2xl text-center border transition-all duration-500 transform group-hover:-translate-y-3 group-hover:shadow-2xl
+                    ${item.highlight 
+                      ? 'bg-gradient-to-br from-amber-400 to-orange-500 border-amber-300 shadow-lg shadow-amber-500/20' 
+                      : 'bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 hover:border-blue-400/50 hover:shadow-blue-500/20'
+                    }
+                  `}>
+                    {/* Icon for Highlighted Item */}
+                    {item.highlight && (
+                      <div className="absolute -top-3 -right-3 bg-white text-orange-500 p-1.5 rounded-full shadow-md animate-bounce">
+                        <Star className="w-4 h-4 fill-current" />
                       </div>
-                    </div>
+                    )}
+
+                    <span className={`block text-4xl font-extrabold mb-1 ${item.highlight ? 'text-white' : 'text-white'}`}>
+                      {item.day}
+                    </span>
+                    <span className={`block text-sm font-bold uppercase tracking-wider ${item.highlight ? 'text-amber-100' : 'text-blue-300'}`}>
+                      {item.month}
+                    </span>
                   </div>
 
-                  {/* Center dot */}
-                  <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-[#005596] border-4 border-white shadow-md" />
+                  {/* Connector Dot (Middle) */}
+                  <div className="relative z-10 flex items-center justify-center w-8 h-8 -mt-12 md:-mt-0 mb-6 transition-all duration-300">
+                    <div className={`
+                      w-4 h-4 rounded-full transition-all duration-500 group-hover:scale-150
+                      ${item.highlight 
+                        ? 'bg-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.6)] ring-4 ring-amber-500/20' 
+                        : 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] ring-4 ring-[#001e35]'
+                      }
+                    `}></div>
+                  </div>
 
-                  {/* Spacer */}
-                  <div className="hidden md:block w-5/12" />
+                  {/* Label (Bottom) */}
+                  <div className="text-center transition-colors duration-300">
+                    <h3 className={`font-bold text-lg leading-tight mb-1 ${item.highlight ? 'text-amber-400' : 'text-white/80 group-hover:text-white'}`}>
+                        {item.label}
+                    </h3>
+                    {item.sub && (
+                        <p className="text-xs text-blue-300/80 uppercase tracking-wide">{item.sub}</p>
+                    )}
+                  </div>
+                  
+                  {/* Status Text (Optional - can comment out if too cluttered) */}
+                  {/* <span className="mt-2 text-xs font-medium px-2 py-0.5 rounded-full border text-gray-500 border-gray-700 bg-gray-800/50">
+                    {item.status}
+                  </span> */}
+
                 </div>
               ))}
+
             </div>
           </div>
         </div>

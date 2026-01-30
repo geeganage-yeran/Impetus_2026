@@ -15,7 +15,7 @@ export default function Contact() {
     {
       name: "Ms. Rashmi Abeywardhana",
       role: "Secretary",
-      email: "shinrashmi97@gmail.com",
+      email: "rashmi@uwu.ac.lk",
       img: "/committee/rashmi.jpg" 
     }
   ];

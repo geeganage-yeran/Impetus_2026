@@ -100,7 +100,7 @@ export default function SponsorsSection() {
               >
                 <div className="text-center">
                   <div className="w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:from-blue-50 group-hover:to-purple-50 transition-all duration-300">
-                    <span className="text-gray-400 text-lg font-bold group-hover:text-blue-600 transition-colors duration-300">
+                    <span className="text-gray-500 text-lg font-bold group-hover:text-blue-600 transition-colors duration-300">
                       {sponsor.placeholder}
                     </span>
                   </div>
@@ -112,9 +112,9 @@ export default function SponsorsSection() {
             ))}
           </div>
         </div>
-        {/* Become a Sponsor CTA */}
-        <div className="relative overflow-hidden p-8 sm:p-12 bg-gradient-to-br from-[#005596] to-[#3377ab] rounded-2xl shadow-2xl text-center transform hover:scale-[1.02] transition-all duration-300">
-          {/* Decorative elements */}
+        
+        {/* <div className="relative overflow-hidden p-8 sm:p-12 bg-gradient-to-br from-[#005596] to-[#3377ab] rounded-2xl shadow-2xl text-center transform hover:scale-[1.02] transition-all duration-300">
+          
           <div className="absolute top-0 right-0 w-48 h-48 bg-white opacity-10 rounded-full -mr-24 -mt-24"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full -ml-32 -mb-32"></div>
 
@@ -137,7 +137,7 @@ export default function SponsorsSection() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
