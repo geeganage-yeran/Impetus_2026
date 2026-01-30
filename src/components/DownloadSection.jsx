@@ -22,7 +22,7 @@ export default function DownloadSection() {
               <FileText className="w-8 h-8" />
             </div>
             <div className="text-left">
-              <h3 className="font-bold text-xl text-gray-900">IEEE Conference Template</h3>
+              <h3 className="font-bold text-xl text-gray-900">IEEE Paper Template</h3>
               <p className="text-gray-500">Available in DOCX and LaTeX formats</p>
             </div>
           </div>

@@ -45,7 +45,7 @@ export default function ContactSection() {
               </div>
               <h3 className="text-gray-900 font-semibold text-lg mb-2">Phone</h3>
               <a href="tel:+94551234567" className="text-[#005596] font-medium inline-flex items-center gap-2 group/link">
-                +94 55 123 4567
+                +94 71 915 1945
                 <ArrowRight className="w-4 h-4 opacity-0 group-hover/link:opacity-100 transform -translate-x-2 group-hover/link:translate-x-0 transition-all" />
               </a>
               <p className="text-sm text-gray-500 mt-2">Monday - Friday, 9 AM - 5 PM</p>

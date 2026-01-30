@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Calendar, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 export default function HeroAndCountdown() {
-  const navigate = useNavigate(); // Initialize hook
-  const targetDate = new Date('2026-02-25T00:00:00').getTime();
+  const navigate = useNavigate();
+  const targetDate = new Date('2026-05-27T00:00:00').getTime();
   
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -104,36 +104,47 @@ export default function HeroAndCountdown() {
           <source src="intro.mp4" type="video/mp4" />
         </video>
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/10"></div>
+        {/* Dark Overlay - Increased opacity for text readability without boxes */}
+        <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-30 text-center">
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-3 mb-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-sm font-medium transition-all hover:bg-white/15 animate-fade-in">
             <Calendar className="w-4 h-4 text-white" />
-            <span className="text-white">February 25, 2026 | Hybrid Mode</span>
+            <span className="text-white">May 27, 2026 | Hybrid Mode</span>
           </div>
 
           {/* Main Heading */}
           <div className="mb-8">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-6 text-white animate-fade-in-up">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-6 text-white animate-fade-in-up drop-shadow-2xl">
               {typedText}
               {showCursor && <span className="animate-blink">|</span>}
             </h1>
-            <div className="h-1 w-24 bg-white mx-auto"></div>
+            <div className="h-1 w-24 bg-white mx-auto shadow-[0_0_15px_rgba(255,255,255,0.8)]"></div>
           </div>
 
           {/* Subtitle */}
-          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-8 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-10 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             International Symposium on Computing,<br className="hidden sm:block" /> Engineering, and Technology
           </p>
 
-          {/* Description */}
-          <p className="sm:text-lg text-sm text-white/80 max-w-6xl font-extralight mx-auto mb-12 leading-relaxed px-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            IMPETUS is an International Research Symposium organized by the IEEE Uva Wellassa University Student Branch and the Faculty of Applied Sciences at Uva Wellassa University, Sri Lanka.
-          </p>
+          {/* Description - CLEANER STYLE: No Box, No Heavy Bold */}
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <p className="sm:text-lg text-base text-gray-200 max-w-6xl mx-auto mb-12 leading-loose font-light px-4 text-center">
+              <span className="text-white font-semibold text-xl tracking-wide mr-1">IMPETUS:</span> 
+              International Symposium on Computing, Engineering, and Technology 2026 is a pioneering academic endeavor by the 
+              <span className="text-white font-medium mx-1">Faculty of Applied Sciences, Uva Wellassa University of Sri Lanka</span>, 
+              in collaboration with the 
+              <span className="text-white font-medium mx-1">IEEE Uva Wellassa University Student Branch</span>. 
+              Centered around the theme 
+              <br className="hidden md:block" />
+              <span className="text-yellow-300 font-medium text-xl inline-block my-2">"Humanity First: Steering Innovation for Ethical Impact"</span>
+              <br className="hidden md:block" />
+              the symposium emphasizes ethical, human-centered, and multidisciplinary innovation at Uva Wellassa University and beyond. Adhering to international academic standards and IEEE guidelines, the symposium aims to drive impactful innovation.
+            </p>
+          </div>
 
-          {/* CTA Buttons - UPDATED */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             
             {/* Register Button -> External CMT Portal */}
@@ -141,7 +152,7 @@ export default function HeroAndCountdown() {
               href="https://cmt3.research.microsoft.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-8 py-4 bg-[#005596] text-white rounded-lg font-semibold text-base transition-all hover:bg-[#003b69] cursor-pointer hover:shadow-xl w-full sm:w-auto inline-flex items-center justify-center"
+              className="group px-8 py-4 bg-[#005596] text-white rounded-lg font-semibold text-base transition-all hover:bg-[#003b69] cursor-pointer hover:shadow-xl w-full sm:w-auto inline-flex items-center justify-center shadow-lg border border-transparent hover:border-white/20"
             >
               <span className="flex items-center justify-center gap-2">
                 Register via CMT
@@ -152,7 +163,7 @@ export default function HeroAndCountdown() {
             {/* Submit Papers Button -> Internal Author Page */}
             <button
               onClick={() => navigate('/author')}
-              className="px-8 py-4 cursor-pointer bg-white/15 backdrop-blur-md border-2 border-white/30 text-white rounded-lg font-semibold text-base transition-all hover:bg-white/20 w-full sm:w-auto"
+              className="px-8 py-4 cursor-pointer bg-white/10 backdrop-blur-md border-2 border-white/50 text-white rounded-lg font-semibold text-base transition-all hover:bg-white/20 w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] shadow-lg"
             >
               Submit Papers
             </button>
@@ -192,9 +203,8 @@ export default function HeroAndCountdown() {
         </div>
       </section>
 
-      {/* Countdown Section - Professional Dark Background */}
+      {/* Countdown Section */}
       <section className="relative py-10 bg-slate-900 overflow-hidden">
-        {/* Subtle Background */}
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-slate-700/20 rounded-full blur-3xl"></div>
           <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-slate-700/20 rounded-full blur-3xl"></div>

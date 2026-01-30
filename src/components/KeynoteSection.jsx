@@ -1,7 +1,7 @@
 import React from 'react';
 import { Quote, Linkedin, Twitter, Globe } from 'lucide-react';
 // Make sure to add your speaker image
-import speakerImg from '../assets/weblead.png'; 
+import speakerImg from '../assets/speaker.jpg'; 
 
 export default function KeynoteSection() {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, Users, Mic, Coffee } from 'lucide-react';
-import speakerImg from '../assets/weblead.png';
+import speakerImg from '../assets/speaker.jpg'; // Replace with actual keynote speaker image
 export default function ProgramDetails() {
   const [activeTab, setActiveTab] = useState('symposium');
 
@@ -92,7 +92,7 @@ export default function ProgramDetails() {
                 />
                 <ScheduleItem
                   time="11:30 AM"
-                  title="Technical Sessions (Track 1 & 2)"
+                  title="Technical Sessions (Track 1 to 4)"
                   location="Lecture Halls A & B"
                   icon={Users}
                 />
