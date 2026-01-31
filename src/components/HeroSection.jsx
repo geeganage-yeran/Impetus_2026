@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Calendar, ArrowRight } from 'lucide-react';
+import { Calendar, ArrowRight, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function HeroAndCountdown() {
@@ -16,7 +16,6 @@ export default function HeroAndCountdown() {
   const [showCursor, setShowCursor] = useState(false);
   const [showFloatingCountdown, setShowFloatingCountdown] = useState(true);
   
-  // Typing effect configuration
   const fullText = 'IMPETUS 2026';
   const keepText = 'I'; 
   const typingSpeed = 150; 
@@ -104,14 +103,23 @@ export default function HeroAndCountdown() {
           <source src="intro.mp4" type="video/mp4" />
         </video>
 
-        {/* Dark Overlay - Increased opacity for text readability without boxes */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-30 text-center">
-          {/* Top Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-3 mb-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-sm font-medium transition-all hover:bg-white/15 animate-fade-in">
-            <Calendar className="w-4 h-4 text-white" />
-            <span className="text-white">May 27, 2026 | Hybrid Mode</span>
+          
+          {/* --- Highlighted Top Badge --- */}
+          <div className="inline-flex items-center gap-3 px-6 py-3 mb-10 bg-black/40 backdrop-blur-md border border-white/30 rounded-full transition-all duration-300 hover:bg-black/50 hover:scale-105 hover:shadow-[0_0_20px_rgba(253,224,71,0.3)] animate-fade-in cursor-default group">
+            <Calendar className="w-5 h-5 text-white group-hover:text-yellow-300 transition-colors" />
+            <div className="flex items-center gap-3 text-lg">
+              <span className="text-white font-bold tracking-wide border-r border-white/30 pr-3">
+                May 27, 2026
+              </span>
+              <span className="flex items-center gap-2 text-yellow-300 font-extrabold uppercase tracking-widest text-sm sm:text-base">
+                <Globe className="w-4 h-4 animate-pulse" />
+                Hybrid Mode
+              </span>
+            </div>
           </div>
 
           {/* Main Heading */}
@@ -124,30 +132,12 @@ export default function HeroAndCountdown() {
           </div>
 
           {/* Subtitle */}
-          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-10 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             International Symposium on Computing,<br className="hidden sm:block" /> Engineering, and Technology
           </p>
 
-          {/* Description - CLEANER STYLE: No Box, No Heavy Bold */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            <p className="sm:text-lg text-base text-gray-200 max-w-6xl mx-auto mb-12 leading-loose font-light px-4 text-center">
-              <span className="text-white font-semibold text-xl tracking-wide mr-1">IMPETUS:</span> 
-              International Symposium on Computing, Engineering, and Technology 2026 is a pioneering academic endeavor by the 
-              <span className="text-white font-medium mx-1">Faculty of Applied Sciences, Uva Wellassa University of Sri Lanka</span>, 
-              in collaboration with the 
-              <span className="text-white font-medium mx-1">IEEE Uva Wellassa University Student Branch</span>. 
-              Centered around the theme 
-              <br className="hidden md:block" />
-              <span className="text-yellow-300 font-medium text-xl inline-block my-2">"Humanity First: Steering Innovation for Ethical Impact"</span>
-              <br className="hidden md:block" />
-              the symposium emphasizes ethical, human-centered, and multidisciplinary innovation at Uva Wellassa University and beyond. Adhering to international academic standards and IEEE guidelines, the symposium aims to drive impactful innovation.
-            </p>
-          </div>
-
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            
-            {/* Register Button -> External CMT Portal */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <a
               href="https://cmt3.research.microsoft.com/"
               target="_blank"
@@ -160,7 +150,6 @@ export default function HeroAndCountdown() {
               </span>
             </a>
             
-            {/* Submit Papers Button -> Internal Author Page */}
             <button
               onClick={() => navigate('/author')}
               className="px-8 py-4 cursor-pointer bg-white/10 backdrop-blur-md border-2 border-white/50 text-white rounded-lg font-semibold text-base transition-all hover:bg-white/20 w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] shadow-lg"
