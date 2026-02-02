@@ -7,8 +7,8 @@ import {
   AlertCircle, 
   MousePointerClick,
   PackageCheck,
-  Monitor,   // Added missing import
-  Users      // Added missing import
+  Monitor,
+  Users
 } from 'lucide-react';
 
 export default function Registration() {
@@ -35,7 +35,7 @@ export default function Registration() {
             <h3 className="text-lg font-bold text-amber-900 mb-1">Important Notice for Authors</h3>
             <p className="text-amber-800 leading-relaxed">
               Authors/Presenters must register for the conference on or before <span className="font-bold">May 30, 2026</span>. 
-              The full paper will <span className="underline">not</span> be included in the proceedings if at least one author does not register by the deadline.
+              The full paper will <span className="underline">not</span> be included in the proceedings if at least one author does not register before the deadline.
             </p>
           </div>
         </div>
@@ -57,43 +57,41 @@ export default function Registration() {
                   <th colSpan="2" className="py-2 px-6 text-center bg-amber-50/50 text-amber-700">Late Registration</th>
                 </tr>
                 <tr className="bg-slate-50 text-slate-600 text-xs uppercase">
-                  <th className="py-3 px-6 text-center border-r border-gray-200 bg-blue-50/30">Online</th>
-                  <th className="py-3 px-6 text-center border-r border-gray-200 bg-blue-50/30">Physical</th>
-                  <th className="py-3 px-6 text-center border-r border-gray-200 bg-amber-50/30">Online</th>
-                  <th className="py-3 px-6 text-center bg-amber-50/30">Physical</th>
+                  <th className="py-3 px-6 text-center border-r border-gray-200 bg-blue-50/30">Online Presenters</th>
+                  <th className="py-3 px-6 text-center border-r border-gray-200 bg-blue-50/30">Physical Presenters</th>
+                  <th className="py-3 px-6 text-center border-r border-gray-200 bg-amber-50/30">Online Presenters</th>
+                  <th className="py-3 px-6 text-center bg-amber-50/30">Physical Presenters</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 text-gray-700 font-medium">
                 <tr className="hover:bg-gray-50 transition-colors">
-                  <td className="py-4 px-6 border-r border-gray-100">UWU Students</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 1,000</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 1,500</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 1,500</td>
-                  <td className="py-4 px-6 text-center">LKR 2,000</td>
+                  <td className="py-4 px-6 border-r border-gray-100">
+                    Students <span className="text-amber-600 font-bold">**</span>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 2,500</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 3,000</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 3,500</td>
+                  <td className="py-4 px-6 text-center">LKR 4,000</td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors bg-slate-50/30">
-                  <td className="py-4 px-6 border-r border-gray-100">Local Students</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 2,000</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 2,000</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 2,000</td>
-                  <td className="py-4 px-6 text-center">LKR 2,500</td>
-                </tr>
-                <tr className="hover:bg-gray-50 transition-colors">
-                  <td className="py-4 px-6 border-r border-gray-100">Local Participants</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 4,000</td>
+                  <td className="py-4 px-6 border-r border-gray-100">Local</td>
                   <td className="py-4 px-6 text-center border-r border-gray-100">LKR 5,000</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 5,000</td>
-                  <td className="py-4 px-6 text-center">LKR 5,500</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 6,000</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 6,500</td>
+                  <td className="py-4 px-6 text-center">LKR 7,500</td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors bg-blue-50/10 border-l-4 border-l-blue-500">
                   <td className="py-4 px-6 border-r border-gray-100 font-bold text-[#005596]">International</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 50</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 75</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 75</td>
-                  <td className="py-4 px-6 text-center font-bold">USD 100</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 60</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 80</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 90</td>
+                  <td className="py-4 px-6 text-center font-bold">USD 120</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
+            <span className="font-bold">**</span> 25% registration fee waiver for UWU students with IEEE membership.
           </div>
         </section>
 
@@ -110,11 +108,10 @@ export default function Registration() {
               <h3 className="text-lg font-bold text-gray-900 mb-4">1. Bank Transfer</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li><strong className="text-gray-900">A/C Name:</strong> Uva Wellassa University</li>
-                <li><strong className="text-gray-900">Bank:</strong> Bank of Ceylon</li>
-                <li><strong className="text-gray-900">Branch:</strong> Badulla Branch</li>
+                <li><strong className="text-gray-900">Bank Details:</strong> Bank of Ceylon, Badulla Branch</li>
                 <li><strong className="text-gray-900">A/C No:</strong> 0003114820</li>
                 <li><strong className="text-gray-900">Bank Code:</strong> 7010</li>
-                <li><strong className="text-gray-900">Branch Code:</strong> 011</li>
+                <li><strong className="text-gray-900">Bank Branch Code:</strong> 011</li>
                 <li><strong className="text-gray-900">Swift Code:</strong> BCEYLKLX</li>
               </ul>
             </div>
@@ -125,9 +122,9 @@ export default function Registration() {
                 <CreditCard className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">2. Online Payment</h3>
-              <p className="text-sm text-gray-500 mb-6">Credit / Debit Card</p>
-              <p className="text-sm text-gray-600 mb-6">
-                Recommended for International Participants. Secure payment gateway.
+              <p className="text-sm text-gray-500 mb-2">Credit / Debit Card</p>
+              <p className="text-sm font-semibold text-purple-700 mb-6 bg-purple-50 inline-block px-2 py-1 rounded">
+                (For the International Participant)
               </p>
               <button className="w-full py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200">
                 Pay Online Now
@@ -171,7 +168,7 @@ export default function Registration() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Make Payment</h3>
                 <p className="text-gray-600 text-sm">
-                  Complete the payment using one of the methods listed above. Keep your receipt/slip ready.
+                  Make the payment using one of the methods listed above.
                 </p>
               </div>
 
@@ -182,7 +179,7 @@ export default function Registration() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Fill Registration Form</h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  Submit the online form with your payment receipt. Students must attach valid ID.
+                  Complete the online form by clicking "Register Now" below and submit it with the payment receipt. (Students: attach valid ID).
                 </p>
                 <a 
                   href="#" 
@@ -199,7 +196,7 @@ export default function Registration() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">CMT Upload</h3>
                 <p className="text-gray-600 text-sm">
-                  Upload Camera-Ready Paper, signed Author Declaration, and Payment Slip via CMT.
+                  Upload Camera-Ready Paper (final submission) via CMT, signed Author Declaration Form, and payment slip (online or physical).
                 </p>
               </div>
 
@@ -208,7 +205,7 @@ export default function Registration() {
 
           <div className="text-center mt-12">
             <button className="bg-[#005596] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-[#003b69] transition-all transform hover:scale-105 shadow-xl shadow-blue-900/20">
-              Go to Registration Form
+              Register Now
             </button>
           </div>
         </section>
