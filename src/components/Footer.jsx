@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import whiteLogo from "../assets/whitelogo.png"; 
+import whiteLogo from "../assets/logoWhite-1.png"; 
 
 export default function Footer() {
   const scrollToTop = () => {

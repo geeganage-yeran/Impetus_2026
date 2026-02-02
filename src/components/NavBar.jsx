@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import blackLogo from "../assets/blacklogo.png"; 
+import blackLogo from "../assets/logoBlack.png"; 
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);

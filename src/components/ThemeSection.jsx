@@ -29,15 +29,15 @@ const topics = [
     image:
       "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
   },
-  {
-    icon: Factory,
-    title: "Industrial Information Systems & Smart Technologies",
-    description:
-      "Industry 4.0, smart manufacturing, automation, and industrial IoT solutions",
-    gradient: "from-green-500 to-emerald-500",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
-  },
+  // {
+  //   icon: Factory,
+  //   title: "Industrial Information Systems & Smart Technologies",
+  //   description:
+  //     "Industry 4.0, smart manufacturing, automation, and industrial IoT solutions",
+  //   gradient: "from-green-500 to-emerald-500",
+  //   image:
+  //     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+  // },
   {
     icon: Microscope,
     title: "Science and Technology",
