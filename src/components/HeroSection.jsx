@@ -133,7 +133,7 @@ export default function HeroAndCountdown() {
 
           {/* Subtitle */}
           <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-10 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            International Symposium on Computing,<br className="hidden sm:block" /> Engineering, and Technology
+            International Conference on Computing,<br className="hidden sm:block" /> Engineering, and Technology
           </p>
 
           {/* Description */}
@@ -148,7 +148,7 @@ export default function HeroAndCountdown() {
               <br className="hidden md:block" />
               <span className="text-yellow-300 font-medium text-xl inline-block my-2">"Humanity First: Steering Innovation for Ethical Impact"</span>
               <br className="hidden md:block" />
-              The symposium emphasizes ethical, human-centered, and multidisciplinary innovation at Uva Wellassa University and beyond. Adhering to international academic standards and IEEE guidelines, the symposium aims to drive impactful innovation.
+              The Conference emphasizes ethical, human-centered, and multidisciplinary innovation at Uva Wellassa University and beyond. Adhering to international academic standards and IEEE guidelines, the Conference aims to drive impactful innovation.
             </p>
           </div>
 

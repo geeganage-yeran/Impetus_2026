@@ -28,7 +28,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-blue-200/80 text-sm leading-relaxed max-w-sm">
-              International Symposium on Computing, Engineering, and Technology. 
+              International Conference on Computing, Engineering, and Technology. 
               Fostering innovation and ethical impact through multidisciplinary collaboration.
             </p>
           </div>

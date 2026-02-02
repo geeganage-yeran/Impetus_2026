@@ -28,6 +28,7 @@ export default function Navigation() {
         { path: "/registration", label: "Registration" }
       ]
     },
+    { path : "/program", label: "Program Details" },
     { path: "/committee", label: "Committees" },
     { path: "/contact", label: "Contact Us" },
   ];

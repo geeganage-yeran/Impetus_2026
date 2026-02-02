@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, MapPin, Users, Mic, Coffee } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, Mic, Coffee, Utensils } from 'lucide-react';
 import speakerImg from '../assets/speaker.jpg'; // Replace with actual keynote speaker image
+
 export default function ProgramDetails() {
-  const [activeTab, setActiveTab] = useState('symposium');
+  const [activeTab, setActiveTab] = useState('Conference');
 
   const panelists = [
     {
       name: "Dr. Aruna Perera",
       role: "Senior Lecturer - Computer Science",
       org: "Uva Wellassa University",
-      image: "https://ui-avatars.com/api/?name=Aruna+Perera&background=0D8ABC&color=fff" // Replace with real image import
+      image: "https://ui-avatars.com/api/?name=Aruna+Perera&background=0D8ABC&color=fff"
     },
     {
       name: "Ms. Sarah Johnson",
@@ -31,7 +32,6 @@ export default function ProgramDetails() {
     }
   ];
 
-
   return (
     <div className="pt-24 min-h-screen bg-gray-50">
       {/* Page Header */}
@@ -48,7 +48,7 @@ export default function ProgramDetails() {
 
         {/* Navigation Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {['symposium', 'keynote', 'panel'].map((tab) => (
+          {['Conference', 'keynote', 'panel'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -57,7 +57,7 @@ export default function ProgramDetails() {
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                 }`}
             >
-              {tab === 'symposium' ? 'Symposium Schedule' : tab === 'keynote' ? 'Keynote Speech' : 'Panel Discussion'}
+              {tab === 'Conference' ? 'Conference Schedule' : tab === 'keynote' ? 'Keynote Speech' : 'Panel Discussion'}
             </button>
           ))}
         </div>
@@ -65,47 +65,55 @@ export default function ProgramDetails() {
         {/* Content Area */}
         <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 border border-gray-100 min-h-[400px]">
 
-          {/* Tab 1: Symposium Schedule */}
-          {activeTab === 'symposium' && (
+          {/* Tab 1: Conference Schedule */}
+          {activeTab === 'Conference' && (
             <div className="animate-fade-in">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-[#005596] pl-4">
-                Symposium Agenda
+              <h2 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-[#005596] pl-4 flex items-center justify-between">
+                <span>Conference Agenda</span>
+                <span className="text-sm font-normal text-gray-500 bg-gray-100 px-3 py-1 rounded-full">May 27, 2026</span>
               </h2>
-              <div className="space-y-6">
+              
+              <div className="space-y-6 relative">
+                {/* Vertical Line Connector */}
+                <div className="absolute left-[125px] top-4 bottom-4 w-0.5 bg-gray-100 hidden sm:block"></div>
+
                 <ScheduleItem
-                  time="08:00 AM"
-                  title="Registration & Welcome Breakfast"
-                  location="Main Hall Lobby"
-                  icon={Coffee}
-                />
-                <ScheduleItem
-                  time="09:00 AM"
-                  title="Inauguration Ceremony"
-                  location="Main Auditorium"
-                  icon={Mic}
-                />
-                <ScheduleItem
-                  time="10:00 AM"
-                  title="Keynote Speech: AI for Humanity"
-                  location="Main Auditorium"
-                  highlight
-                />
-                <ScheduleItem
-                  time="11:30 AM"
-                  title="Technical Sessions (Track 1 to 4)"
-                  location="Lecture Halls A & B"
+                  time="08:00 AM - 09:00 AM"
+                  title="Registration"
+                  //location="Main Hall Lobby"
                   icon={Users}
                 />
                 <ScheduleItem
-                  time="01:00 PM"
-                  title="Lunch Break"
-                  location="University Cafeteria"
+                  time="09:00 AM - 10:30 AM"
+                  title="Inauguration Ceremony"
+                  //location="Main Auditorium"
+                  icon={Mic}
+                  highlight
+                />
+                <ScheduleItem
+                  time="10:30 AM - 11:00 AM"
+                  title="Refreshments"
+                  //location="Cafeteria Area"
                   icon={Coffee}
                 />
                 <ScheduleItem
-                  time="02:00 PM"
-                  title="Panel Discussion: Industry 5.0"
-                  location="Main Auditorium"
+                  time="11:00 AM - 01:00 PM"
+                  title="Panel Discussion"
+                  //location="Main Auditorium"
+                  icon={Users}
+                  highlight
+                />
+                <ScheduleItem
+                  time="01:00 PM - 02:00 PM"
+                  title="Lunch"
+                  //location="University Cafeteria"
+                  icon={Utensils}
+                />
+                <ScheduleItem
+                  time="02:00 PM - 05:00 PM"
+                  title="Technical Sessions"
+                  //location="Lecture Halls A, B, C & D"
+                  icon={Users}
                   highlight
                 />
               </div>
@@ -133,7 +141,7 @@ export default function ProgramDetails() {
                 {/* Speaker Info Column */}
                 <div className="w-full md:w-2/3">
                   <span className="inline-block px-3 py-1 bg-blue-100 text-[#005596] rounded-full text-xs font-bold mb-4">
-                    10:00 AM - 11:00 AM
+                    Keynote Session
                   </span>
 
                   <h2 className="text-3xl font-bold text-gray-900 mb-2">Prof. John Doe</h2>
@@ -155,7 +163,7 @@ export default function ProgramDetails() {
             <div className="animate-fade-in">
               <div className="text-center mb-12">
                 <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider mb-2">
-                  02:00 PM - 04:00 PM
+                  11:00 AM - 01:00 PM
                 </span>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
                   Topic: The Future of Sustainable Tech
@@ -220,17 +228,24 @@ export default function ProgramDetails() {
 // Helper Component for Schedule Items
 function ScheduleItem({ time, title, location, icon: Icon, highlight }) {
   return (
-    <div className={`flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-lg transition-colors ${highlight ? 'bg-blue-50 border border-blue-100' : 'hover:bg-gray-50'}`}>
-      <div className="min-w-[100px] font-bold text-[#005596] flex items-center gap-2">
-        <Clock className="w-4 h-4" /> {time}
+    <div className={`relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 rounded-xl transition-all duration-300 ${highlight ? 'bg-blue-50/50 border border-blue-100 shadow-sm' : 'bg-white hover:bg-gray-50 border border-transparent'}`}>
+      <div className="min-w-[140px] font-bold text-[#005596] flex items-center gap-2 bg-white/80 px-3 py-1 rounded-md shadow-sm border border-gray-100 sm:bg-transparent sm:shadow-none sm:border-0 sm:p-0">
+        <Clock className="w-4 h-4" /> 
+        <span className="text-sm sm:text-base">{time}</span>
       </div>
+      
       <div className="flex-grow">
         <h4 className="font-bold text-gray-900 text-lg">{title}</h4>
         <div className="flex items-center gap-2 text-gray-500 text-sm mt-1">
-          <MapPin className="w-3 h-3" /> {location}
+          {/* <MapPin className="w-3 h-3" /> {location} */}
         </div>
       </div>
-      {Icon && <Icon className="w-6 h-6 text-gray-400 hidden sm:block" />}
+      
+      {Icon && (
+        <div className={`p-2 rounded-lg ${highlight ? 'bg-blue-100 text-[#005596]' : 'bg-gray-100 text-gray-500'}`}>
+          <Icon className="w-5 h-5" />
+        </div>
+      )}
     </div>
   );
 }

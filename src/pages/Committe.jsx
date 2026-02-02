@@ -241,7 +241,7 @@ export default function Committee() {
             Meet the Team
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            The dedicated academic and student leaders working behind the scenes to steer innovation and ensure the success of this symposium.
+            The dedicated academic and student leaders working behind the scenes to steer innovation and ensure the success of this Conference.
           </p>
         </div>
         

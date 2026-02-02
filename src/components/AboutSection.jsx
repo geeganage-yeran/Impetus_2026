@@ -46,10 +46,10 @@ export default function AboutSection() {
             {/* Updated Text Block */}
             <div className="text-gray-600 text-lg mb-8 leading-relaxed text-justify space-y-4">
               <p>
-                <strong className="text-[#005596]">IMPETUS:</strong> International Symposium on Computing, Engineering, and Technology 2026 is a pioneering academic endeavor by the <span className="font-semibold text-gray-900">Faculty of Applied Sciences, Uva Wellassa University of Sri Lanka</span>, in collaboration with the <span className="font-semibold text-gray-900">IEEE Uva Wellassa University Student Branch</span>.
+                <strong className="text-[#005596]">IMPETUS:</strong> International Conference on Computing, Engineering, and Technology 2026 is a pioneering academic endeavor by the <span className="font-semibold text-gray-900">Faculty of Applied Sciences, Uva Wellassa University of Sri Lanka</span>, in collaboration with the <span className="font-semibold text-gray-900">IEEE Uva Wellassa University Student Branch</span>.
               </p>
               <p>
-                Centered around the theme <em className="text-[#005596] font-medium">"Humanity First: Steering Innovation for Ethical Impact"</em>, the symposium emphasizes ethical, human-centered, and multidisciplinary innovation at Uva Wellassa University and beyond. Adhering to international academic standards and IEEE guidelines, the symposium aims to drive impactful innovation.
+                Centered around the theme <em className="text-[#005596] font-medium">"Humanity First: Steering Innovation for Ethical Impact"</em>, the Conference emphasizes ethical, human-centered, and multidisciplinary innovation at Uva Wellassa University and beyond. Adhering to international academic standards and IEEE guidelines, the Conference aims to drive impactful innovation.
               </p>
             </div>
 

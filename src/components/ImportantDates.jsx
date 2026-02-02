@@ -8,7 +8,7 @@ const dates = [
   { day: '27', month: 'Apr 2026', label: 'Author Notification', status: 'upcoming' },
   { day: '27', month: 'Apr 2026', label: 'Regular Reg Opens', sub: 'Until May 20', status: 'upcoming' },
   { day: '10', month: 'May 2026', label: 'Camera Ready', status: 'upcoming' },
-  { day: '27', month: 'May 2026', label: 'Symposium Date', highlight: true, status: 'upcoming' },
+  { day: '27', month: 'May 2026', label: 'Conference Date', highlight: true, status: 'upcoming' },
 ];
 
 export default function ImportantDates() {
