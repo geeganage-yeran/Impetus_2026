@@ -29,11 +29,7 @@ export default function Author() {
 
       {/* Submission Guidelines & CMT CTA */}
       <SubmissionSection />
-      
-      // ... inside your Author component
-      <Link to="/registration" className="btn-styles...">
-        View Registration Details
-      </Link>
+    
     </div>
   );
 }
