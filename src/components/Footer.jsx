@@ -8,7 +8,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#002b4b] text-white py-12 border-t border-white/10">
+    <footer className="bg-gradient-to-br from-[#020617] via-[#001e35] to-[#002b4b] text-white py-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           
@@ -44,17 +44,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/author" onClick={scrollToTop} className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                  Author Zone
-                </Link>
-              </li>
-              <li>
-                <Link to="/program" onClick={scrollToTop} className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                  Program Schedule
+                  Author Space
                 </Link>
               </li>
               <li>
                 <Link to="/committee" onClick={scrollToTop} className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                  Organizing Committee
+                  Committees
                 </Link>
               </li>
               <li>
@@ -64,7 +59,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
                 >
-                  CMT Login
+                  Submit Full Paper
                 </a>
               </li>
             </ul>
@@ -92,9 +87,7 @@ export default function Footer() {
             © 2026 IMPETUS. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-blue-200/60">
-            <Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link>
-            <span className="text-blue-200/20">|</span>
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact Us</Link>
           </div>
         </div>
       </div>

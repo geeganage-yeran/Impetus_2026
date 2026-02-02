@@ -10,6 +10,7 @@ import Registration from './pages/Registration';
 import ProgramDetails from './pages/ProgramDetails';
 import Committee from './pages/Committe';
 import Contact from './pages/Contact';
+import ScrollToTop from './components/ScrollToTop';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <NavBar />
       <main className="flex-grow">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/author" element={<Author />} />

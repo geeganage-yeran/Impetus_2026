@@ -43,7 +43,7 @@ export default function SubmissionSection() {
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-3 bg-white text-[#002b4b] px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95"
             >
-              Submit Full Paper via CMT
+              Submit Full Paper
               <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </a>
             

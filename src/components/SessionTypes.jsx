@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mic2, MonitorPlay, Users2, MessageSquare } from 'lucide-react';
+import { Mic2, MonitorPlay, MessageSquare } from 'lucide-react';
 
 const sessions = [
   {
@@ -14,12 +14,12 @@ const sessions = [
     icon: MonitorPlay,
     color: "bg-blue-100 text-blue-600"
   },
-  {
-    title: "Poster Sessions",
-    desc: "Interactive visual displays allowing deep-dive discussions with attendees during dedicated networking breaks.",
-    icon: Users2,
-    color: "bg-green-100 text-green-600"
-  },
+  // {
+  //   title: "Poster Sessions",
+  //   desc: "Interactive visual displays allowing deep-dive discussions with attendees during dedicated networking breaks.",
+  //   icon: Users2,
+  //   color: "bg-green-100 text-green-600"
+  // },
   {
     title: "Panel Discussions",
     desc: "Expert-led forums debating emerging trends in technology, featuring industry leaders and senior academics.",
@@ -41,11 +41,12 @@ export default function SessionTypes() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Updated grid to lg:grid-cols-3 for perfect alignment of 3 items */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {sessions.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="flex flex-col items-center text-center group">
+              <div key={index} className="flex flex-col items-center text-center group px-4">
                 <div className={`w-20 h-20 rounded-2xl ${item.color} flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform duration-300 shadow-sm`}>
                   <Icon className="w-10 h-10" />
                 </div>

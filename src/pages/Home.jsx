@@ -1,10 +1,8 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
-import ThemeSection from '../components/ThemeSection'; // Using this as the brief intro
-import SponsorsSection from '../components/SponsorsSection';
+import ThemeSection from '../components/ThemeSection'; 
+import ImportantDates from '../components/ImportantDates';
 import CmtAcknowledgment from '../components/CmtAcknowledgment';
-import AboutSection from '../components/AboutSection';
-import KeynoteSection from '../components/KeynoteSection';
 import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
@@ -12,22 +10,17 @@ export default function Home() {
     <div className="pt-16">
       <HeroSection />
 
-      {/* About Section: Organizers */}
-      <AboutSection />
+      {/* Important Dates */}
+      <ImportantDates />
 
-      {/* Brief Introduction / Theme */}
+      {/* Conference Tracks */}
       <ThemeSection />
-
-      {/* Keynote Speaker */}
-      <KeynoteSection />
-
-      {/* Sponsors */}
-      <SponsorsSection />
       
       {/* Microsoft Acknowledgment */}
-      {/* <CmtAcknowledgment /> */}
+      <CmtAcknowledgment />
+      
       {/* CMT Message CTA */}
-      {/* <section className="py-16 bg-[#002b4b] text-white text-center">
+      <section className="py-16 bg-[#002b4b] text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6">Ready to Submit Your Research?</h2>
           <p className="text-lg text-white/80 mb-8">
@@ -40,10 +33,10 @@ export default function Home() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 bg-white text-[#002b4b] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors"
           >
-            Go to CMT Portal <ArrowRight className="w-5 h-5" />
+            Submit Full Paper <ArrowRight className="w-5 h-5" />
           </a>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }
