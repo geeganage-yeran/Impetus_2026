@@ -104,7 +104,7 @@ const AdvisorySection = ({ title, members }) => (
   </div>
 );
 
-// --- 2. Conference Committee Grid Section (Horizontal Layout) ---
+// --- 2. Conference Committee Grid Section (Horizontal Layout - No Icon) ---
 const ConferenceCommitteeGrid = ({ title, members }) => (
   <div className="mb-24 last:mb-0">
     <div className="flex items-center justify-center mb-12" data-aos="fade-up">
@@ -128,20 +128,14 @@ const ConferenceCommitteeGrid = ({ title, members }) => (
             {/* Top accent bar */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             
-            <div className="flex items-start gap-4">
-               {/* Icon Placeholder */}
-              <div className="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-[#005596] group-hover:bg-[#005596] group-hover:text-white transition-colors">
-                <User className="w-5 h-5" />
-              </div>
-
-              <div>
-                <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1 group-hover:text-blue-700">
-                  {m.role}
-                </p>
-                <h3 className="text-gray-900 font-bold text-lg leading-tight group-hover:text-[#005596] transition-colors">
-                  {m.name}
-                </h3>
-              </div>
+            {/* Content Container */}
+            <div>
+              <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1 group-hover:text-blue-700">
+                {m.role}
+              </p>
+              <h3 className="text-gray-900 font-bold text-lg leading-tight group-hover:text-[#005596] transition-colors">
+                {m.name}
+              </h3>
             </div>
           </div>
         ))}
