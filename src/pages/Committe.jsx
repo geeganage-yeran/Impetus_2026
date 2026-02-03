@@ -12,33 +12,89 @@ const advisoryCommittee = [
   { name: "Prof. E. M. U. W. J. B. Ekanayake", role: "Prof, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "/committee/ekanayake.jpg" },
 ];
 
-const conferenceCommittee = [
-  { role: "Conference Chair", name: "Prof. K. W. S. N. Kumari" },
-  { role: "Conference Co-Chair", name: "Dr. A.R.P.C.C.J. Amarasinghe" },
-  { role: "Conference Secretary", name: "Ms. R.P. Abeywardhana" },
-  { role: "Conference Co-Secretary", name: "Mr. V. Thanujan" },
-  { role: "Technical Programme Chair", name: "Prof. E.M.U.W.J.B. Ekanayake" },
-  { role: "International Relations Chair", name: "Dr. M. A. R. L. Samaraweera" },
-  { role: "Editor-in-Chief", name: "Dr. H.M.S.N. Ariyadasa" },
-  { role: "Co-Editor-in-Chief & Publication Chair", name: "Dr. (Eng.) M.N.P. Dushyantha" },
-  { role: "Finance Chair", name: "Ms. C.S.D. Ellepola" },
-  { role: "Finance Co-Chair", name: "Mr. A.M.P. Chandrasiri" },
-  { role: "Logistics Chair", name: "Mr. W.A.P.Weerakoon" },
-  { role: "Logistics Co-Chair", name: "Ms. K.A.A. Chathurangi" },
-  { role: "Publicity Chair", name: "Mr. H.P.D.P. Pathirana" },
-  { role: "Publicity Co-Chair", name: "Mr. K.A.P.A. Rathnathilake" },
-  { role: "Registration Chair", name: "Dr. J.A.V.M.K. Jayakody" },
-  { role: "Registration Co-Chair", name: "Ms. M.P.A.M. Rathnakumara" },
-  { role: "Webmaster Chair", name: "Mr. A.M.B. Ratnayake" },
-  { role: "Webmaster Co-Chair", name: "Mr. U.E. Ranasooriya" },
-  { role: "Panel Discussion Chair", name: "Dr. T. H. N. G. Amaraweera" },
-  { role: "Panel Discussion Co-Chair", name: "Ms. R.M.T. Lakmali" },
-  { role: "Designing and Printing Chair", name: "Dr. M.M.S.N. Premetilake" },
-  { role: "Designing and Printing Co-Chair", name: "Ms. B.C. Liyanapathirana" },
-  { role: "Hall Arrangements Chair", name: "Dr. Dilan Karunathilaka" },
-  { role: "Hall Arrangements Co-Chair", name: "Mr. R.D.A.U. Pallegama" },
-  { role: "Hospitality Co-Chair", name: "Ms. K.W.H.M.I.M. Hearth" },
-  { role: "Hospitality Co-Chair", name: "Ms. Y. Milani" },
+// Grouped Conference Committee Data
+const conferenceCommitteeGroups = [
+  {
+    title: "Conference Leadership",
+    members: [
+      { role: "Conference Chair", name: "Prof. K. W. S. N. Kumari" },
+      { role: "Conference Co-Chair", name: "Dr. A. R. P. C. C. J. Amarasinghe" },
+      { role: "Conference Secretary", name: "Ms. R. P. Abeywardhana" },
+      { role: "Conference Co-Secretary", name: "Mr. V. Thanujan" }
+    ]
+  },
+  {
+    title: "Technical & Academic Committee",
+    members: [
+      { role: "Technical Programme Chair", name: "Prof. E. M. U. W. J. B. Ekangayake" },
+      { role: "Editor-in-Chief", name: "Dr. H. M. S. N. Ariyadasa" },
+      { role: "Co-Editor-in-Chief & Publication Chair", name: "Dr. (Eng.) M. N. P. Dushyantha" },
+      { role: "Panel Discussion Chair", name: "Dr. T. H. N. G. Amaraweera" },
+      { role: "Panel Discussion Co-Chair", name: "Ms. R. M. T. Lakmali" }
+    ]
+  },
+  {
+    title: "International Relations",
+    members: [
+      { role: "International Relations Chair", name: "Dr. M. A. R. L. Samaraweera" }
+    ]
+  },
+  {
+    title: "Finance Committee",
+    members: [
+      { role: "Finance Chair", name: "Ms. C. S. D. Ellepola" },
+      { role: "Finance Co-Chair", name: "Mr. A. M. P. Chandrasiri" }
+    ]
+  },
+  {
+    title: "Logistics Committee",
+    members: [
+      { role: "Logistics Chair", name: "Mr. W. A. P. Weerakoon" },
+      { role: "Logistics Co-Chair", name: "Ms. K. A. A. Chathurangi" }
+    ]
+  },
+  {
+    title: "Publicity Committee",
+    members: [
+      { role: "Publicity Chair", name: "Mr. H. P. D. P. Pathirana" },
+      { role: "Publicity Co-Chair", name: "Mr. K. A. P. A. Rathnathilake" }
+    ]
+  },
+  {
+    title: "Registration Committee",
+    members: [
+      { role: "Registration Chair", name: "Dr. J. A. V. M. K. Jayakody" },
+      { role: "Registration Co-Chair", name: "Ms. M. P. A. M. Rathnakumara" }
+    ]
+  },
+  {
+    title: "Web & IT Committee",
+    members: [
+      { role: "Webmaster Chair", name: "Mr. A. M. B. Rathnayake" },
+      { role: "Webmaster Co-Chair", name: "Mr. U. E. Randsooriya" }
+    ]
+  },
+  {
+    title: "Designing & Printing Committee",
+    members: [
+      { role: "Designing and Printing Chair", name: "Dr. M. M. S. N. Premetilake" },
+      { role: "Designing and Printing Co-Chair", name: "Ms. B. C. Liyanapathirana" }
+    ]
+  },
+  {
+    title: "Hall Arrangements Committee",
+    members: [
+      { role: "Hall Arrangements Chair", name: "Dr. Dilan Karunathilaka" },
+      { role: "Hall Arrangements Co-Chair", name: "Mr. R. D. A. U. Pallegama" }
+    ]
+  },
+  {
+    title: "Hospitality Committee",
+    members: [
+      { role: "Hospitality Co-Chair", name: "Ms. K. W. H. M. I. M. Hearth" },
+      { role: "Hospitality Co-Chair", name: "Ms. Y. Milani" }
+    ]
+  }
 ];
 
 const technicalTracks = [
@@ -104,42 +160,48 @@ const AdvisorySection = ({ title, members }) => (
   </div>
 );
 
-// --- 2. Conference Committee Grid Section (Horizontal Layout - No Icon) ---
-const ConferenceCommitteeGrid = ({ title, members }) => (
+// --- 2. Grouped Conference Committee Section ---
+const ConferenceCommitteeGrouped = ({ groups }) => (
   <div className="mb-24 last:mb-0">
     <div className="flex items-center justify-center mb-12" data-aos="fade-up">
       <div className="h-px bg-gray-200 w-16 md:w-32"></div>
       <h2 className="text-2xl md:text-3xl font-bold text-center text-[#005596] px-6 uppercase tracking-wider">
-        {title}
+        Conference Committee
       </h2>
       <div className="h-px bg-gray-200 w-16 md:w-32"></div>
     </div>
     
-    <div className="max-w-7xl mx-auto px-4">
-      {/* Horizontal Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {members.map((m, i) => (
-          <div 
-            key={i} 
-            data-aos="fade-up"
-            data-aos-delay={i * 30}
-            className="group flex flex-col p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 relative overflow-hidden"
-          >
-            {/* Top accent bar */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            
-            {/* Content Container */}
-            <div>
-              <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1 group-hover:text-blue-700">
-                {m.role}
-              </p>
-              <h3 className="text-gray-900 font-bold text-lg leading-tight group-hover:text-[#005596] transition-colors">
-                {m.name}
-              </h3>
-            </div>
+    <div className="max-w-7xl mx-auto px-4 space-y-16">
+      {groups.map((group, groupIndex) => (
+        <div key={groupIndex} data-aos="fade-up">
+          {/* Sub-Group Title */}
+          <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-8 border-l-4 border-[#005596] pl-4">
+            {group.title}
+          </h3>
+
+          {/* Members Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {group.members.map((m, i) => (
+              <div 
+                key={i} 
+                className="group flex flex-col p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 relative overflow-hidden"
+              >
+                {/* Top accent bar */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                
+                <div className="flex-grow">
+                  <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1 group-hover:text-blue-700">
+                    {m.role}
+                  </p>
+                  <h3 className="text-gray-900 font-bold text-lg leading-tight group-hover:text-[#005596] transition-colors">
+                    {m.name}
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   </div>
 );
@@ -241,15 +303,15 @@ export default function Committee() {
             Meet the Team
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            The dedicated academic and student leaders working behind the scenes to steer innovation and ensure the success of this Conference.
+            The dedicated academic and student leaders working behind the scenes to steer innovation and ensure the success of this symposium.
           </p>
         </div>
         
         {/* Advisory Committee - Kept with Images */}
         <AdvisorySection title="Advisory Committee" members={advisoryCommittee} />
 
-        {/* Conference Committee - Horizontal Grid Layout */}
-        <ConferenceCommitteeGrid title="Conference Committee" members={conferenceCommittee} />
+        {/* Conference Committee - Grouped Layout */}
+        <ConferenceCommitteeGrouped groups={conferenceCommitteeGroups} />
 
         {/* Technical Tracks */}
         <TechnicalTracksSection />

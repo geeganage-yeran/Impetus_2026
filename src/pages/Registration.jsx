@@ -34,7 +34,7 @@ export default function Registration() {
           <div>
             <h3 className="text-lg font-bold text-amber-900 mb-1">Important Notice for Authors</h3>
             <p className="text-amber-800 leading-relaxed">
-              Authors/Presenters must register for the conference on or before <span className="font-bold">May 30, 2026</span>. 
+              Authors/Presenters must register for the conference on or before <span className="font-bold">May 20, 2026</span>. 
               The full paper will <span className="underline">not</span> be included in the proceedings if at least one author does not register before the deadline.
             </p>
           </div>

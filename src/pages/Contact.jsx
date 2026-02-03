@@ -10,7 +10,7 @@ export default function Contact() {
       name: "Prof. Sandya Kumari",
       role: "Coordinator",
       email: "sandya@uwu.ac.lk",
-      img: "/committee/kumari.jpg" 
+      img: "/committee/kumari.jpeg" 
     },
     {
       name: "Ms. Rashmi Abeywardhana",
