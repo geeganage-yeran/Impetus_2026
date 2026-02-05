@@ -64,7 +64,7 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="https://cmt3.research.microsoft.com/" 
+                  href="https://cmt3.research.microsoft.com/IMPETUS2026" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"

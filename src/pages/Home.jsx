@@ -27,8 +27,9 @@ export default function Home() {
             Submissions are open via the Microsoft CMT platform.
             Ensure your paper follows the IEEE format.
           </p>
+          {/* UPDATED LINK */}
           <a
-            href="https://cmt3.research.microsoft.com/"
+            href="https://cmt3.research.microsoft.com/IMPETUS2026"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 bg-white text-[#002b4b] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors"

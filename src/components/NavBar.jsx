@@ -69,7 +69,7 @@ export default function Navigation() {
               
               {/* Submit Paper Button */}
               <a
-                href="https://cmt3.research.microsoft.com/"
+                href="https://cmt3.research.microsoft.com/IMPETUS2026"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#005596] text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-[#003b69] transition-all transform hover:scale-105 hover:shadow-lg"
@@ -108,7 +108,7 @@ export default function Navigation() {
               </Link>
             ))}
             <a
-              href="https://cmt3.research.microsoft.com/"
+              href="https://cmt3.research.microsoft.com/IMPETUS2026"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}

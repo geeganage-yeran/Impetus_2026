@@ -37,8 +37,9 @@ export default function SubmissionSection() {
               Submissions are now open via the Microsoft CMT platform. Please ensure you have read the author guidelines before proceeding.
             </p>
             
+            {/* UPDATED LINK */}
             <a 
-              href="https://cmt3.research.microsoft.com/"
+              href="https://cmt3.research.microsoft.com/IMPETUS2026"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-3 bg-white text-[#002b4b] px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95"
