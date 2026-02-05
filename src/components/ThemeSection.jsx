@@ -7,7 +7,7 @@ const topics = [
     title: "Track 1: Computing & Industrial Information Systems",
     subthemes: [
       "Software Engineering & Systems Architecture",
-      "Web, Mobile & Enterprise Application Systems",
+      "Web, Mobile, Enterprise & Educational Technology Systems", // Updated
       "Cloud, Distributed & Networked Computing",
       "Cybersecurity, Privacy & IT Governance",
       "Industrial IoT, Smart Manufacturing & Industry 4.0",

@@ -8,7 +8,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-br from-[#020617] via-[#001e35] to-[#002b4b] text-white py-12 border-t border-white/10">
+    <footer className="bg-gradient-to-br from-[#020617] via-[#001e35] to-[#002b4b] text-white pt-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           
@@ -28,7 +28,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-blue-200/80 text-sm leading-relaxed max-w-sm">
-              International Conference on Computing, Engineering, and Technology. 
+              International Symposium on Computing, Engineering, and Technology. 
               Fostering innovation and ethical impact through multidisciplinary collaboration.
             </p>
           </div>
@@ -44,7 +44,17 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/author" onClick={scrollToTop} className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                  Author Space
+                  Author Guidelines
+                </Link>
+              </li>
+              <li>
+                <Link to="/registration" onClick={scrollToTop} className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                  Registration
+                </Link>
+              </li>
+              <li>
+                <Link to="/program" onClick={scrollToTop} className="hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                  Program Details
                 </Link>
               </li>
               <li>
@@ -82,7 +92,7 @@ export default function Footer() {
         </div>
 
         {/* Divider and Copyright */}
-        <div className="border-t border-white/10 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-white/10 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-blue-200/60">
             © 2026 IMPETUS. All rights reserved.
           </p>
@@ -90,6 +100,8 @@ export default function Footer() {
             <Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact Us</Link>
           </div>
         </div>
+        
+        {/* Note: CMT Acknowledgment is now in index.html to meet static view-source requirements */}
       </div>
     </footer>
   );

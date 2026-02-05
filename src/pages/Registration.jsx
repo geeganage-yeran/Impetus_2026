@@ -91,7 +91,7 @@ export default function Registration() {
             </table>
           </div>
           <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
-            <span className="font-bold">**</span> 25% registration fee waiver for UWU students with IEEE membership.
+            <span className="font-bold">**</span> 25% registration fee waiver for local undergraduate students with IEEE membership.
           </div>
         </section>
 
@@ -179,14 +179,20 @@ export default function Registration() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Fill Registration Form</h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  Complete the online form by clicking "Register Now" below and submit it with the payment receipt. (Students: attach valid ID).
+                  Complete the online form by clicking "Register Now" and submit it with the payment receipt.(Students: attach valid Student ID).
                 </p>
-                <a 
-                  href="#" 
-                  className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800"
-                >
-                  Register Now <MousePointerClick className="w-4 h-4" />
-                </a>
+                
+                <div className="flex flex-col items-center">
+                  {/* <a 
+                    href="#" 
+                    className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800"
+                  >
+                    Register Now <MousePointerClick className="w-4 h-4" />
+                  </a> */}
+                  <p className="text-xs text-amber-600 mt-2 font-medium italic">
+                    (Registration will be available after April 05th)
+                  </p>
+                </div>
               </div>
 
               {/* Step 3 */}
@@ -203,10 +209,13 @@ export default function Registration() {
             </div>
           </div>
 
-          <div className="text-center mt-12">
-            <button className="bg-[#005596] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-[#003b69] transition-all transform hover:scale-105 shadow-xl shadow-blue-900/20">
+          <div className="text-center mt-12 flex flex-col items-center">
+            <button className="bg-[#005596] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-[#003b69] transition-all transform hover:scale-105 shadow-xl shadow-blue-900/20 cursor-not-allowed opacity-80" disabled>
               Register Now
             </button>
+            <p className="text-sm text-amber-700 mt-3 font-semibold bg-amber-50 px-4 py-1 rounded-full border border-amber-200">
+              (Registration will be available after April 05th)
+            </p>
           </div>
         </section>
 
