@@ -70,8 +70,8 @@ const conferenceCommitteeGroups = [
   {
     title: "Web & IT Committee",
     members: [
-      { role: "Webmaster Chair", name: "Mr. A. M. B. Rathnayake" },
-      { role: "Webmaster Co-Chair", name: "Mr. U. E. Randsooriya" }
+      { role: "Webmaster Chair", name: "Mr. A. M. B. Ratnayake" },
+      { role: "Webmaster Co-Chair", name: "Mr. U. E. Ranasooriya" }
     ]
   },
   {

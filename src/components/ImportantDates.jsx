@@ -3,11 +3,11 @@ import { Calendar, CheckCircle2, Star } from 'lucide-react';
 
 const dates = [
   { day: '06', month: 'Feb 2026', label: 'Call for Paper', status: 'upcoming' },
-  { day: '30', month: 'Mar 2026', label: 'Full Paper Deadline', status: 'upcoming' },
-  { day: '05', month: 'Apr 2026', label: 'Early Bird Opens', sub: 'Until May 10', status: 'upcoming' },
-  { day: '27', month: 'Apr 2026', label: 'Author Notification', status: 'upcoming' },
-  { day: '27', month: 'Apr 2026', label: 'Regular Reg Opens', sub: 'Until May 20', status: 'upcoming' },
-  { day: '10', month: 'May 2026', label: 'Camera Ready', status: 'upcoming' },
+  { day: '02', month: 'Apr 2026', label: 'Full Paper Deadline', status: 'upcoming' },
+  { day: '02', month: 'May 2026', label: 'Author Notification', status: 'upcoming' },
+  { day: '10', month: 'May 2026', label: 'Camera Ready Submission Deadline', status: 'upcoming' },
+  { day: '02', month: 'May 2026', label: 'Early Bird Opens', sub: 'Until May 10', status: 'upcoming' },
+  { day: '11', month: 'May 2026', label: 'Regular Reg Opens', sub: 'Until May 20', status: 'upcoming' },
   { day: '27', month: 'May 2026', label: 'Conference Date', highlight: true, status: 'upcoming' },
 ];
 
