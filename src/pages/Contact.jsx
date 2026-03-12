@@ -79,11 +79,11 @@ export default function Contact() {
           </p>
 
           <a 
-            href="mailto:impetus@ieee.uwu.ac.lk"
+            href="mailto:impetus@uwu.ac.lk"
             className="inline-flex items-center gap-3 bg-[#005596] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#00447a] transition-all shadow-lg hover:shadow-blue-900/20 transform hover:-translate-y-1"
           >
             <Mail className="w-5 h-5" />
-            impetus@ieee.uwu.ac.lk
+            impetus@uwu.ac.lk
           </a>
         </div>
       </section>

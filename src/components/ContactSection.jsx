@@ -26,10 +26,10 @@ export default function ContactSection() {
               </div>
               <h3 className="text-gray-900 font-semibold text-lg mb-2">Email</h3>
               <a
-                href="mailto:impetus@ieee.uwu.ac.lk"
+                href="mailto:impetus@uwu.ac.lk"
                 className="text-[#005596] font-medium inline-flex items-center gap-2 group/link"
               >
-                impetus@ieee.uwu.ac.lk
+                impetus@uwu.ac.lk
                 <ArrowRight className="w-4 h-4 opacity-0 group-hover/link:opacity-100 transform -translate-x-2 group-hover/link:translate-x-0 transition-all" />
               </a>
               <p className="text-sm text-gray-500 mt-2">We'll respond within 24 hours</p>
