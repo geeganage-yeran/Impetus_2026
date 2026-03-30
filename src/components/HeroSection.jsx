@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Calendar, ArrowRight, Globe } from 'lucide-react';
+import { Calendar, ArrowRight, Globe, BookOpenCheck } from 'lucide-react'; // Added BookOpenCheck icon
 import { useNavigate } from 'react-router-dom';
 
 export default function HeroAndCountdown() {
@@ -152,16 +152,24 @@ export default function HeroAndCountdown() {
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          {/* CTA Buttons - Added Publication Text here */}
+          <div className="flex flex-col items-center justify-center gap-6 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             
             {/* Submit Papers Button */}
             <button
               onClick={() => navigate('/author')}
-              className="px-10 py-4 cursor-pointer bg-white/10 backdrop-blur-md border-2 border-white/50 text-white rounded-lg font-semibold text-lg transition-all hover:bg-white/20 w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] shadow-lg"
+              className="px-12 py-4 cursor-pointer bg-white/10 backdrop-blur-md border-2 border-white/50 text-white rounded-lg font-bold text-lg transition-all hover:bg-white/20 w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] shadow-lg"
             >
               Submit Full Paper
             </button>
+
+            {/* Publication Info Spotlight */}
+            <div className="flex items-center gap-3 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 px-6 py-3 rounded-2xl shadow-xl max-w-2xl">
+              <BookOpenCheck className="w-6 h-6 text-yellow-300 flex-shrink-0 animate-pulse" />
+              <p className="text-white text-sm md:text-base font-semibold text-center leading-relaxed">
+                All accepted and presented papers will receive a <span className="text-yellow-300 font-bold">DOI</span> and will be published in the conference proceedings.
+              </p>
+            </div>
           </div>
         </div>
 

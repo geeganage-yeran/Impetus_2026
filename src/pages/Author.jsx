@@ -5,8 +5,6 @@ import SessionTypes from '../components/SessionTypes';
 import { Link } from 'react-router-dom';
 import { FileText, Download, Users, AlertCircle } from 'lucide-react';
 
-
-
 export default function Author() {
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
@@ -42,7 +40,8 @@ export default function Author() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Adjusted to md:grid-cols-2 and added max-w-4xl to center the 2 remaining cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             
             {/* Declaration Form */}
             <a href="Docs/IMPETUS2026-DeclarationForm.docx" target="_blank" rel="noreferrer" className="flex flex-col p-6 bg-white border-l-4 border-[#005596] rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group shadow-md relative overflow-hidden">
@@ -76,8 +75,8 @@ export default function Author() {
               </p>
             </a>
 
-            {/* Reviewer List */}
-            <a href="Docs/IMPETUS2026-ReviewerList.docx" target="_blank" rel="noreferrer" className="flex flex-col p-6 bg-white border-l-4 border-emerald-500 rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group shadow-md relative overflow-hidden">
+            {/* Reviewer List - COMMENTED OUT */}
+            {/* <a href="Docs/IMPETUS2026-ReviewerList.docx" target="_blank" rel="noreferrer" className="flex flex-col p-6 bg-white border-l-4 border-emerald-500 rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group shadow-md relative overflow-hidden">
               <div className="flex justify-between items-start mb-4">
                 <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg group-hover:bg-emerald-500 group-hover:text-white transition-colors">
                   <Users className="w-6 h-6" />
@@ -90,7 +89,8 @@ export default function Author() {
               <p className="text-sm text-gray-600 leading-relaxed">
                 A comprehensive list of our esteemed academic and industry reviewers for IMPETUS 2026.
               </p>
-            </a>
+            </a> 
+            */}
 
           </div>
         </div>
