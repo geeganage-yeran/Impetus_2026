@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Calendar, ArrowRight, Globe, BookOpenCheck } from 'lucide-react'; // Added BookOpenCheck icon
+import { Calendar, ArrowRight, Globe, BookOpenCheck, AlertCircle } from 'lucide-react'; // Added AlertCircle
 import { useNavigate } from 'react-router-dom';
 
 export default function HeroAndCountdown() {
@@ -132,9 +132,19 @@ export default function HeroAndCountdown() {
           </div>
 
           {/* Subtitle */}
-          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-10 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-6 font-light max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             International Conference on Computing,<br className="hidden sm:block" /> Engineering, and Technology
           </p>
+
+          {/* EXTENDED DEADLINE HIGHLIGHT */}
+          <div className="mb-10 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <div className="inline-flex items-center gap-2 px-6 py-2 bg-amber-500 text-white rounded-full font-bold shadow-[0_0_15px_rgba(245,158,11,0.5)] border border-amber-400">
+              <AlertCircle className="w-5 h-5 animate-pulse" />
+              <span className="uppercase tracking-wider text-sm md:text-base">
+                Full Paper Submission Deadline Extended: April 10, 2026
+              </span>
+            </div>
+          </div>
 
           {/* Description */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
@@ -148,11 +158,11 @@ export default function HeroAndCountdown() {
               <br className="hidden md:block" />
               <span className="text-yellow-300 font-medium text-xl inline-block my-2">"Humanity First: Steering Innovation for Ethical Impact"</span>
               <br className="hidden md:block" />
-              The Conference emphasizes ethical, human-centered, and multidisciplinary innovation at Uva Wellassa University and beyond. Adhering to international academic standards and IEEE guidelines, the Conference aims to drive impactful innovation.
+              The Conference emphasizes ethical, human-centered, and multidisciplinary innovation.
             </p>
           </div>
 
-          {/* CTA Buttons - Added Publication Text here */}
+          {/* CTA Buttons */}
           <div className="flex flex-col items-center justify-center gap-6 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             
             {/* Submit Papers Button */}
