@@ -99,7 +99,7 @@ const conferenceCommitteeGroups = [
 
 const technicalTracks = [
   { track: "Computing and Industrial Information Systems", chair: "Dr. S.H.D. Senanayake", coChair: "Dr. P.N.S. Kumara" },
-  { track: "Data Science and Artificial Intelligence", chair: "Dr. Dias", coChair: "Dr. K.P.P.S. Pathirana" },
+  { track: "Data Science and Artificial Intelligence", chair: "Dr. L.S.L. Dias", coChair: "Dr. K.P.P.S. Pathirana" },
   { track: "Robotics, Mechatronics, and Embedded Systems", chair: "Dr. R.M.T.C.B. Ekanayake", coChair: "Ms. D.P. Jayathunga" },
   { track: "Science and Technology", chair: "Dr. D.J. Kottehewa", coChair: "Mr. Roshan Thilakarathna" },
 ];

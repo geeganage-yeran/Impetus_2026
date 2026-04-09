@@ -214,7 +214,7 @@ export default function Registration() {
               Register Now
             </button>
             <p className="text-sm text-amber-700 mt-3 font-semibold bg-amber-50 px-4 py-1 rounded-full border border-amber-200">
-              (Registration will be available after April 05th)
+              (Registration will be available after May 02nd)
             </p>
           </div>
         </section>
