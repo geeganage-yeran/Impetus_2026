@@ -190,7 +190,7 @@ export default function Registration() {
                     Register Now <MousePointerClick className="w-4 h-4" />
                   </a> */}
                   <p className="text-xs text-amber-600 mt-2 font-medium italic">
-                    (Registration will be available after April 05th)
+                    (Registration will be available after May 02nd)
                   </p>
                 </div>
               </div>
