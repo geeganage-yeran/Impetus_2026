@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 // Pages
 import Home from './pages/Home';
 import Author from './pages/Author';
-
+import RegistrationForm from './pages/RegistrationForm';
 import Registration from './pages/Registration';
 import ProgramDetails from './pages/ProgramDetails';
 import Committee from './pages/Committe';
@@ -27,6 +27,7 @@ function App() {
           <Route path="/program" element={<ProgramDetails />} />
           <Route path="/committee" element={<Committee />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/register-form" element={<RegistrationForm />} />
         </Routes>
       </main>
       <Footer />
