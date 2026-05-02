@@ -7,9 +7,10 @@ const advisoryCommittee = [
   { name: "Prof. Amila Sandaruwan Ratnayake", role: "Dean, Faculty of Applied Sciences", dept: "Uva Wellassa University", img: "/committee/amila.png" },
   { name: "Assoc. Prof. A. P. Henagamage", role: "Head, Dept. of Science & Technology", dept: "Uva Wellassa University", img: "/committee/henagama.jpg" },
   { name: "Dr. J. T. Cooray", role: "Head, Dept. of Applied Earth Sciences", dept: "Uva Wellassa University", img: "/committee/cooray.jpg" },
-  { name: "Ms. S. D. H. S. Wickramarathne", role: "Head, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "/committee/harshani.jpg" },
+  { name: "Prof. E. M. U. W. J. B. Ekanayake", role: "Head, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "/committee/ekanayake.jpg" },
+  { name: "Ms. S. D. H. S. Wickramarathne", role: "Senior Lecturer, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "/committee/harshani.jpg" },
   { name: "Prof. K. W. S. N. Kumari", role: "Counselor", dept: "IEEE Uva Wellassa University Student Branch", img: "/committee/kumari.jpeg" },
-  { name: "Prof. E. M. U. W. J. B. Ekanayake", role: "Prof, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "/committee/ekanayake.jpg" },
+  
 ];
 
 // Grouped Conference Committee Data
