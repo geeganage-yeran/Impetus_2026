@@ -1,0 +1,41 @@
+# --- Security & Environment ---
+# Prevents sensitive keys (like your Azure AI key) from being pushed
+.env
+.env.local
+.env.*.local
+*.env
+config.json
+secrets.json
+
+# --- Node / Backend ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- Python (if used for AI/Backend) ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+build/
+dist/
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Logs & Performance ---
+logs
+*.log
+npm-debug.log*
