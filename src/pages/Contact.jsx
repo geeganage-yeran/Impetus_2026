@@ -10,13 +10,13 @@ export default function Contact() {
       name: "Prof. Sandya Kumari",
       role: "Coordinator",
       email: "sandya@uwu.ac.lk",
-      img: "/committee/kumari.jpeg" 
+      img: "kumari.jpeg" 
     },
     {
       name: "Ms. Rashmi Abeywardhana",
       role: "Secretary",
       email: "rashmi@uwu.ac.lk",
-      img: "/committee/rashmi.jpg" 
+      img: "rashmi.jpg" 
     }
   ];
 
@@ -41,7 +41,7 @@ export default function Contact() {
                   src={person.img} 
                   alt={person.name} 
                   className="w-full h-full object-cover object-top"
-                  onError={(e) => {e.target.src = "https://i.pravatar.cc/150?u=99"}} 
+                  onError={(e) => {e.target.src = "https://ui-avatars.com/api/?name=" + person.name + "&background=random"}} 
                 />
               </div>
 

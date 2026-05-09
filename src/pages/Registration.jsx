@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Added for navigation
-import { 
-  CreditCard, 
-  Landmark, 
-  Building2, 
-  CheckCircle2, 
-  AlertCircle, 
+import {
+  CreditCard,
+  Landmark,
+  Building2,
+  CheckCircle2,
+  AlertCircle,
   PackageCheck,
   Monitor,
   Users,
@@ -16,7 +16,7 @@ import {
 export default function Registration() {
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
-      
+
       {/* Header Banner */}
       <div className="bg-[#002b4b] py-16 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
@@ -29,14 +29,14 @@ export default function Registration() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
-        
+
         {/* Important Deadline Alert */}
         <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-xl shadow-lg mb-12 flex items-start gap-4">
           <AlertCircle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
           <div>
             <h3 className="text-lg font-bold text-amber-900 mb-1">Important Notice for Authors</h3>
             <p className="text-amber-800 leading-relaxed">
-              Authors/Presenters must register for the conference on or before <span className="font-bold">May 20, 2026</span>. 
+              Authors/Presenters must register for the conference on or before <span className="font-bold">May 20, 2026</span>.
               The full paper will <span className="underline">not</span> be included in the proceedings if at least one author does not register before the deadline.
             </p>
           </div>
@@ -100,7 +100,7 @@ export default function Registration() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Payment Methods</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
+
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4">
                 <Landmark className="w-6 h-6" />
@@ -126,12 +126,12 @@ export default function Registration() {
                 (For the International Participant)
               </p>
               {/* BUTTON UPDATED TO LINK */}
-              <Link 
-                to="/register-form" 
+              <a
+                href="/pay/"
                 className="mt-auto block text-center w-full py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
               >
                 Go to Registration & Payment
-              </Link>
+              </a>
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
@@ -144,8 +144,8 @@ export default function Registration() {
                 Payments can be made directly at the Shroff Counter.
               </p>
               <div className="mt-4 p-3 bg-gray-50 rounded-lg text-sm text-gray-600 border border-gray-200">
-                <strong>Location:</strong><br/>
-                Ground Floor,<br/>
+                <strong>Location:</strong><br />
+                Ground Floor,<br />
                 Senate Building, UWU
               </div>
             </div>
@@ -156,7 +156,7 @@ export default function Registration() {
         {/* 3. Registration Steps */}
         <section className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12 border border-gray-100">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Registration Steps</h2>
-          
+
           <div className="relative">
             <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-100 -translate-y-1/2 z-0"></div>
 
@@ -184,7 +184,7 @@ export default function Registration() {
 
           <div className="text-center mt-12 flex flex-col items-center">
             {/* BUTTON UPDATED TO LINK */}
-            <Link 
+            <Link
               to="/register-form" 
               className="bg-[#005596] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-[#003b69] transition-all transform hover:scale-105 shadow-xl shadow-blue-900/20"
             >
@@ -198,40 +198,40 @@ export default function Registration() {
 
         {/* 4. Conference Package */}
         <section className="mb-16">
-           <div className="text-center mb-10">
+          <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-gray-900 flex items-center justify-center gap-3">
-              <PackageCheck className="w-8 h-8 text-[#005596]" /> 
+              <PackageCheck className="w-8 h-8 text-[#005596]" />
               Conference Package
             </h2>
             <p className="text-gray-600 mt-2">What is included in your registration fee</p>
-           </div>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-             <div className="bg-white p-8 rounded-2xl border-t-4 border-blue-400 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Monitor className="w-5 h-5 text-blue-500" /> For Online Presenters
-                </h3>
-                <ul className="space-y-4">
-                  {["e-Participation in all sessions", "e-Program Book", "e-Certificate"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-700">
-                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />{item}
-                    </li>
-                  ))}
-                </ul>
-             </div>
-             <div className="bg-white p-8 rounded-2xl border-t-4 border-[#005596] shadow-lg relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-[#005596] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">RECOMMENDED</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-[#005596]" /> For Physical Presenters
-                </h3>
-                <ul className="space-y-4">
-                  {["Participation in all sessions", "e-Program Book", "e-Certificate", "Lunch / Refreshments"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-700">
-                      <CheckCircle2 className="w-5 h-5 text-[#005596] flex-shrink-0" />{item}
-                    </li>
-                  ))}
-                </ul>
-             </div>
-           </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white p-8 rounded-2xl border-t-4 border-blue-400 shadow-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Monitor className="w-5 h-5 text-blue-500" /> For Online Presenters
+              </h3>
+              <ul className="space-y-4">
+                {["e-Participation in all sessions", "e-Program Book", "e-Certificate"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-gray-700">
+                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />{item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-white p-8 rounded-2xl border-t-4 border-[#005596] shadow-lg relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-[#005596] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">RECOMMENDED</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Users className="w-5 h-5 text-[#005596]" /> For Physical Presenters
+              </h3>
+              <ul className="space-y-4">
+                {["Participation in all sessions", "e-Program Book", "e-Certificate", "Lunch / Refreshments"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-gray-700">
+                    <CheckCircle2 className="w-5 h-5 text-[#005596] flex-shrink-0" />{item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </section>
 
       </div>

@@ -82,7 +82,7 @@ async function vectorizeData() {
     }
 
 
-    console.log("✅ All 15 IMPETUS documents successfully vectorized!");
+    console.log("✅ All 17 IMPETUS documents successfully vectorized!");
 
     process.exit(0);
 

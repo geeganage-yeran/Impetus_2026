@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import Chatbot from './components/Chatbot';
+// import Chatbot from './components/Chatbot';
 // Pages
 import Home from './pages/Home';
 import Author from './pages/Author';
@@ -30,7 +30,7 @@ function App() {
           <Route path="/register-form" element={<RegistrationForm />} />
         </Routes>
       </main>
-      <Chatbot />
+      {/* <Chatbot /> */}
       <Footer />
     </div>
   );
