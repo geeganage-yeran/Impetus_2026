@@ -8,9 +8,8 @@ const advisoryCommittee = [
   { name: "Assoc. Prof. A. P. Henagamage", role: "Head, Dept. of Science & Technology", dept: "Uva Wellassa University", img: "henagama.jpg" },
   { name: "Dr. J. T. Cooray", role: "Head, Dept. of Applied Earth Sciences", dept: "Uva Wellassa University", img: "cooray.jpg" },
   { name: "Prof. E. M. U. W. J. B. Ekanayake", role: "Head, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "ekanayake.jpg" },
-  { name: "Ms. S. D. H. S. Wickramarathne", role: "Senior Lecturer, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "harshani.jpg" },
   { name: "Prof. K. W. S. N. Kumari", role: "Counselor", dept: "IEEE Uva Wellassa University Student Branch", img: "kumari.jpeg" },
-  
+
 ];
 
 // Grouped Conference Committee Data
@@ -119,7 +118,6 @@ const organizingCommittee = [
   { name: "Mr. W. H. G. L. Bimsara", role: "Operational Support Chair" },
 ];
 
-// --- 1. Advisory Section (Images + Details) ---
 const AdvisorySection = ({ title, members }) => (
   <div className="mb-24 last:mb-0">
     <div className="flex items-center justify-center mb-16" data-aos="fade-up">
@@ -129,23 +127,26 @@ const AdvisorySection = ({ title, members }) => (
       </h2>
       <div className="h-px bg-gray-200 w-16 md:w-32"></div>
     </div>
-    
+
     <div className="flex flex-wrap justify-center gap-10 md:gap-x-12 md:gap-y-16">
       {members.map((m, i) => (
-        <div 
-          key={i} 
-          className="w-full sm:w-[calc(50%-2.5rem)] md:w-[calc(33.33%-3rem)] lg:w-[calc(25%-3rem)] min-w-[260px] max-w-[300px] flex flex-col items-center text-center group"
+        <div
+          key={i}
+          className={`w-full sm:w-[calc(50%-2.5rem)] md:w-[calc(33.33%-3rem)] max-w-[300px] flex flex-col items-center text-center group ${members.length === 5
+              ? "lg:w-[calc(20%-3rem)] min-w-[200px]" // 5 items per row
+              : "lg:w-[calc(25%-3rem)] min-w-[260px]" // 4 items per row (original)
+            }`}
           data-aos="fade-up"
           data-aos-delay={i * 50}
         >
           <div className="relative mb-6 w-48 h-48">
             <div className="absolute inset-0 bg-blue-50 rounded-full transform scale-90 group-hover:scale-110 transition-transform duration-500"></div>
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg ring-1 ring-gray-100 group-hover:ring-4 group-hover:ring-blue-100 transform group-hover:-translate-y-2 transition-all duration-300 bg-white">
-              <img 
-                src={m.img} 
-                alt={m.name} 
+              <img
+                src={m.img}
+                alt={m.name}
                 className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
-                onError={(e) => {e.target.src = "https://ui-avatars.com/api/?name=" + m.name + "&background=random"}} 
+                onError={(e) => { e.target.src = "https://ui-avatars.com/api/?name=" + m.name + "&background=random" }}
               />
             </div>
           </div>
@@ -171,7 +172,7 @@ const ConferenceCommitteeGrouped = ({ groups }) => (
       </h2>
       <div className="h-px bg-gray-200 w-16 md:w-32"></div>
     </div>
-    
+
     <div className="max-w-7xl mx-auto px-4 space-y-16">
       {groups.map((group, groupIndex) => (
         <div key={groupIndex} data-aos="fade-up">
@@ -183,13 +184,13 @@ const ConferenceCommitteeGrouped = ({ groups }) => (
           {/* Members Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {group.members.map((m, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="group flex flex-col p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 relative overflow-hidden"
               >
                 {/* Top accent bar */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                
+
                 <div className="flex-grow">
                   <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1 group-hover:text-blue-700">
                     {m.role}
@@ -210,7 +211,7 @@ const ConferenceCommitteeGrouped = ({ groups }) => (
 // --- 3. Technical Tracks Section ---
 const TechnicalTracksSection = () => (
   <div className="mb-24">
-     <div className="flex items-center justify-center mb-12" data-aos="fade-up">
+    <div className="flex items-center justify-center mb-12" data-aos="fade-up">
       <div className="h-px bg-gray-200 w-16 md:w-32"></div>
       <h2 className="text-2xl md:text-3xl font-bold text-center text-[#005596] px-6 uppercase tracking-wider">
         Technical Session Chairs
@@ -221,9 +222,9 @@ const TechnicalTracksSection = () => (
     <div className="max-w-6xl mx-auto px-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {technicalTracks.map((track, i) => (
-          <div 
-            key={i} 
-            data-aos="fade-up" 
+          <div
+            key={i}
+            data-aos="fade-up"
             className="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#005596] hover:shadow-xl transition-all duration-300"
           >
             <h3 className="font-bold text-lg text-[#005596] mb-6">
@@ -260,11 +261,11 @@ const OrganizingCommitteeSection = ({ title, members }) => (
       </h2>
       <div className="h-px bg-gray-200 w-16 md:w-32"></div>
     </div>
-    
+
     <div className="max-w-6xl mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {members.map((m, i) => (
-          <div 
+          <div
             key={i}
             data-aos="fade-up"
             data-aos-delay={i * 30}
@@ -307,7 +308,7 @@ export default function Committee() {
             The dedicated academic and student leaders working behind the scenes to steer innovation and ensure the success of this symposium.
           </p>
         </div>
-        
+
         {/* Advisory Committee - Kept with Images */}
         <AdvisorySection title="Advisory Committee" members={advisoryCommittee} />
 
@@ -316,10 +317,10 @@ export default function Committee() {
 
         {/* Technical Tracks */}
         <TechnicalTracksSection />
-        
+
         {/* Organizing Committee - Student Committee */}
         <OrganizingCommitteeSection title="Organizing Committee" members={organizingCommittee} />
-        
+
       </div>
     </div>
   );

@@ -5,6 +5,8 @@ import jsPDF from 'jspdf';
 const RegistrationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [receiptData, setReceiptData] = useState(null);
+  const [fileError, setFileError] = useState(''); 
+  const [isProcessing, setIsProcessing] = useState(false); // NEW: Processing state
 
   // Reference for the PDF generation
   const receiptRef = useRef(null);
@@ -16,6 +18,8 @@ const RegistrationForm = () => {
     institution: '',
     country: 'Sri Lanka',
     role: 'non-author',
+    attendanceType: '', 
+    ieeeMemberId: '',   
     paperId: '',
     paperTitle: '',
     researchTrack: '',
@@ -30,11 +34,31 @@ const RegistrationForm = () => {
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, receipt: e.target.files[0] });
+    const file = e.target.files[0];
+    if (file) {
+      // 5MB = 5 * 1024 * 1024 bytes (5,242,880 bytes)
+      if (file.size > 5 * 1024 * 1024) {
+        setFileError('File size exceeds 5MB. Please upload a smaller file.');
+        setFormData({ ...formData, receipt: null });
+        e.target.value = ''; // Clear the input field
+      } else {
+        setFileError('');
+        setFormData({ ...formData, receipt: file });
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Final validation check before submitting
+    if (fileError || !formData.receipt) {
+      alert("Please upload a valid payment receipt under 5MB.");
+      return;
+    }
+
+    // Trigger the processing UI immediately
+    setIsProcessing(true);
 
     // 1. Generate reference and date
     const refNumber = 'IMP-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
@@ -43,6 +67,12 @@ const RegistrationForm = () => {
     // 2. Convert Image to Base64
     const reader = new FileReader();
     reader.readAsDataURL(formData.receipt);
+    
+    reader.onerror = () => {
+      alert("Error reading file. Please try again.");
+      setIsProcessing(false);
+    };
+
     reader.onload = async () => {
       const base64Image = reader.result;
 
@@ -53,8 +83,6 @@ const RegistrationForm = () => {
         receipt: base64Image // Send the image as text
       };
 
-      // 3. Send to Google Apps Script
-      // 3. Send to Google Apps Script
       // 3. Send to Google Apps Script
       try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbxO3tNRwf4x7ymah98ozJIihNeDnEgXd7EgeOVoxMFuH24d4agSgnKeKsY6S3Qf_tielg/exec', {
@@ -70,7 +98,7 @@ const RegistrationForm = () => {
 
         if (result.status === "success") {
           setReceiptData(payload);
-          setIsSubmitted(true); // Only switch to success if Google says success!
+          setIsSubmitted(true); // Switch to success UI
         } else {
           // If Google caught an error, show it to us!
           alert("Google Error: " + result.message);
@@ -79,7 +107,10 @@ const RegistrationForm = () => {
 
       } catch (error) {
         console.error("Network or parsing error", error);
-        alert("Submission failed. Check the console.");
+        alert("Submission failed. Check your internet connection and try again.");
+      } finally {
+        // ALWAYS turn off processing, whether success or error
+        setIsProcessing(false);
       }
     };
   };
@@ -88,6 +119,8 @@ const RegistrationForm = () => {
     setFormData(initialFormState);
     setReceiptData(null);
     setIsSubmitted(false);
+    setIsProcessing(false);
+    setFileError('');
   };
 
   // Modern PDF Generation Logic
@@ -118,7 +151,7 @@ const RegistrationForm = () => {
   };
 
   // ==========================================
-  // SUCCESS / PDF RECEIPT VIEW
+  // VIEW 1: SUCCESS / PDF RECEIPT VIEW
   // ==========================================
   if (isSubmitted && receiptData) {
     return (
@@ -133,7 +166,7 @@ const RegistrationForm = () => {
           <p className="mt-1 text-emerald-700 text-sm font-medium">Your details have been securely recorded. Please download your receipt below.</p>
         </div>
 
-        {/* The Document to be converted to PDF (This matches A4 aspect ratio nicely) */}
+        {/* The Document to be converted to PDF */}
         <div className="w-full max-w-[210mm] bg-white shadow-2xl overflow-hidden" ref={receiptRef}>
           {/* Document Header */}
           <div className="bg-indigo-900 px-10 py-12 text-white flex justify-between items-center">
@@ -203,6 +236,18 @@ const RegistrationForm = () => {
                     <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">Country</p>
                     <p className="font-bold text-slate-800 uppercase">{receiptData.country}</p>
                   </div>
+                  
+                  <div className="col-span-2 pt-4 mt-2 border-t border-slate-200">
+                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">Category / Attendance</p>
+                    <p className="font-bold text-slate-800 text-lg">{receiptData.attendanceType}</p>
+                  </div>
+                  
+                  {receiptData.attendanceType?.includes('Student') && receiptData.ieeeMemberId && (
+                    <div className="col-span-2">
+                      <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">IEEE Membership ID</p>
+                      <p className="font-bold text-slate-800">{receiptData.ieeeMemberId}</p>
+                    </div>
+                  )}
 
                   {receiptData.role === 'author' && (
                     <>
@@ -256,7 +301,38 @@ const RegistrationForm = () => {
   }
 
   // ==========================================
-  // ORIGINAL FORM VIEW
+  // VIEW 2: LOADING / PROCESSING VIEW
+  // ==========================================
+  if (isProcessing) {
+    return (
+      <div className="py-16 px-4 sm:px-6 lg:px-8 w-full min-h-screen flex flex-col items-center justify-center font-sans text-slate-800 bg-slate-50">
+        <div className="flex flex-col items-center justify-center bg-white p-12 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 max-w-md w-full text-center transform transition-all animate-fade-in-up">
+          
+          <div className="relative w-28 h-28 mb-8">
+            {/* Background ring */}
+            <div className="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
+            {/* Spinning ring */}
+            <div className="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div>
+            {/* Center Icon */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <svg className="w-10 h-10 text-indigo-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+            </div>
+          </div>
+          
+          <h3 className="text-3xl font-extrabold text-slate-800 mb-3 tracking-tight">Processing...</h3>
+          <p className="text-slate-500 text-base leading-relaxed">
+            Please wait while we securely upload your registration details and payment receipt to IMPETUS servers. <br/><br/>
+            <span className="font-semibold text-indigo-500">Do not refresh or close this page.</span>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ==========================================
+  // VIEW 3: ORIGINAL FORM VIEW
   // ==========================================
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8 w-full flex justify-center font-sans text-slate-800 bg-slate-50 min-h-screen">
@@ -344,6 +420,38 @@ const RegistrationForm = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="border-b border-slate-200 pb-3">
+                <h3 className="text-xl font-bold text-slate-800">Registration Category</h3>
+                <p className="text-sm text-slate-500 mt-1">Select your attendance type and category.</p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div className="col-span-1 sm:col-span-2 group">
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Category & Attendance <span className="text-red-500">*</span></label>
+                  <div className="relative">
+                    <select name="attendanceType" required value={formData.attendanceType} onChange={handleInputChange} className="appearance-none w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200 shadow-sm cursor-pointer">
+                      <option value="" disabled>Select your category...</option>
+                      <option value="Student - Online">Student - Online (LKR 2,500)</option>
+                      <option value="Student - Physical">Student - Physical (LKR 3,000)</option>
+                      <option value="Local - Online">Local - Online (LKR 5,000)</option>
+                      <option value="Local - Physical">Local - Physical (LKR 6,000)</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                  </div>
+                </div>
+
+                {formData.attendanceType.includes('Student') && (
+                  <div className="col-span-1 sm:col-span-2 group">
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">IEEE Membership ID <span className="text-slate-400 font-normal">(Optional)</span></label>
+                    <input type="text" name="ieeeMemberId" value={formData.ieeeMemberId} onChange={handleInputChange} placeholder="e.g. 98765432" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -438,6 +546,7 @@ const RegistrationForm = () => {
                   </div>
                   <label className="block text-lg font-bold text-slate-800 mb-2">Upload Bank Payment Receipt <span className="text-red-500">*</span></label>
                   <p className="text-sm text-slate-500 mb-6">Supported formats: PDF, JPG, PNG (Max size: 5MB)</p>
+                  
                   <input
                     type="file"
                     name="receipt"
@@ -446,12 +555,24 @@ const RegistrationForm = () => {
                     onChange={handleFileChange}
                     className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer mx-auto max-w-md transition-colors"
                   />
+                  
+                  {fileError && (
+                    <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm font-semibold flex items-center justify-center gap-2 max-w-md mx-auto">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                      {fileError}
+                    </div>
+                  )}
+
                 </div>
               </div>
             </div>
 
             <div className="pt-6">
-              <button type="submit" className="w-full flex justify-center items-center gap-2 py-4 px-8 rounded-xl text-lg font-bold text-white bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transform hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-indigo-900/20">
+              <button 
+                type="submit" 
+                className={`w-full flex justify-center items-center gap-2 py-4 px-8 rounded-xl text-lg font-bold text-white transition-all duration-200 shadow-lg shadow-indigo-900/20 
+                  ${fileError ? 'bg-slate-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transform hover:-translate-y-0.5'}`}
+              >
                 Submit Registration
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </button>
