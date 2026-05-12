@@ -1,0 +1,15 @@
+Options -MultiViews
+RewriteEngine On
+
+# 1. Skip the rewrite rules if the request is for the /pay folder
+# This keeps your existing payment logic functional
+RewriteCond %{REQUEST_URI} ^/pay [NC]
+RewriteRule .* - [L]
+
+# 2. Standard React fallback
+# This allows React Router to handle page refreshes without 404s
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
