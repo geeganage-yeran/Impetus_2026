@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
-import { Clock, Users, Mic, Coffee, Utensils, MapPin } from 'lucide-react';
+import { 
+  Clock, 
+  Users, 
+  Mic, 
+  Coffee, 
+  Utensils, 
+  MapPin, 
+  Calendar, 
+  Target, 
+  Award, 
+  CheckCircle2,
+  BookOpen,
+  Briefcase,
+  Sparkles,
+  ChevronRight
+} from 'lucide-react';
 import speakerImg from '../assets/speaker.jpg';
-import panelm1 from '../../public/panelDis/Picture1.png'
 
 export default function ProgramDetails() {
   const [activeTab, setActiveTab] = useState('Conference');
 
-  // Updated Panelists Data
+  // Existing Panelists Data
   const panelists = [
     {
       name: "Snr. Prof. R.A.R.C. Gopura",
@@ -34,19 +48,30 @@ export default function ProgramDetails() {
     }
   ];
 
+  // Workshop Resource Panel Data
+  const resourcePanel = [
+    { name: "Prof. Roshan G. Ragel", role: "Professor, Computer Engineering | Consultant CEO, LEARN", org: "University of Peradeniya" },
+    { name: "Dr. Asitha Bandaranayake", role: "Head/Senior Lecturer, Computer Engineering | Consultant CTO, LEARN", org: "University of Peradeniya" },
+    { name: "Prof. Chalinda Beneragama", role: "Director, Academic Affairs Division", org: "University of Peradeniya" },
+    { name: "Dr. Pramila Gamage", role: "Director, Centre for Quality Assurance", org: "University of Peradeniya" },
+    { name: "Ms. Andrea Rajiah", role: "Senior Admin Executive cum PA", org: "LEARN" },
+    { name: "Ms. Gayani Herath", role: "Financial Accountant", org: "LEARN" }
+  ];
+
   return (
-    <div className="pt-24 min-h-screen bg-gray-50">
+    <div className="pt-24 min-h-screen bg-gray-50 pb-20">
       {/* Page Header */}
-      <div className="bg-[#002b4b] text-white py-16 mb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="bg-[#002b4b] text-white py-16 mb-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Program Details</h1>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg text-blue-100 max-w-2xl mx-auto">
             Explore the comprehensive schedule for IMPETUS 2026, featuring keynote speeches, expert panel discussions, and technical sessions.
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Navigation Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -55,8 +80,8 @@ export default function ProgramDetails() {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === tab
-                ? 'bg-[#005596] text-white shadow-lg transform scale-105'
-                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                ? 'bg-[#005596] text-white shadow-lg shadow-blue-900/20 transform scale-105'
+                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-blue-300'
                 }`}
             >
               {tab === 'Conference' ? 'Conference Schedule' : tab === 'keynote' ? 'Keynote Speaker' : 'Panel Discussion'}
@@ -65,53 +90,189 @@ export default function ProgramDetails() {
         </div>
 
         {/* Content Area */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 border border-gray-100 min-h-[400px]">
+        <div className="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 p-6 sm:p-12 border border-gray-100 min-h-[400px]">
 
-          {/* Tab 1: Conference Schedule */}
+          {/* Tab 1: Conference Schedule & Workshops */}
           {activeTab === 'Conference' && (
             <div className="animate-fade-in">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-[#005596] pl-4 flex items-center justify-between">
-                <span>Conference Agenda</span>
-                <span className="text-sm font-normal text-gray-500 bg-gray-100 px-3 py-1 rounded-full">May 27, 2026</span>
-              </h2>
+              
+              {/* --- 1. Main Conference Agenda --- */}
+              <div className="mb-20">
+                <h2 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-[#005596] pl-4 flex items-center justify-between">
+                  <span>Conference Agenda</span>
+                  <span className="text-sm font-bold text-[#005596] bg-blue-50 border border-blue-100 px-4 py-1.5 rounded-full shadow-sm">May 27, 2026</span>
+                </h2>
 
-              <div className="space-y-6 relative">
-                {/* Vertical Line Connector */}
-                <div className="absolute left-[188px] top-4 bottom-4 w-0.5 bg-gray-100 hidden sm:block"></div>
+                <div className="space-y-6 relative">
+                  {/* Vertical Line Connector */}
+                  <div className="absolute left-[188px] top-4 bottom-4 w-0.5 bg-blue-100 hidden sm:block"></div>
 
-                <ScheduleItem
-                  time="08:00 AM - 09:00 AM"
-                  title="Registration"
-                  icon={Users}
-                />
-                <ScheduleItem
-                  time="09:00 AM - 10:30 AM"
-                  title="Inauguration Ceremony"
-                  icon={Mic}
-                  highlight
-                />
-                <ScheduleItem
-                  time="10:30 AM - 11:00 AM"
-                  title="Refreshments"
-                  icon={Coffee}
-                />
-                <ScheduleItem
-                  time="11:00 AM - 01:00 PM"
-                  title="Panel Discussion"
-                  icon={Users}
-                  highlight
-                />
-                <ScheduleItem
-                  time="01:00 PM - 02:00 PM"
-                  title="Lunch"
-                  icon={Utensils}
-                />
-                <ScheduleItem
-                  time="02:00 PM - 05:00 PM"
-                  title="Technical Sessions"
-                  icon={Users}
-                  highlight
-                />
+                  <ScheduleItem time="08:00 AM - 09:00 AM" title="Registration" icon={Users} />
+                  <ScheduleItem time="09:00 AM - 10:30 AM" title="Inauguration Ceremony" icon={Mic} highlight />
+                  <ScheduleItem time="10:30 AM - 11:00 AM" title="Refreshments" icon={Coffee} />
+                  <ScheduleItem time="11:00 AM - 01:00 PM" title="Panel Discussion" icon={Users} highlight />
+                  <ScheduleItem time="01:00 PM - 02:00 PM" title="Lunch" icon={Utensils} />
+                  <ScheduleItem time="02:00 PM - 05:00 PM" title="Technical Sessions" icon={Users} highlight />
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="flex items-center gap-4 mb-16">
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent flex-1"></div>
+                <span className="text-blue-600 font-bold uppercase tracking-widest text-sm bg-blue-50 px-4 py-1 rounded-full border border-blue-100 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4" /> Pre-Conference Events
+                </span>
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent flex-1"></div>
+              </div>
+
+              {/* --- 2. Pre-Conference Workshops Section --- */}
+              <div>
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+                    AI4ALL: AI Fundamentals Workshops
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Conducted by <strong className="text-[#005596]">LEARN</strong> (Lanka Education and Research Network) in collaboration with the <strong className="text-[#005596]">Faculty of Applied Sciences, Uva Wellassa University</strong>.
+                  </p>
+                </div>
+
+                {/* Uniform Workshop Cards Grid (Equal Heights) */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 items-stretch">
+                  
+                  {/* Workshop 1: Students */}
+                  <div className="bg-white border border-gray-100 rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group relative">
+                    <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    {/* Split Image Header for Workshop 1 */}
+                    <div className="h-56 flex relative overflow-hidden bg-gray-200">
+                      <img src="/workshop1.jpeg" alt="Group 1 Flyer" className="w-1/2 h-full object-cover transform group-hover:scale-105 transition-transform duration-500 border-r border-white/20" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800" }} />
+                      <img src="/workshop1.1.jpeg" alt="Group 2 Flyer" className="w-1/2 h-full object-cover transform group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=800" }} />
+                      <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-black text-[#005596] shadow-sm uppercase tracking-widest border border-white/50">Workshop 1</div>
+                    </div>
+                    
+                    <div className="p-6 flex flex-col flex-1 relative z-10">
+                      <h3 className="text-xl font-black text-gray-900 mb-2 group-hover:text-[#005596] transition-colors leading-tight">AI4ALL for Students</h3>
+                      <p className="text-gray-600 text-sm mb-5 flex-1 flex items-start gap-2">
+                        <Target className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                        <span>Introduce students to AI fundamentals, emphasizing ethical, responsible, and practical applications.</span>
+                      </p>
+                      
+                      {/* Features List */}
+                      <div className="space-y-2 mb-5">
+                        <div className="flex items-start gap-2 text-xs font-semibold text-gray-700 bg-gray-50 p-2 rounded-lg border border-gray-100">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" /> Interactive in-person sessions & certificates awarded
+                        </div>
+                      </div>
+
+                      {/* Schedule Block */}
+                      <div className="bg-blue-50 rounded-xl p-4 border border-blue-100 mt-auto">
+                        <h4 className="text-[10px] font-black text-blue-800 uppercase tracking-widest mb-3 flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> Schedule</h4>
+                        <div className="space-y-3">
+                          <div className="bg-white p-2.5 rounded-lg shadow-sm border border-blue-50">
+                            <span className="text-blue-700 font-bold text-xs block mb-1">Group I:</span>
+                            <p className="text-[11px] font-medium text-gray-600 leading-tight">May 26: 9am-12pm <br/> May 27: 9am-10:30am & 1:30pm-2:30pm</p>
+                          </div>
+                          <div className="bg-white p-2.5 rounded-lg shadow-sm border border-blue-50">
+                            <span className="text-blue-700 font-bold text-xs block mb-1">Group II:</span>
+                            <p className="text-[11px] font-medium text-gray-600 leading-tight">May 26: 1pm-4pm <br/> May 27: 11am-12:30pm & 3pm-4pm</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Workshop 2: Admin Staff */}
+                  <div className="bg-white border border-gray-100 rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group relative">
+                    <div className="absolute inset-0 bg-gradient-to-b from-purple-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="h-56 relative overflow-hidden bg-gray-200">
+                      <img src="/workshop2.jpeg" alt="GenAI for Staff Flyer" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" }} />
+                      <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-black text-purple-700 shadow-sm uppercase tracking-widest border border-white/50">Workshop 2</div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1 relative z-10">
+                      <h3 className="text-xl font-black text-gray-900 mb-1 group-hover:text-purple-600 transition-colors leading-tight">GenAI for Empowerment</h3>
+                      <p className="text-xs font-bold text-purple-600 mb-4 uppercase tracking-wider bg-purple-50 inline-block px-2.5 py-1 rounded-md border border-purple-100 w-fit">Admin & Operational Staff</p>
+                      
+                      <p className="text-gray-600 text-sm mb-6 flex-1 flex items-start gap-2">
+                        <Target className="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5" />
+                        <span>Enable staff to understand AI concepts and use tools to improve office productivity, communication, and routine tasks ethically.</span>
+                      </p>
+                      
+                      <div className="bg-purple-50 rounded-xl p-4 border border-purple-100 mt-auto flex items-start gap-3">
+                        <div className="bg-white p-2 rounded-lg shadow-sm shrink-0">
+                          <Calendar className="w-5 h-5 text-purple-600" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-purple-900">May 26, 2026</p>
+                          <p className="text-sm font-semibold text-gray-700 mt-0.5">9:00 AM - 4:00 PM</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Workshop 3: Education */}
+                  <div className="bg-white border border-gray-100 rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group relative">
+                    <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="h-56 relative overflow-hidden bg-gray-200">
+                      <img src="/workshop3.jpeg" alt="GenAI for Education Flyer" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1524169358666-79f22534bc6e?auto=format&fit=crop&q=80&w=800" }} />
+                      <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-black text-emerald-700 shadow-sm uppercase tracking-widest border border-white/50">Workshop 3</div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1 relative z-10">
+                      <h3 className="text-xl font-black text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors leading-tight">GenAI for Education</h3>
+                      <p className="text-xs font-bold text-emerald-600 mb-4 uppercase tracking-wider bg-emerald-50 inline-block px-2.5 py-1 rounded-md border border-emerald-100 w-fit">Education & Research</p>
+                      
+                      <p className="text-gray-600 text-sm mb-6 flex-1 flex items-start gap-2">
+                        <Target className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span>Enhance participants’ understanding of Generative AI use cases, integrations, and best practices in modern Education and Research.</span>
+                      </p>
+                      
+                      <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100 mt-auto flex items-start gap-3">
+                        <div className="bg-white p-2 rounded-lg shadow-sm shrink-0">
+                          <Calendar className="w-5 h-5 text-emerald-600" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-emerald-900">May 26, 2026</p>
+                          <p className="text-sm font-semibold text-gray-700 mt-0.5">1:30 PM - 4:30 PM</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* --- 3. Resource Panel Section --- */}
+                <div className="bg-gradient-to-br from-[#002b4b] to-[#00447a] rounded-[2.5rem] p-8 sm:p-12 relative overflow-hidden shadow-2xl border border-[#005596]">
+                  {/* Decorative Elements */}
+                  <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+                  <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-400 opacity-10 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4"></div>
+                  
+                  <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                      <h3 className="text-3xl font-black text-white flex items-center gap-3 tracking-tight">
+                        <BookOpen className="w-8 h-8 text-blue-300" />
+                        Resource Panel
+                      </h3>
+                      <p className="text-blue-200 mt-2 font-medium">Esteemed experts guiding the pre-conference workshops.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10">
+                    {resourcePanel.map((member, idx) => (
+                      <div key={idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl hover:bg-white/20 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                          <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4 border border-blue-400/30 group-hover:scale-110 group-hover:bg-blue-500/40 transition-all">
+                            <Users className="w-6 h-6 text-blue-100" />
+                          </div>
+                          <h4 className="font-bold text-white text-lg mb-1 leading-tight">{member.name}</h4>
+                          <p className="text-sm text-blue-200 font-medium mb-4 leading-snug">{member.role}</p>
+                        </div>
+                        <p className="text-[11px] uppercase tracking-widest text-blue-300 font-bold bg-black/20 inline-block px-3 py-1.5 rounded-lg border border-white/10 w-fit">
+                          {member.org}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </div>
           )}
@@ -123,15 +284,15 @@ export default function ProgramDetails() {
 
                 {/* Speaker Image Column */}
                 <div className="w-full md:w-1/3 flex justify-center">
-                  <div className="relative rounded-2xl overflow-hidden shadow-xl group w-full max-w-sm">
+                  <div className="relative rounded-3xl overflow-hidden shadow-2xl group w-full max-w-sm">
                     <img
                       src={speakerImg}
                       alt="Prof. Brian Helenbrook"
                       className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => { e.target.src = "https://ui-avatars.com/api/?name=Brian+Helenbrook&size=500&background=0D8ABC&color=fff" }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                      <span className="text-white font-medium">Keynote Speaker</span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#002b4b]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                      <span className="text-white font-bold tracking-wider uppercase text-sm">Keynote Speaker</span>
                     </div>
                   </div>
                 </div>
@@ -139,15 +300,17 @@ export default function ProgramDetails() {
                 {/* Speaker Info Column */}
                 <div className="w-full md:w-2/3">
                   <div className="mb-6">
-                    <span className="inline-block px-3 py-1 bg-blue-100 text-[#005596] rounded-full text-xs font-bold mb-3 uppercase tracking-wider">
+                    <span className="inline-block px-4 py-1.5 bg-blue-50 border border-blue-100 text-[#005596] rounded-full text-xs font-bold mb-4 uppercase tracking-wider shadow-sm">
                       Keynote Speaker
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Prof. Brian Helenbrook</h2>
-                    <p className="text-lg text-[#005596] font-medium mb-1">Paynter-Krigman Endowed Professor in Engineering Science Simulation</p>
-                    <p className="text-gray-500 font-medium">Associate Dean of the Graduate School, Clarkson University, USA</p>
+                    <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-3 tracking-tight">Prof. Brian Helenbrook</h2>
+                    <p className="text-lg text-[#005596] font-bold mb-1">Paynter-Krigman Endowed Professor in Engineering Science Simulation</p>
+                    <p className="text-gray-500 font-medium flex items-center gap-2">
+                      <Briefcase className="w-4 h-4 text-gray-400" /> Associate Dean of the Graduate School, Clarkson University, USA
+                    </p>
                   </div>
 
-                  <div className="prose max-w-none text-gray-600 leading-relaxed">
+                  <div className="prose max-w-none text-gray-600 leading-relaxed text-lg bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-inner">
                     <p>
                       Prof. Helenbrook’s research in numerical simulation for fluid flows and heat transfer exemplifies responsible innovation, demonstrating how advanced computational methods address real-world engineering challenges. His commitment to mentoring emerging researchers and interdisciplinary approach aligns perfectly with IMPETUS 2026’s mission to cultivate ethical innovation.
                     </p>
@@ -161,14 +324,14 @@ export default function ProgramDetails() {
           {/* Tab 3: Panel Discussion */}
           {activeTab === 'panel' && (
             <div className="animate-fade-in">
-              <div className="text-center mb-12">
-                <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider mb-2">
-                  11:00 AM - 01:00 PM
+              <div className="text-center mb-16">
+                <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-blue-50 border border-blue-100 text-[#005596] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+                  <Clock className="w-3.5 h-3.5" /> 11:00 AM - 01:00 PM
                 </span>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                  Topic: The Future of Sustainable Tech
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight">
+                  The Future of Sustainable Tech
                 </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
                   A thought-provoking debate on how AI, IoT, and Cloud Computing can drive global sustainability goals while navigating ethical boundaries.
                 </p>
               </div>
@@ -178,28 +341,29 @@ export default function ProgramDetails() {
                 {panelists.map((member, index) => (
                   <div
                     key={index}
-                    className="group relative bg-white p-6 border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    className="group relative bg-white p-6 border border-gray-100 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col items-center"
                   >
                     {/* Image Area */}
-                    <div className="w-24 h-24 mx-auto mb-4 relative">
-                      <div className="absolute inset-0 bg-blue-100 rounded-full scale-110 group-hover:scale-125 transition-transform duration-300 opacity-0 group-hover:opacity-100"></div>
+                    <div className="w-32 h-32 mx-auto mb-5 relative">
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-indigo-50 rounded-full scale-110 group-hover:scale-125 transition-transform duration-500 opacity-0 group-hover:opacity-100"></div>
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="relative w-full h-full rounded-full object-cover border-2 border-white shadow-md"
+                        className="relative w-full h-full rounded-full object-cover border-4 border-white shadow-lg"
+                        onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${member.name}&background=f3f4f6&color=002b4b` }}
                       />
                     </div>
 
                     {/* Content */}
-                    <div className="text-center">
+                    <div className="text-center flex-1 flex flex-col">
                       <h3 className="font-bold text-lg text-gray-900 mb-1 group-hover:text-[#005596] transition-colors leading-tight">
                         {member.name}
                       </h3>
-                      <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-2 mt-2">
+                      <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-3 mt-1 line-clamp-2">
                         {member.role}
                       </p>
-                      <div className="inline-flex items-center justify-center px-3 py-1 bg-gray-50 rounded-full border border-gray-100">
-                        <p className="text-xs font-medium text-gray-600 text-center">
+                      <div className="mt-auto inline-flex items-center justify-center px-4 py-2 bg-gray-50 rounded-xl border border-gray-100 w-full">
+                        <p className="text-[11px] font-bold text-gray-500 text-center leading-snug uppercase tracking-wider">
                           {member.org}
                         </p>
                       </div>
@@ -214,10 +378,10 @@ export default function ProgramDetails() {
 
       <style jsx>{`
         .animate-fade-in {
-          animation: fadeIn 0.5s ease-in-out;
+          animation: fadeIn 0.5s ease-out forwards;
         }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
+          from { opacity: 0; transform: translateY(15px); }
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
@@ -226,23 +390,20 @@ export default function ProgramDetails() {
 }
 
 // Helper Component for Schedule Items
-function ScheduleItem({ time, title, location, icon: Icon, highlight }) {
+function ScheduleItem({ time, title, icon: Icon, highlight }) {
   return (
-    <div className={`relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 rounded-xl transition-all duration-300 ${highlight ? 'bg-blue-50/50 border border-blue-100 shadow-sm' : 'bg-white hover:bg-gray-50 border border-transparent'}`}>
-      <div className="min-w-[160px] font-bold text-[#005596] flex items-center gap-2 bg-white/80 px-3 py-1 rounded-md shadow-sm border border-gray-100 sm:bg-transparent sm:shadow-none sm:border-0 sm:p-0">
-        <Clock className="w-4 h-4" />
-        <span className="text-sm sm:text-base">{time}</span>
+    <div className={`relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 rounded-2xl transition-all duration-300 ${highlight ? 'bg-blue-50/60 border border-blue-100 shadow-sm' : 'bg-white hover:bg-gray-50 border border-gray-100'}`}>
+      <div className="min-w-[170px] font-bold text-[#005596] flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl shadow-sm border border-gray-100 sm:bg-transparent sm:shadow-none sm:border-0 sm:p-0">
+        <Clock className="w-4 h-4 text-blue-400 shrink-0" />
+        <span className="text-sm sm:text-[15px] tracking-wide whitespace-nowrap">{time}</span>
       </div>
 
       <div className="flex-grow">
-        <h4 className="font-bold text-gray-900 text-lg">{title}</h4>
-        <div className="flex items-center gap-2 text-gray-500 text-sm mt-1">
-          {/* <MapPin className="w-3 h-3" /> {location} */}
-        </div>
+        <h4 className={`font-bold text-lg ${highlight ? 'text-[#002b4b]' : 'text-gray-900'}`}>{title}</h4>
       </div>
 
       {Icon && (
-        <div className={`p-2 rounded-lg ${highlight ? 'bg-blue-100 text-[#005596]' : 'bg-gray-100 text-gray-500'}`}>
+        <div className={`p-3 rounded-xl shrink-0 ${highlight ? 'bg-[#005596] text-white shadow-md shadow-blue-900/20' : 'bg-gray-100 text-gray-500'}`}>
           <Icon className="w-5 h-5" />
         </div>
       )}

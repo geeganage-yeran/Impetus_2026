@@ -5,7 +5,7 @@ const dates = [
   { day: '06', month: 'Feb 2026', label: 'Call for Paper', status: 'upcoming' },
   { day: '10', month: 'Apr 2026', label: 'Full Paper Submission Deadline', deadline: true, status: 'upcoming' },
   { day: '11', month: 'May 2026', label: 'Author Notification', status: 'upcoming' },
-  { day: '16', month: 'May 2026', label: 'Camera Ready Submission Deadline Extended', status: 'upcoming' },
+  { day: '18', month: 'May 2026', label: 'Camera Ready Submission Deadline Extended', status: 'upcoming' },
   { day: '18', month: 'May 2026', label: 'Early Bird Registration Deadline Extended', status: 'upcoming' },
   { day: '19', month: 'May 2026', label: 'Regular Registration Opens', sub: 'Until May 23', status: 'upcoming' },
   { day: '27', month: 'May 2026', label: 'Conference Date', highlight: true, status: 'upcoming' },
