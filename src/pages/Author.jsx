@@ -2,6 +2,7 @@ import React from 'react';
 import SubmissionSection from '../components/SubmissionSection';
 import DownloadSection from '../components/DownloadSection';
 import SessionTypes from '../components/SessionTypes';
+import CameraReadyInstructions from '../components/CameraReadyInstructions'; // <-- NEW IMPORT
 import { Link } from 'react-router-dom';
 import { FileText, Download, Users, AlertCircle } from 'lucide-react';
 
@@ -25,7 +26,7 @@ export default function Author() {
       <DownloadSection />
 
       {/* HIGHLIGHTED SECTION: Downloadable Documents */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 -mt-4 relative z-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 -mt-4 relative z-10">
         <div className="bg-gradient-to-br from-blue-50 to-white p-8 md:p-10 rounded-3xl border border-blue-100 shadow-lg">
           
           <div className="flex items-center gap-3 mb-8 border-b border-blue-100 pb-4">
@@ -40,7 +41,6 @@ export default function Author() {
             </div>
           </div>
 
-          {/* Adjusted to md:grid-cols-2 and added max-w-4xl to center the 2 remaining cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             
             {/* Declaration Form */}
@@ -75,26 +75,12 @@ export default function Author() {
               </p>
             </a>
 
-            {/* Reviewer List - COMMENTED OUT */}
-            {/* <a href="Docs/IMPETUS2026-ReviewerList.docx" target="_blank" rel="noreferrer" className="flex flex-col p-6 bg-white border-l-4 border-emerald-500 rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group shadow-md relative overflow-hidden">
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                  <Users className="w-6 h-6" />
-                </div>
-                <div className="flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full group-hover:bg-emerald-100 transition-colors">
-                  <Download className="w-4 h-4" /> Download
-                </div>
-              </div>
-              <h4 className="font-bold text-gray-900 text-lg mb-2 group-hover:text-emerald-600 transition-colors">Reviewer List</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                A comprehensive list of our esteemed academic and industry reviewers for IMPETUS 2026.
-              </p>
-            </a> 
-            */}
-
           </div>
         </div>
       </section>
+
+      {/* NEW SECTION: Camera Ready Instructions */}
+      <CameraReadyInstructions />
 
       {/* 4 Technical Session Details */}
       <SessionTypes />
