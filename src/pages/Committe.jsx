@@ -26,7 +26,7 @@ const conferenceCommitteeGroups = [
   {
     title: "Technical & Academic Committee",
     members: [
-      { role: "Technical Programme Chair", name: "Prof. E. M. U. W. J. B. Ekangayake" },
+      { role: "Technical Programme Chair", name: "Prof. E. M. U. W. J. B. Ekanayake" },
       { role: "Editor-in-Chief", name: "Dr. H. M. S. N. Ariyadasa" },
       { role: "Co-Editor-in-Chief & Publication Chair", name: "Dr. (Eng.) M. N. P. Dushyantha" },
       { role: "Panel Discussion Chair", name: "Dr. T. H. N. G. Amaraweera" },
@@ -91,7 +91,7 @@ const conferenceCommitteeGroups = [
   {
     title: "Hospitality Committee",
     members: [
-      { role: "Hospitality Co-Chair", name: "Ms. K. W. H. M. I. M. Hearth" },
+      { role: "Hospitality Co-Chair", name: "Ms. K. W. H. M. I. M. Herath" },
       { role: "Hospitality Co-Chair", name: "Ms. Y. Milani" }
     ]
   }

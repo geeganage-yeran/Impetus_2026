@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Added for navigation
+import { Link } from 'react-router-dom';
 import {
   CreditCard,
   Landmark,
@@ -36,7 +36,7 @@ export default function Registration() {
           <div>
             <h3 className="text-lg font-bold text-amber-900 mb-1">Important Notice for Authors</h3>
             <p className="text-amber-800 leading-relaxed">
-              Authors/Presenters must register for the conference on or before <span className="font-bold">May 20, 2026</span>.
+              Authors/Presenters must register for the conference on or before <span className="font-bold">May 23, 2026</span>.
               The full paper will <span className="underline">not</span> be included in the proceedings if at least one author does not register before the deadline.
             </p>
           </div>
@@ -69,30 +69,70 @@ export default function Registration() {
                   <td className="py-4 px-6 border-r border-gray-100">
                     Students <span className="text-amber-600 font-bold">**</span>
                   </td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 2,500</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 3,000</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 3,500</td>
-                  <td className="py-4 px-6 text-center">LKR 4,000</td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div>LKR 2,500</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 1,875</div>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div>LKR 3,000</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 2,250</div>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div>LKR 3,500</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 2,625</div>
+                  </td>
+                  <td className="py-4 px-6 text-center">
+                    <div>LKR 4,000</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 3,000</div>
+                  </td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors bg-slate-50/30">
-                  <td className="py-4 px-6 border-r border-gray-100">Local</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 5,000</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 6,000</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100">LKR 6,500</td>
-                  <td className="py-4 px-6 text-center">LKR 7,500</td>
+                  <td className="py-4 px-6 border-r border-gray-100">
+                    Local <span className="text-amber-600 font-bold">**</span>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div>LKR 5,000</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 3,750</div>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div>LKR 6,000</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,500</div>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div>LKR 6,500</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,875</div>
+                  </td>
+                  <td className="py-4 px-6 text-center">
+                    <div>LKR 7,500</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 5,625</div>
+                  </td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors bg-blue-50/10 border-l-4 border-l-blue-500">
-                  <td className="py-4 px-6 border-r border-gray-100 font-bold text-[#005596]">International</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 60</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 80</td>
-                  <td className="py-4 px-6 text-center border-r border-gray-100 font-bold">USD 90</td>
-                  <td className="py-4 px-6 text-center font-bold">USD 120</td>
+                  <td className="py-4 px-6 border-r border-gray-100 font-bold text-[#005596]">
+                    International <span className="text-amber-600 font-bold">**</span>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div className="font-bold">USD 60</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 45</div>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div className="font-bold">USD 80</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 60</div>
+                  </td>
+                  <td className="py-4 px-6 text-center border-r border-gray-100">
+                    <div className="font-bold">USD 90</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 67.50</div>
+                  </td>
+                  <td className="py-4 px-6 text-center">
+                    <div className="font-bold">USD 120</div>
+                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 90</div>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
-            <span className="font-bold">**</span> 25% registration fee waiver for local undergraduate students with IEEE membership.
+            <span className="font-bold">**</span> 25% registration fee waiver applies to all participants with a valid IEEE membership.
           </div>
         </section>
 
@@ -125,7 +165,6 @@ export default function Registration() {
               <p className="text-sm font-semibold text-purple-700 mb-6 bg-purple-50 inline-block px-2 py-1 rounded self-start">
                 (For the International Participant)
               </p>
-              {/* BUTTON UPDATED TO LINK */}
               <a
                 href="/pay/"
                 className="mt-auto block text-center w-full py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
@@ -183,7 +222,6 @@ export default function Registration() {
           </div>
 
           <div className="text-center mt-12 flex flex-col items-center">
-            {/* BUTTON UPDATED TO LINK */}
             <Link
               to="/register-form" 
               className="bg-[#005596] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-[#003b69] transition-all transform hover:scale-105 shadow-xl shadow-blue-900/20"
@@ -224,7 +262,7 @@ export default function Registration() {
                 <Users className="w-5 h-5 text-[#005596]" /> For Physical Presenters
               </h3>
               <ul className="space-y-4">
-                {["Participation in all sessions", "e-Program Book", "e-Certificate", "Lunch / Refreshments"].map((item, i) => (
+                {["Participation in all sessions", "Conference bag", "e-Program Book", "e-Certificate", "Lunch / Refreshments"].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-gray-700">
                     <CheckCircle2 className="w-5 h-5 text-[#005596] flex-shrink-0" />{item}
                   </li>

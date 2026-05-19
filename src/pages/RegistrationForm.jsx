@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { toPng } from 'html-to-image';
 import jsPDF from 'jspdf';
+import { CreditCard } from 'lucide-react';
 
 const RegistrationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [receiptData, setReceiptData] = useState(null);
-  const [fileError, setFileError] = useState(''); 
-  const [isProcessing, setIsProcessing] = useState(false); // NEW: Processing state
+  const [fileError, setFileError] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // Reference for the PDF generation
   const receiptRef = useRef(null);
@@ -18,8 +19,8 @@ const RegistrationForm = () => {
     institution: '',
     country: 'Sri Lanka',
     role: 'non-author',
-    attendanceType: '', 
-    ieeeMemberId: '',   
+    attendanceType: '',
+    ieeeMemberId: '',
     paperId: '',
     paperTitle: '',
     researchTrack: '',
@@ -60,14 +61,35 @@ const RegistrationForm = () => {
     // Trigger the processing UI immediately
     setIsProcessing(true);
 
-    // 1. Generate reference and date
+    // 1. Calculate Base Amount & Discount
+    let baseAmount = 0;
+    let currency = 'LKR';
+
+    if (formData.attendanceType === 'Student - Online') baseAmount = 2500;
+    else if (formData.attendanceType === 'Student - Physical') baseAmount = 3000;
+    else if (formData.attendanceType === 'Local - Online') baseAmount = 5000;
+    else if (formData.attendanceType === 'Local - Physical') baseAmount = 6000;
+    else if (formData.attendanceType === 'International - Online') { baseAmount = 60; currency = 'USD'; }
+    else if (formData.attendanceType === 'International - Physical') { baseAmount = 80; currency = 'USD'; }
+
+    // Apply 25% discount if an IEEE Member ID is provided
+    let finalAmount = baseAmount;
+    if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '') {
+      finalAmount = baseAmount * 0.75;
+    }
+
+    const formattedAmount = currency === 'USD'
+      ? `$${finalAmount.toFixed(2)} USD`
+      : `LKR ${finalAmount.toLocaleString()}`;
+
+    // 2. Generate reference and date
     const refNumber = 'IMP-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
     const submitDate = new Date().toLocaleDateString('en-US');
 
-    // 2. Convert Image to Base64
+    // 3. Convert Image to Base64
     const reader = new FileReader();
     reader.readAsDataURL(formData.receipt);
-    
+
     reader.onerror = () => {
       alert("Error reading file. Please try again.");
       setIsProcessing(false);
@@ -80,10 +102,11 @@ const RegistrationForm = () => {
         ...formData,
         referenceNumber: refNumber,
         submitDate: submitDate,
-        receipt: base64Image // Send the image as text
+        amountPaid: formattedAmount, // Included the calculated amount
+        receipt: base64Image
       };
 
-      // 3. Send to Google Apps Script
+      // 4. Send to Google Apps Script
       try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbxO3tNRwf4x7ymah98ozJIihNeDnEgXd7EgeOVoxMFuH24d4agSgnKeKsY6S3Qf_tielg/exec', {
           method: 'POST',
@@ -93,14 +116,12 @@ const RegistrationForm = () => {
           body: JSON.stringify(payload)
         });
 
-        // Actually read the JSON response from our Google Script
         const result = await response.json();
 
         if (result.status === "success") {
           setReceiptData(payload);
           setIsSubmitted(true); // Switch to success UI
         } else {
-          // If Google caught an error, show it to us!
           alert("Google Error: " + result.message);
           console.error("Backend Error:", result);
         }
@@ -109,7 +130,6 @@ const RegistrationForm = () => {
         console.error("Network or parsing error", error);
         alert("Submission failed. Check your internet connection and try again.");
       } finally {
-        // ALWAYS turn off processing, whether success or error
         setIsProcessing(false);
       }
     };
@@ -151,113 +171,161 @@ const RegistrationForm = () => {
   };
 
   // ==========================================
+  // CALCULATE DISPLAY PRICE FOR UI DYNAMICALLY
+  // ==========================================
+  let displayBaseAmount = 0;
+  let displayCurrency = 'LKR';
+
+  if (formData.attendanceType === 'Student - Online') displayBaseAmount = 2500;
+  else if (formData.attendanceType === 'Student - Physical') displayBaseAmount = 3000;
+  else if (formData.attendanceType === 'Local - Online') displayBaseAmount = 5000;
+  else if (formData.attendanceType === 'Local - Physical') displayBaseAmount = 6000;
+  else if (formData.attendanceType === 'International - Online') { displayBaseAmount = 60; displayCurrency = 'USD'; }
+  else if (formData.attendanceType === 'International - Physical') { displayBaseAmount = 80; displayCurrency = 'USD'; }
+
+  let displayFinalAmount = displayBaseAmount;
+  let hasDiscount = false;
+  if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '') {
+    displayFinalAmount = displayBaseAmount * 0.75;
+    hasDiscount = true;
+  }
+
+  const formattedDisplayAmount = displayCurrency === 'USD'
+    ? `$${displayFinalAmount.toFixed(2)} USD`
+    : `LKR ${displayFinalAmount.toLocaleString()}`;
+    
+  const formattedBaseAmount = displayCurrency === 'USD'
+    ? `$${displayBaseAmount.toFixed(2)} USD`
+    : `LKR ${displayBaseAmount.toLocaleString()}`;
+
+
+  // ==========================================
   // VIEW 1: SUCCESS / PDF RECEIPT VIEW
   // ==========================================
   if (isSubmitted && receiptData) {
     return (
-      <div className="py-16 px-4 sm:px-6 lg:px-8 w-full min-h-screen flex flex-col items-center justify-start font-sans text-slate-800 bg-slate-100">
+      <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 w-full min-h-screen flex flex-col items-center justify-start font-sans text-slate-800 bg-gray-50/50">
 
         {/* Web Success Banner */}
-        <div className="w-full max-w-3xl mb-8 bg-emerald-50 border border-emerald-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm">
-          <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white mb-3 shadow-md">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+        <div className="w-full max-w-3xl mb-12 bg-white border border-emerald-100 rounded-3xl p-8 flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+          <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500 mb-5 border border-emerald-100 shadow-sm">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"></path></svg>
           </div>
-          <h2 className="text-2xl font-extrabold text-emerald-900">Registration Successful!</h2>
-          <p className="mt-1 text-emerald-700 text-sm font-medium">Your details have been securely recorded. Please download your receipt below.</p>
+          <h2 className="text-3xl font-extrabold text-slate-900 mb-2">Registration Successful!</h2>
+          <p className="text-slate-500 text-base max-w-md">Your details have been securely recorded. Please download your official receipt below and keep it for your records.</p>
         </div>
 
         {/* The Document to be converted to PDF */}
-        <div className="w-full max-w-[210mm] bg-white shadow-2xl overflow-hidden" ref={receiptRef}>
+        <div className="w-full max-w-[210mm] bg-white shadow-2xl ring-1 ring-slate-900/5 mx-auto" ref={receiptRef}>
           {/* Document Header */}
-          <div className="bg-indigo-900 px-10 py-12 text-white flex justify-between items-center">
+          <div className="bg-[#002b4b] px-12 py-14 text-white flex justify-between items-center border-b-[6px] border-[#005596]">
             <div>
-              <h1 className="text-4xl font-black tracking-tight">IMPETUS 2026</h1>
-              <p className="text-indigo-200 font-semibold tracking-widest text-sm mt-1 uppercase">Official Registration Receipt</p>
+              <h1 className="text-4xl font-black tracking-tight mb-2">IMPETUS <span className="text-blue-300">2026</span></h1>
+              <p className="text-blue-100 font-medium tracking-widest text-xs uppercase">Official Registration Receipt</p>
             </div>
             <div className="text-right">
-              <div className="bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/20 text-center">
-                <p className="text-[10px] text-indigo-200 uppercase tracking-widest font-bold mb-1">Receipt Number</p>
-                <p className="text-xl font-mono font-bold text-white">{receiptData.referenceNumber}</p>
+              <div className="bg-white/10 px-5 py-3 rounded-xl backdrop-blur-md border border-white/20 text-center">
+                <p className="text-[10px] text-blue-200 uppercase tracking-widest font-bold mb-1">Receipt No.</p>
+                <p className="text-xl font-mono font-bold text-white tracking-wider">{receiptData.referenceNumber}</p>
               </div>
             </div>
           </div>
 
-          <div className="p-10 space-y-8">
-            {/* Header Details */}
-            <div className="flex justify-between items-end border-b-2 border-slate-100 pb-4">
+          <div className="p-12 space-y-10">
+            {/* Meta Details */}
+            <div className="flex justify-between items-end border-b border-slate-200 pb-6">
               <div>
-                <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Date Issued</p>
+                <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1.5">Date Issued</p>
                 <p className="text-base font-bold text-slate-800">{receiptData.submitDate}</p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Payment Status</p>
-                <p className="text-base font-bold text-emerald-600 flex items-center justify-end gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-                  Verified
-                </p>
+                <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1.5">Payment Status</p>
+                <div className="inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1 rounded-md border border-emerald-100">
+                  <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                  <p className="text-sm font-bold text-emerald-700 uppercase tracking-wide">Verified</p>
+                </div>
               </div>
             </div>
 
             {/* Attendee Info Section */}
             <div>
-              <h3 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-4 bg-indigo-50 inline-block px-3 py-1 rounded">Attendee Information</h3>
-              <div className="grid grid-cols-2 gap-y-6 gap-x-8 text-slate-800">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#005596] flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                </div>
+                <h3 className="text-base font-bold text-[#002b4b] uppercase tracking-widest">Attendee Information</h3>
+              </div>
+
+              <div className="grid grid-cols-2 gap-y-8 gap-x-12 text-slate-800 bg-slate-50/50 p-8 rounded-2xl border border-slate-100">
                 <div>
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wide mb-1">Full Name</p>
-                  <p className="font-bold text-lg border-b border-slate-100 pb-2">{receiptData.fullName}</p>
+                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Full Name</p>
+                  <p className="font-bold text-lg text-slate-900">{receiptData.fullName}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wide mb-1">Email Address</p>
-                  <p className="font-medium text-base border-b border-slate-100 pb-2">{receiptData.email}</p>
+                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Email Address</p>
+                  <p className="font-medium text-base text-slate-700">{receiptData.email}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wide mb-1">Mobile</p>
-                  <p className="font-medium text-base border-b border-slate-100 pb-2">{receiptData.mobile}</p>
+                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Mobile</p>
+                  <p className="font-medium text-base text-slate-700">{receiptData.mobile}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wide mb-1">Institution</p>
-                  <p className="font-medium text-base border-b border-slate-100 pb-2">{receiptData.institution}</p>
+                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Institution</p>
+                  <p className="font-medium text-base text-slate-700">{receiptData.institution}</p>
                 </div>
               </div>
             </div>
 
             {/* Registration Details Section */}
             <div>
-              <h3 className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-4 bg-indigo-50 inline-block px-3 py-1 rounded">Registration Profile</h3>
-              <div className="bg-slate-50 rounded-xl p-6 border border-slate-200">
-                <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <h3 className="text-base font-bold text-[#002b4b] uppercase tracking-widest">Registration Profile</h3>
+              </div>
+
+              <div className="bg-white border-2 border-slate-100 rounded-2xl p-8">
+                <div className="grid grid-cols-2 gap-y-8 gap-x-12">
                   <div>
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">Role</p>
-                    <p className="font-black text-indigo-800 uppercase">
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Role</p>
+                    <p className="font-black text-indigo-700 uppercase tracking-wide">
                       {receiptData.role === 'author' ? 'Author / Presenter' : 'Non-Author / Attendee'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">Country</p>
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Country</p>
                     <p className="font-bold text-slate-800 uppercase">{receiptData.country}</p>
                   </div>
-                  
-                  <div className="col-span-2 pt-4 mt-2 border-t border-slate-200">
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">Category / Attendance</p>
-                    <p className="font-bold text-slate-800 text-lg">{receiptData.attendanceType}</p>
+
+                  <div className="col-span-2 pt-6 mt-2 border-t border-slate-100">
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Category / Attendance</p>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold text-slate-800 text-lg">{receiptData.attendanceType}</p>
+                      <p className="font-bold text-emerald-600 text-lg bg-emerald-50 px-4 py-1.5 rounded-lg border border-emerald-100">
+                        Paid: {receiptData.amountPaid}
+                      </p>
+                    </div>
                   </div>
-                  
-                  {receiptData.attendanceType?.includes('Student') && receiptData.ieeeMemberId && (
+
+                  {receiptData.ieeeMemberId && (
                     <div className="col-span-2">
-                      <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">IEEE Membership ID</p>
-                      <p className="font-bold text-slate-800">{receiptData.ieeeMemberId}</p>
+                      <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">IEEE Membership ID</p>
+                      <p className="font-bold text-slate-800 bg-slate-50 inline-block px-4 py-2 rounded-lg border border-slate-200">{receiptData.ieeeMemberId}</p>
                     </div>
                   )}
 
                   {receiptData.role === 'author' && (
                     <>
-                      <div className="col-span-2 pt-4 mt-2 border-t border-slate-200">
-                        <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">Paper ID</p>
-                        <p className="font-bold text-slate-800 text-lg">{receiptData.paperId}</p>
+                      <div className="col-span-2 pt-6 mt-2 border-t border-slate-100">
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Paper Title & ID</p>
+                        <p className="font-bold text-slate-900 text-lg mb-1">{receiptData.paperTitle}</p>
+                        <p className="font-mono text-sm text-indigo-600 font-bold">ID: {receiptData.paperId}</p>
                       </div>
                       <div className="col-span-2">
-                        <p className="text-xs text-slate-500 font-bold uppercase tracking-wide mb-1">Research Track</p>
-                        <p className="font-bold text-slate-800">{receiptData.researchTrack}</p>
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Research Track</p>
+                        <p className="font-medium text-slate-700 bg-slate-50 inline-block px-4 py-2 rounded-lg border border-slate-200">{receiptData.researchTrack}</p>
                       </div>
                     </>
                   )}
@@ -266,31 +334,27 @@ const RegistrationForm = () => {
             </div>
 
             {/* Official Footer */}
-            <div className="pt-8 pb-6 flex flex-col items-center justify-center">
-              <div className="mb-2">
-                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest text-center">Ref: {receiptData.referenceNumber}</p>
-              </div>
-
-              <div className="mt-4 text-center border-t border-slate-200 pt-6 w-full">
-                <p className="text-xs text-slate-400 font-medium">This is a system-generated document. No signature is required.</p>
-                <p className="text-xs text-slate-400 font-medium mt-1">Please present this digital receipt at the registration desk upon arrival.</p>
+            <div className="pt-10 flex flex-col items-center justify-center">
+              <div className="w-full text-center border-t border-slate-200 pt-8">
+                <p className="text-[11px] text-slate-400 font-medium tracking-wide">This is a system-generated document. No signature is required.</p>
+                <p className="text-[11px] text-slate-400 font-medium tracking-wide mt-1">Please present this digital receipt at the registration desk upon arrival.</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Web Action Buttons */}
-        <div className="w-full max-w-[210mm] mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="w-full max-w-[210mm] mt-10 flex flex-col sm:flex-row gap-5 justify-center">
           <button
             onClick={handleDownloadPDF}
-            className="flex-1 flex items-center justify-center gap-2 py-4 px-8 rounded-xl text-lg font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-500/30"
+            className="flex-1 flex items-center justify-center gap-3 py-4 px-8 rounded-2xl text-lg font-bold text-white bg-[#005596] hover:bg-[#003b69] transition-all shadow-lg hover:shadow-blue-900/20 hover:-translate-y-0.5"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            Download High-Quality PDF
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download Official PDF
           </button>
           <button
             onClick={handleReset}
-            className="flex items-center justify-center py-4 px-8 rounded-xl text-lg font-bold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-all shadow-sm"
+            className="flex items-center justify-center py-4 px-8 rounded-2xl text-lg font-bold text-slate-600 bg-white border-2 border-slate-200 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-300 transition-all shadow-sm"
           >
             Submit Another
           </button>
@@ -307,7 +371,7 @@ const RegistrationForm = () => {
     return (
       <div className="py-16 px-4 sm:px-6 lg:px-8 w-full min-h-screen flex flex-col items-center justify-center font-sans text-slate-800 bg-slate-50">
         <div className="flex flex-col items-center justify-center bg-white p-12 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 max-w-md w-full text-center transform transition-all animate-fade-in-up">
-          
+
           <div className="relative w-28 h-28 mb-8">
             {/* Background ring */}
             <div className="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
@@ -320,10 +384,10 @@ const RegistrationForm = () => {
               </svg>
             </div>
           </div>
-          
+
           <h3 className="text-3xl font-extrabold text-slate-800 mb-3 tracking-tight">Processing...</h3>
           <p className="text-slate-500 text-base leading-relaxed">
-            Please wait while we securely upload your registration details and payment receipt to IMPETUS servers. <br/><br/>
+            Please wait while we securely upload your registration details and payment receipt to IMPETUS servers. <br /><br />
             <span className="font-semibold text-indigo-500">Do not refresh or close this page.</span>
           </p>
         </div>
@@ -349,35 +413,98 @@ const RegistrationForm = () => {
 
         <div className="p-6 md:p-10">
 
-          <div className="mb-12 bg-slate-50/80 rounded-2xl p-6 md:p-8 border border-slate-200">
-            <h2 className="text-sm font-bold text-indigo-600 tracking-wider uppercase mb-4 flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              Early Bird Registration Fees
-            </h2>
-            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
-              <table className="w-full text-left text-sm text-slate-600">
-                <thead className="bg-slate-100/50 text-slate-800">
-                  <tr>
-                    <th className="px-5 py-4 font-semibold border-b border-slate-200">CATEGORY</th>
-                    <th className="px-5 py-4 font-semibold border-b border-slate-200">ONLINE PRESENTERS</th>
-                    <th className="px-5 py-4 font-semibold border-b border-slate-200">PHYSICAL PRESENTERS</th>
+          <section className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-12">
+            <div className="p-8 border-b border-gray-100">
+              <h2 className="text-2xl font-bold text-[#005596] flex items-center gap-2">
+                <CreditCard className="w-6 h-6" /> Registration Fees
+              </h2>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[800px]">
+                <thead>
+                  <tr className="bg-slate-50 text-slate-700 text-sm uppercase tracking-wider">
+                    <th rowSpan="2" className="py-4 px-6 text-left border-r border-gray-200">Category</th>
+                    <th colSpan="2" className="py-2 px-6 text-center border-r border-gray-200 bg-blue-50/50 text-[#005596]">Early Bird Registration</th>
+                    <th colSpan="2" className="py-2 px-6 text-center bg-amber-50/50 text-amber-700">Late Registration</th>
+                  </tr>
+                  <tr className="bg-slate-50 text-slate-600 text-xs uppercase">
+                    <th className="py-3 px-6 text-center border-r border-gray-200 bg-blue-50/30">Online Presenters</th>
+                    <th className="py-3 px-6 text-center border-r border-gray-200 bg-blue-50/30">Physical Presenters</th>
+                    <th className="py-3 px-6 text-center border-r border-gray-200 bg-amber-50/30">Online Presenters</th>
+                    <th className="py-3 px-6 text-center bg-amber-50/30">Physical Presenters</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
-                  <tr className="hover:bg-slate-50 transition-colors">
-                    <td className="px-5 py-4 font-medium text-slate-900">Students **</td>
-                    <td className="px-5 py-4">LKR 2,500</td>
-                    <td className="px-5 py-4">LKR 3,000</td>
+                <tbody className="divide-y divide-gray-100 text-gray-700 font-medium">
+                  <tr className="hover:bg-gray-50 transition-colors">
+                    <td className="py-4 px-6 border-r border-gray-100">
+                      Students <span className="text-amber-600 font-bold">**</span>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div>LKR 2,500</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 1,875</div>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div>LKR 3,000</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 2,250</div>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div>LKR 3,500</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 2,625</div>
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div>LKR 4,000</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 3,000</div>
+                    </td>
                   </tr>
-                  <tr className="hover:bg-slate-50 transition-colors">
-                    <td className="px-5 py-4 font-medium text-slate-900">Local</td>
-                    <td className="px-5 py-4">LKR 5,000</td>
-                    <td className="px-5 py-4">LKR 6,000</td>
+                  <tr className="hover:bg-gray-50 transition-colors bg-slate-50/30">
+                    <td className="py-4 px-6 border-r border-gray-100">
+                      Local <span className="text-amber-600 font-bold">**</span>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div>LKR 5,000</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 3,750</div>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div>LKR 6,000</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,500</div>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div>LKR 6,500</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,875</div>
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div>LKR 7,500</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 5,625</div>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50 transition-colors bg-blue-50/10 border-l-4 border-l-blue-500">
+                    <td className="py-4 px-6 border-r border-gray-100 font-bold text-[#005596]">
+                      International <span className="text-amber-600 font-bold">**</span>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div className="font-bold">USD 60</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 45</div>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div className="font-bold">USD 80</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 60</div>
+                    </td>
+                    <td className="py-4 px-6 text-center border-r border-gray-100">
+                      <div className="font-bold">USD 90</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 67.50</div>
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="font-bold">USD 120</div>
+                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 90</div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </div>
+            <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
+              <span className="font-bold">**</span> 25% registration fee waiver applies to all participants with a valid IEEE membership.
+            </div>
+          </section>
 
           <form onSubmit={handleSubmit} className="space-y-12">
 
@@ -399,8 +526,8 @@ const RegistrationForm = () => {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Mobile (with country code) <span className="text-red-500">*</span></label>
-                  <input type="tel" name="mobile" required value={formData.mobile} onChange={handleInputChange} placeholder="+94 77 123 4567" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Mobile<span className="text-red-500">*</span></label>
+                  <input type="tel" name="mobile" required value={formData.mobile} onChange={handleInputChange} placeholder="0771234567" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
                 </div>
 
                 <div className="group">
@@ -439,6 +566,8 @@ const RegistrationForm = () => {
                       <option value="Student - Physical">Student - Physical (LKR 3,000)</option>
                       <option value="Local - Online">Local - Online (LKR 5,000)</option>
                       <option value="Local - Physical">Local - Physical (LKR 6,000)</option>
+                      <option value="International - Online">International - Online (USD 60)</option>
+                      <option value="International - Physical">International - Physical (USD 80)</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -446,12 +575,35 @@ const RegistrationForm = () => {
                   </div>
                 </div>
 
-                {formData.attendanceType.includes('Student') && (
-                  <div className="col-span-1 sm:col-span-2 group">
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">IEEE Membership ID <span className="text-slate-400 font-normal">(Optional)</span></label>
-                    <input type="text" name="ieeeMemberId" value={formData.ieeeMemberId} onChange={handleInputChange} placeholder="e.g. 98765432" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
+                <div className="col-span-1 sm:col-span-2 group">
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">IEEE Membership ID <span className="text-slate-400 font-normal">(Optional - 25% Discount Applied)</span></label>
+                  <input type="text" name="ieeeMemberId" value={formData.ieeeMemberId} onChange={handleInputChange} placeholder="e.g. 98765432" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
+                </div>
+
+                {/* --- NEW DYNAMIC PRICE FIELD --- */}
+                {formData.attendanceType && (
+                  <div className="col-span-1 sm:col-span-2 group animate-fade-in-up mt-2">
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">Total Amount Payable</label>
+                    <div className="w-full px-5 py-4 rounded-xl border-2 border-emerald-200 bg-emerald-50/80 text-emerald-900 flex items-center justify-between shadow-sm transition-all duration-300">
+                      <span className="font-bold flex items-center gap-2">
+                        <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Amount Due
+                      </span>
+                      <div className="flex items-center gap-3">
+                        {hasDiscount && (
+                          <span className="text-sm line-through text-emerald-600/60 font-bold">
+                            {formattedBaseAmount}
+                          </span>
+                        )}
+                        <span className="text-2xl font-black text-emerald-700">
+                          {formattedDisplayAmount}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 )}
+                {/* --- END NEW DYNAMIC PRICE FIELD --- */}
+
               </div>
             </div>
 
@@ -546,7 +698,7 @@ const RegistrationForm = () => {
                   </div>
                   <label className="block text-lg font-bold text-slate-800 mb-2">Upload Bank Payment Receipt <span className="text-red-500">*</span></label>
                   <p className="text-sm text-slate-500 mb-6">Supported formats: PDF, JPG, PNG (Max size: 5MB)</p>
-                  
+
                   <input
                     type="file"
                     name="receipt"
@@ -555,7 +707,7 @@ const RegistrationForm = () => {
                     onChange={handleFileChange}
                     className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer mx-auto max-w-md transition-colors"
                   />
-                  
+
                   {fileError && (
                     <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm font-semibold flex items-center justify-center gap-2 max-w-md mx-auto">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -568,8 +720,8 @@ const RegistrationForm = () => {
             </div>
 
             <div className="pt-6">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className={`w-full flex justify-center items-center gap-2 py-4 px-8 rounded-xl text-lg font-bold text-white transition-all duration-200 shadow-lg shadow-indigo-900/20 
                   ${fileError ? 'bg-slate-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transform hover:-translate-y-0.5'}`}
               >
