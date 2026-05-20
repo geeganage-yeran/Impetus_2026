@@ -23,29 +23,30 @@ export default function ProgramDetails() {
   // Existing Panelists Data
   const panelists = [
     {
-      name: "Snr. Prof. R.A.R.C. Gopura",
-      role: "Dean, Faculty of Graduate Studies",
-      org: "University of Moratuwa",
-      image: "/panelDis/Picture1.png"
-    },
-    {
       name: "Prof. S. Vasanthapriyan",
       role: "Dean, Faculty of Computing",
       org: "Sabaragamuwa University of Sri Lanka",
       image: "/panelDis/Picture2.png"
     },
     {
-      name: "Prof. Prasad M. Jayaweera",
-      role: "Dean, Faculty of Computing",
-      org: "University of Sri Jayewardenepura",
-      image: "/panelDis/Picture3.png"
-    },
-    {
       name: "Prof. Roshan G. Ragel",
       role: "Professor, Dept. of Computer Engineering",
       org: "University of Peradeniya",
       image: "/panelDis/Picture4.jpg"
-    }
+    },
+    {
+      name: "Prof. Pradeep Abeygunawardhana",
+      role: "Dean, Faculty of Computing",
+      org: "Sri Lanka Institute of Information Technology",
+      image: "/panelDis/Picture1.jpeg"
+    },
+    {
+      name: "Dr. D.R. Welikanna",
+      role: "Senior Lecturer, Faculty of Geomatics",
+      org: "Sabaragamuwa University of Sri Lanka",
+      image: "/panelDis/Picture3.jpeg"
+    },
+    
   ];
 
   // Workshop Resource Panel Data
