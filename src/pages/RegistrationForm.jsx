@@ -37,11 +37,10 @@ const RegistrationForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // 5MB = 5 * 1024 * 1024 bytes (5,242,880 bytes)
       if (file.size > 5 * 1024 * 1024) {
         setFileError('File size exceeds 5MB. Please upload a smaller file.');
         setFormData({ ...formData, receipt: null });
-        e.target.value = ''; // Clear the input field
+        e.target.value = '';
       } else {
         setFileError('');
         setFormData({ ...formData, receipt: file });
@@ -52,13 +51,11 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Final validation check before submitting
     if (fileError || !formData.receipt) {
       alert("Please upload a valid payment receipt under 5MB.");
       return;
     }
 
-    // Trigger the processing UI immediately
     setIsProcessing(true);
 
     // 1. Calculate Base Amount & Discount
@@ -72,9 +69,9 @@ const RegistrationForm = () => {
     else if (formData.attendanceType === 'International - Online') { baseAmount = 60; currency = 'USD'; }
     else if (formData.attendanceType === 'International - Physical') { baseAmount = 80; currency = 'USD'; }
 
-    // Apply 25% discount if an IEEE Member ID is provided
+    // Apply 25% discount if an IEEE Member ID is provided AND it's not International
     let finalAmount = baseAmount;
-    if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '') {
+    if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && !formData.attendanceType.includes('International')) {
       finalAmount = baseAmount * 0.75;
     }
 
@@ -82,11 +79,9 @@ const RegistrationForm = () => {
       ? `$${finalAmount.toFixed(2)} USD`
       : `LKR ${finalAmount.toLocaleString()}`;
 
-    // 2. Generate reference and date
     const refNumber = 'IMP-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
     const submitDate = new Date().toLocaleDateString('en-US');
 
-    // 3. Convert Image to Base64
     const reader = new FileReader();
     reader.readAsDataURL(formData.receipt);
 
@@ -102,17 +97,14 @@ const RegistrationForm = () => {
         ...formData,
         referenceNumber: refNumber,
         submitDate: submitDate,
-        amountPaid: formattedAmount, // Included the calculated amount
+        amountPaid: formattedAmount, 
         receipt: base64Image
       };
 
-      // 4. Send to Google Apps Script
       try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbxO3tNRwf4x7ymah98ozJIihNeDnEgXd7EgeOVoxMFuH24d4agSgnKeKsY6S3Qf_tielg/exec', {
           method: 'POST',
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload)
         });
 
@@ -120,12 +112,11 @@ const RegistrationForm = () => {
 
         if (result.status === "success") {
           setReceiptData(payload);
-          setIsSubmitted(true); // Switch to success UI
+          setIsSubmitted(true);
         } else {
           alert("Google Error: " + result.message);
           console.error("Backend Error:", result);
         }
-
       } catch (error) {
         console.error("Network or parsing error", error);
         alert("Submission failed. Check your internet connection and try again.");
@@ -143,25 +134,19 @@ const RegistrationForm = () => {
     setFileError('');
   };
 
-  // Modern PDF Generation Logic
   const handleDownloadPDF = () => {
     const input = receiptRef.current;
-
     if (!input) return;
 
     toPng(input, {
       cacheBust: true,
-      backgroundColor: '#ffffff', // Ensures a white background
-      pixelRatio: 2 // High resolution output
+      backgroundColor: '#ffffff',
+      pixelRatio: 2
     })
       .then((dataUrl) => {
-        // Create a standard A4 portrait PDF
         const pdf = new jsPDF('p', 'mm', 'a4');
-
         const pdfWidth = pdf.internal.pageSize.getWidth();
-        // Calculate height to maintain the aspect ratio of your receipt container
         const pdfHeight = (input.offsetHeight * pdfWidth) / input.offsetWidth;
-
         pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
         pdf.save(`IMPETUS_2026_Receipt_${receiptData.referenceNumber}.pdf`);
       })
@@ -185,7 +170,8 @@ const RegistrationForm = () => {
 
   let displayFinalAmount = displayBaseAmount;
   let hasDiscount = false;
-  if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '') {
+  // Make sure International participants don't get the discount in the UI
+  if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && !formData.attendanceType.includes('International')) {
     displayFinalAmount = displayBaseAmount * 0.75;
     hasDiscount = true;
   }
@@ -199,14 +185,9 @@ const RegistrationForm = () => {
     : `LKR ${displayBaseAmount.toLocaleString()}`;
 
 
-  // ==========================================
-  // VIEW 1: SUCCESS / PDF RECEIPT VIEW
-  // ==========================================
   if (isSubmitted && receiptData) {
     return (
       <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 w-full min-h-screen flex flex-col items-center justify-start font-sans text-slate-800 bg-gray-50/50">
-
-        {/* Web Success Banner */}
         <div className="w-full max-w-3xl mb-12 bg-white border border-emerald-100 rounded-3xl p-8 flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
           <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500 mb-5 border border-emerald-100 shadow-sm">
@@ -216,9 +197,7 @@ const RegistrationForm = () => {
           <p className="text-slate-500 text-base max-w-md">Your details have been securely recorded. Please download your official receipt below and keep it for your records.</p>
         </div>
 
-        {/* The Document to be converted to PDF */}
         <div className="w-full max-w-[210mm] bg-white shadow-2xl ring-1 ring-slate-900/5 mx-auto" ref={receiptRef}>
-          {/* Document Header */}
           <div className="bg-[#002b4b] px-12 py-14 text-white flex justify-between items-center border-b-[6px] border-[#005596]">
             <div>
               <h1 className="text-4xl font-black tracking-tight mb-2">IMPETUS <span className="text-blue-300">2026</span></h1>
@@ -233,7 +212,6 @@ const RegistrationForm = () => {
           </div>
 
           <div className="p-12 space-y-10">
-            {/* Meta Details */}
             <div className="flex justify-between items-end border-b border-slate-200 pb-6">
               <div>
                 <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1.5">Date Issued</p>
@@ -248,7 +226,6 @@ const RegistrationForm = () => {
               </div>
             </div>
 
-            {/* Attendee Info Section */}
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#005596] flex items-center justify-center">
@@ -277,7 +254,6 @@ const RegistrationForm = () => {
               </div>
             </div>
 
-            {/* Registration Details Section */}
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
@@ -309,7 +285,8 @@ const RegistrationForm = () => {
                     </div>
                   </div>
 
-                  {receiptData.ieeeMemberId && (
+                  {/* Hide IEEE Member ID on receipt if it's international (or if they didn't fill it) */}
+                  {receiptData.ieeeMemberId && !receiptData.attendanceType?.includes('International') && (
                     <div className="col-span-2">
                       <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">IEEE Membership ID</p>
                       <p className="font-bold text-slate-800 bg-slate-50 inline-block px-4 py-2 rounded-lg border border-slate-200">{receiptData.ieeeMemberId}</p>
@@ -333,7 +310,6 @@ const RegistrationForm = () => {
               </div>
             </div>
 
-            {/* Official Footer */}
             <div className="pt-10 flex flex-col items-center justify-center">
               <div className="w-full text-center border-t border-slate-200 pt-8">
                 <p className="text-[11px] text-slate-400 font-medium tracking-wide">This is a system-generated document. No signature is required.</p>
@@ -343,7 +319,6 @@ const RegistrationForm = () => {
           </div>
         </div>
 
-        {/* Web Action Buttons */}
         <div className="w-full max-w-[210mm] mt-10 flex flex-col sm:flex-row gap-5 justify-center">
           <button
             onClick={handleDownloadPDF}
@@ -364,20 +339,14 @@ const RegistrationForm = () => {
     );
   }
 
-  // ==========================================
-  // VIEW 2: LOADING / PROCESSING VIEW
-  // ==========================================
   if (isProcessing) {
     return (
       <div className="py-16 px-4 sm:px-6 lg:px-8 w-full min-h-screen flex flex-col items-center justify-center font-sans text-slate-800 bg-slate-50">
         <div className="flex flex-col items-center justify-center bg-white p-12 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 max-w-md w-full text-center transform transition-all animate-fade-in-up">
 
           <div className="relative w-28 h-28 mb-8">
-            {/* Background ring */}
             <div className="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
-            {/* Spinning ring */}
             <div className="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div>
-            {/* Center Icon */}
             <div className="absolute inset-0 flex items-center justify-center">
               <svg className="w-10 h-10 text-indigo-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -395,9 +364,6 @@ const RegistrationForm = () => {
     );
   }
 
-  // ==========================================
-  // VIEW 3: ORIGINAL FORM VIEW
-  // ==========================================
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8 w-full flex justify-center font-sans text-slate-800 bg-slate-50 min-h-screen">
       <div className="w-full max-w-4xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl overflow-hidden border border-slate-100">
@@ -479,30 +445,26 @@ const RegistrationForm = () => {
                   </tr>
                   <tr className="hover:bg-gray-50 transition-colors bg-blue-50/10 border-l-4 border-l-blue-500">
                     <td className="py-4 px-6 border-r border-gray-100 font-bold text-[#005596]">
-                      International <span className="text-amber-600 font-bold">**</span>
+                      International
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div className="font-bold">USD 60</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 45</div>
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div className="font-bold">USD 80</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 60</div>
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div className="font-bold">USD 90</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 67.50</div>
                     </td>
                     <td className="py-4 px-6 text-center">
                       <div className="font-bold">USD 120</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: USD 90</div>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
-              <span className="font-bold">**</span> 25% registration fee waiver applies to all participants with a valid IEEE membership.
+              <span className="font-bold">**</span> 25% registration fee waiver applies to local (Student and Regular) participants with a valid IEEE membership.
             </div>
           </section>
 
@@ -526,8 +488,8 @@ const RegistrationForm = () => {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Mobile<span className="text-red-500">*</span></label>
-                  <input type="tel" name="mobile" required value={formData.mobile} onChange={handleInputChange} placeholder="0771234567" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Mobile (with country code) <span className="text-red-500">*</span></label>
+                  <input type="tel" name="mobile" required value={formData.mobile} onChange={handleInputChange} placeholder="+94 77 123 4567" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
                 </div>
 
                 <div className="group">
@@ -576,7 +538,9 @@ const RegistrationForm = () => {
                 </div>
 
                 <div className="col-span-1 sm:col-span-2 group">
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">IEEE Membership ID <span className="text-slate-400 font-normal">(Optional - 25% Discount Applied)</span></label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    IEEE Membership ID <span className="text-slate-400 font-normal">(Optional {formData.attendanceType && !formData.attendanceType.includes('International') ? '- 25% Discount Applied' : ''})</span>
+                  </label>
                   <input type="text" name="ieeeMemberId" value={formData.ieeeMemberId} onChange={handleInputChange} placeholder="e.g. 98765432" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
                 </div>
 
