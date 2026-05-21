@@ -162,7 +162,7 @@ export default function Registration() {
                 (For the International Participant)
               </p>
               <Link 
-                to="/register-form" 
+                to="/pay/" 
                 className="mt-auto block text-center w-full py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
               >
                 Go to Registration & Payment
