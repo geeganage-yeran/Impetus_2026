@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Added for navigation
+import { Link } from 'react-router-dom';
 import { 
   CreditCard, 
   Landmark, 
@@ -161,12 +161,13 @@ export default function Registration() {
               <p className="text-sm font-semibold text-purple-700 mb-6 bg-purple-50 inline-block px-2 py-1 rounded self-start">
                 (For the International Participant)
               </p>
-              <Link 
-                to="/pay/" 
+              {/* Restored proper link to /pay/ */}
+              <a 
+                href="/pay/" 
                 className="mt-auto block text-center w-full py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
               >
                 Go to Registration & Payment
-              </Link>
+              </a>
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
