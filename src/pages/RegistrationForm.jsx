@@ -68,10 +68,16 @@ const RegistrationForm = () => {
     else if (formData.attendanceType === 'Local - Physical') baseAmount = 6000;
     else if (formData.attendanceType === 'International - Online') { baseAmount = 60; currency = 'USD'; }
     else if (formData.attendanceType === 'International - Physical') { baseAmount = 80; currency = 'USD'; }
+    else if (formData.attendanceType === 'Late Student - Online') baseAmount = 3500;
+    else if (formData.attendanceType === 'Late Student - Physical') baseAmount = 4000;
+    else if (formData.attendanceType === 'Late Local - Online') baseAmount = 6500;
+    else if (formData.attendanceType === 'Late Local - Physical') baseAmount = 7500;
+    else if (formData.attendanceType === 'Late International - Online') { baseAmount = 90; currency = 'USD'; }
+    else if (formData.attendanceType === 'Late International - Physical') { baseAmount = 120; currency = 'USD'; }
 
-    // Apply 25% discount if an IEEE Member ID is provided AND it's a Student category
+    // Apply 25% discount if an IEEE Member ID is provided AND it's a Student category (but not Late)
     let finalAmount = baseAmount;
-    if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && formData.attendanceType.includes('Student')) {
+    if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && formData.attendanceType.includes('Student') && !formData.attendanceType.includes('Late')) {
       finalAmount = baseAmount * 0.75;
     }
 
@@ -167,11 +173,17 @@ const RegistrationForm = () => {
   else if (formData.attendanceType === 'Local - Physical') displayBaseAmount = 6000;
   else if (formData.attendanceType === 'International - Online') { displayBaseAmount = 60; displayCurrency = 'USD'; }
   else if (formData.attendanceType === 'International - Physical') { displayBaseAmount = 80; displayCurrency = 'USD'; }
+  else if (formData.attendanceType === 'Late Student - Online') displayBaseAmount = 3500;
+  else if (formData.attendanceType === 'Late Student - Physical') displayBaseAmount = 4000;
+  else if (formData.attendanceType === 'Late Local - Online') displayBaseAmount = 6500;
+  else if (formData.attendanceType === 'Late Local - Physical') displayBaseAmount = 7500;
+  else if (formData.attendanceType === 'Late International - Online') { displayBaseAmount = 90; displayCurrency = 'USD'; }
+  else if (formData.attendanceType === 'Late International - Physical') { displayBaseAmount = 120; displayCurrency = 'USD'; }
 
   let displayFinalAmount = displayBaseAmount;
   let hasDiscount = false;
-  // Only Student participants get the IEEE discount
-  if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && formData.attendanceType.includes('Student')) {
+  // Only Student participants get the IEEE discount (excluding Late)
+  if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && formData.attendanceType.includes('Student') && !formData.attendanceType.includes('Late')) {
     displayFinalAmount = displayBaseAmount * 0.75;
     hasDiscount = true;
   }
@@ -286,7 +298,7 @@ const RegistrationForm = () => {
                   </div>
 
                   {/* Hide IEEE Member ID on receipt if it's not a Student (or if they didn't fill it) */}
-                  {receiptData.ieeeMemberId && receiptData.attendanceType?.includes('Student') && (
+                  {receiptData.ieeeMemberId && receiptData.attendanceType?.includes('Student') && !receiptData.attendanceType?.includes('Late') && (
                     <div className="col-span-2">
                       <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">IEEE Membership ID</p>
                       <p className="font-bold text-slate-800 bg-slate-50 inline-block px-4 py-2 rounded-lg border border-slate-200">{receiptData.ieeeMemberId}</p>
@@ -518,12 +530,22 @@ const RegistrationForm = () => {
                   <div className="relative">
                     <select name="attendanceType" required value={formData.attendanceType} onChange={handleInputChange} className="appearance-none w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200 shadow-sm cursor-pointer">
                       <option value="" disabled>Select your category...</option>
-                      <option value="Student - Online">Student - Online (LKR 2,500)</option>
-                      <option value="Student - Physical">Student - Physical (LKR 3,000)</option>
-                      <option value="Local - Online">Local - Online (LKR 5,000)</option>
-                      <option value="Local - Physical">Local - Physical (LKR 6,000)</option>
-                      <option value="International - Online">International - Online (USD 60)</option>
-                      <option value="International - Physical">International - Physical (USD 80)</option>
+                      <optgroup label="Early Bird Registration">
+                        <option value="Student - Online">Student - Online (LKR 2,500)</option>
+                        <option value="Student - Physical">Student - Physical (LKR 3,000)</option>
+                        <option value="Local - Online">Local - Online (LKR 5,000)</option>
+                        <option value="Local - Physical">Local - Physical (LKR 6,000)</option>
+                        <option value="International - Online">International - Online (USD 60)</option>
+                        <option value="International - Physical">International - Physical (USD 80)</option>
+                      </optgroup>
+                      <optgroup label="Late Registration">
+                        <option value="Late Student - Online">Late Student - Online (LKR 3,500)</option>
+                        <option value="Late Student - Physical">Late Student - Physical (LKR 4,000)</option>
+                        <option value="Late Local - Online">Late Local - Online (LKR 6,500)</option>
+                        <option value="Late Local - Physical">Late Local - Physical (LKR 7,500)</option>
+                        <option value="Late International - Online">Late International - Online (USD 90)</option>
+                        <option value="Late International - Physical">Late International - Physical (USD 120)</option>
+                      </optgroup>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -533,7 +555,7 @@ const RegistrationForm = () => {
 
                 <div className="col-span-1 sm:col-span-2 group">
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    IEEE Membership ID <span className="text-slate-400 font-normal">(Optional {formData.attendanceType && formData.attendanceType.includes('Student') ? '- 25% Discount Applied' : ''})</span>
+                    IEEE Membership ID <span className="text-slate-400 font-normal">(Optional {formData.attendanceType && formData.attendanceType.includes('Student') && !formData.attendanceType.includes('Late') ? '- 25% Discount Applied' : ''})</span>
                   </label>
                   <input type="text" name="ieeeMemberId" value={formData.ieeeMemberId} onChange={handleInputChange} placeholder="e.g. 98765432" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
                 </div>

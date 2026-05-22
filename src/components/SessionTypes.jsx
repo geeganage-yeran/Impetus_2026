@@ -15,7 +15,7 @@ const sessions = [
     color: "bg-blue-100 text-blue-600",
     downloads: [
       { 
-        label: "Slide Template", 
+        label: "Virtual Presentation Template", 
         url: "/Docs/IMPETUS.pptx", 
         icon: Presentation 
       },
