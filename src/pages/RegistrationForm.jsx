@@ -403,23 +403,21 @@ const RegistrationForm = () => {
                 <tbody className="divide-y divide-gray-100 text-gray-700 font-medium">
                   <tr className="hover:bg-gray-50 transition-colors">
                     <td className="py-4 px-6 border-r border-gray-100">
-                      Students <span className="text-amber-600 font-bold">**</span>
+                      Students <span className="text-red-600 font-bold">**</span>
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div>LKR 2,500</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 1,875</div>
+                      <div className="text-xs text-red-600 font-bold mt-1 tracking-wide">IEEE: LKR 1,875</div>
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div>LKR 3,000</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 2,250</div>
+                      <div className="text-xs text-red-600 font-bold mt-1 tracking-wide">IEEE: LKR 2,250</div>
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div>LKR 3,500</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 2,625</div>
                     </td>
                     <td className="py-4 px-6 text-center">
                       <div>LKR 4,000</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 3,000</div>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50 transition-colors bg-slate-50/30">
@@ -459,8 +457,8 @@ const RegistrationForm = () => {
                 </tbody>
               </table>
             </div>
-            <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
-              <span className="font-bold">**</span> 25% registration fee waiver applies to local Student participants with a valid IEEE membership.
+            <div className="p-4 bg-red-50/50 text-sm text-red-800 border-t border-red-100">
+              <span className="text-red-600 font-bold">**</span> 25% registration fee waiver applies to local Student participants with a valid IEEE membership.
             </div>
           </section>
 
