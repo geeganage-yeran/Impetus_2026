@@ -5,7 +5,7 @@ import { User, Award, Users, Star, Layers, Globe, PenTool, DollarSign, Truck, Me
 
 const advisoryCommittee = [
   { name: "Prof. Amila Sandaruwan Ratnayake", role: "Dean, Faculty of Applied Sciences", dept: "Uva Wellassa University", img: "amila.png" },
-  { name: "Assoc. Prof. A. P. Henagamage", role: "Head, Dept. of Science & Technology", dept: "Uva Wellassa University", img: "henagama.jpg" },
+  { name: "Prof. A. P. Henagamage", role: "Head, Dept. of Science & Technology", dept: "Uva Wellassa University", img: "henagama.jpg" },
   { name: "Dr. J. T. Cooray", role: "Head, Dept. of Applied Earth Sciences", dept: "Uva Wellassa University", img: "cooray.jpg" },
   { name: "Prof. E. M. U. W. J. B. Ekanayake", role: "Head, Dept. of Computer Science & Informatics", dept: "Uva Wellassa University", img: "ekanayake.jpg" },
   { name: "Prof. K. W. S. N. Kumari", role: "Counselor", dept: "IEEE Uva Wellassa University Student Branch", img: "kumari.jpeg" },
