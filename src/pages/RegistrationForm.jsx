@@ -69,9 +69,9 @@ const RegistrationForm = () => {
     else if (formData.attendanceType === 'International - Online') { baseAmount = 60; currency = 'USD'; }
     else if (formData.attendanceType === 'International - Physical') { baseAmount = 80; currency = 'USD'; }
 
-    // Apply 25% discount if an IEEE Member ID is provided AND it's not International
+    // Apply 25% discount if an IEEE Member ID is provided AND it's a Student category
     let finalAmount = baseAmount;
-    if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && !formData.attendanceType.includes('International')) {
+    if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && formData.attendanceType.includes('Student')) {
       finalAmount = baseAmount * 0.75;
     }
 
@@ -170,8 +170,8 @@ const RegistrationForm = () => {
 
   let displayFinalAmount = displayBaseAmount;
   let hasDiscount = false;
-  // Make sure International participants don't get the discount in the UI
-  if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && !formData.attendanceType.includes('International')) {
+  // Only Student participants get the IEEE discount
+  if (formData.ieeeMemberId && formData.ieeeMemberId.trim() !== '' && formData.attendanceType.includes('Student')) {
     displayFinalAmount = displayBaseAmount * 0.75;
     hasDiscount = true;
   }
@@ -285,8 +285,8 @@ const RegistrationForm = () => {
                     </div>
                   </div>
 
-                  {/* Hide IEEE Member ID on receipt if it's international (or if they didn't fill it) */}
-                  {receiptData.ieeeMemberId && !receiptData.attendanceType?.includes('International') && (
+                  {/* Hide IEEE Member ID on receipt if it's not a Student (or if they didn't fill it) */}
+                  {receiptData.ieeeMemberId && receiptData.attendanceType?.includes('Student') && (
                     <div className="col-span-2">
                       <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">IEEE Membership ID</p>
                       <p className="font-bold text-slate-800 bg-slate-50 inline-block px-4 py-2 rounded-lg border border-slate-200">{receiptData.ieeeMemberId}</p>
@@ -424,23 +424,19 @@ const RegistrationForm = () => {
                   </tr>
                   <tr className="hover:bg-gray-50 transition-colors bg-slate-50/30">
                     <td className="py-4 px-6 border-r border-gray-100">
-                      Local <span className="text-amber-600 font-bold">**</span>
+                      Local
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div>LKR 5,000</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 3,750</div>
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div>LKR 6,000</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,500</div>
                     </td>
                     <td className="py-4 px-6 text-center border-r border-gray-100">
                       <div>LKR 6,500</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,875</div>
                     </td>
                     <td className="py-4 px-6 text-center">
                       <div>LKR 7,500</div>
-                      <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 5,625</div>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50 transition-colors bg-blue-50/10 border-l-4 border-l-blue-500">
@@ -464,7 +460,7 @@ const RegistrationForm = () => {
               </table>
             </div>
             <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
-              <span className="font-bold">**</span> 25% registration fee waiver applies to local (Student and Regular) participants with a valid IEEE membership.
+              <span className="font-bold">**</span> 25% registration fee waiver applies to local Student participants with a valid IEEE membership.
             </div>
           </section>
 
@@ -539,7 +535,7 @@ const RegistrationForm = () => {
 
                 <div className="col-span-1 sm:col-span-2 group">
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    IEEE Membership ID <span className="text-slate-400 font-normal">(Optional {formData.attendanceType && !formData.attendanceType.includes('International') ? '- 25% Discount Applied' : ''})</span>
+                    IEEE Membership ID <span className="text-slate-400 font-normal">(Optional {formData.attendanceType && formData.attendanceType.includes('Student') ? '- 25% Discount Applied' : ''})</span>
                   </label>
                   <input type="text" name="ieeeMemberId" value={formData.ieeeMemberId} onChange={handleInputChange} placeholder="e.g. 98765432" className="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all duration-200" />
                 </div>

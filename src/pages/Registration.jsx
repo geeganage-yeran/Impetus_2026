@@ -88,23 +88,19 @@ export default function Registration() {
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors bg-slate-50/30">
                   <td className="py-4 px-6 border-r border-gray-100">
-                    Local <span className="text-amber-600 font-bold">**</span>
+                    Local
                   </td>
                   <td className="py-4 px-6 text-center border-r border-gray-100">
                     <div>LKR 5,000</div>
-                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 3,750</div>
                   </td>
                   <td className="py-4 px-6 text-center border-r border-gray-100">
                     <div>LKR 6,000</div>
-                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,500</div>
                   </td>
                   <td className="py-4 px-6 text-center border-r border-gray-100">
                     <div>LKR 6,500</div>
-                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 4,875</div>
                   </td>
                   <td className="py-4 px-6 text-center">
                     <div>LKR 7,500</div>
-                    <div className="text-xs text-amber-600 font-bold mt-1 tracking-wide">IEEE: LKR 5,625</div>
                   </td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors bg-blue-50/10 border-l-4 border-l-blue-500">
@@ -128,7 +124,7 @@ export default function Registration() {
             </table>
           </div>
           <div className="p-4 bg-amber-50/50 text-sm text-amber-800 border-t border-amber-100">
-            <span className="font-bold">**</span> 25% registration fee waiver applies to local (Student and Regular) participants with a valid IEEE membership.
+            <span className="font-bold">**</span> 25% registration fee waiver applies to local Student participants with a valid IEEE membership.
           </div>
         </section>
 
