@@ -46,6 +46,12 @@ export default function ProgramDetails() {
       org: "Sabaragamuwa University of Sri Lanka",
       image: "/panelDis/Picture3.jpeg"
     },
+    {
+      name: "Dr. Lochanda Ranathunga",
+      role: "Senior Lecturer, Faculty of Information Technology",
+      org: "University of Moratuwa",
+      image: "/panelDis/Picture5.jpg"
+    },
     
   ];
 
@@ -335,7 +341,7 @@ export default function ProgramDetails() {
               </div>
 
               {/* Panelists Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 {panelists.map((member, index) => (
                   <div
                     key={index}
