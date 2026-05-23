@@ -9,6 +9,11 @@ const sessions = [
     color: "bg-purple-100 text-purple-600",
     downloads: [
       { 
+        label: "Presentation Template", 
+        url: "/Docs/IMPETUS.pptx", 
+        icon: Presentation 
+      },
+      { 
         label: "Presentation Guidelines", 
         url: "/Docs/IMPETUS2026–PresentationSubmissionGuidelines.docx", 
         icon: FileText 
@@ -22,19 +27,14 @@ const sessions = [
     color: "bg-blue-100 text-blue-600",
     downloads: [
       { 
-        label: "Virtual Presentation Template", 
-        url: "/Docs/IMPETUS.pptx", 
-        icon: Presentation 
+        label: "Virtual Presentation Guidelines", 
+        url: "/Docs/IMPETUS2026–VirtualPresentationSubmissionGuidelines.docx", 
+        icon: FileText 
       },
       { 
         label: "Virtual Background", 
         url: "/Docs/background.jpeg", 
         icon: ImageIcon 
-      },
-      { 
-        label: "Virtual Submission Guidelines", 
-        url: "/Docs/IMPETUS2026–VirtualPresentationSubmissionGuidelines.docx", 
-        icon: FileText 
       }
     ]
   },
