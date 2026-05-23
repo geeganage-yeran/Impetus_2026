@@ -25,7 +25,7 @@ export default function ProgramDetails() {
     {
       name: "Prof. S. Vasanthapriyan",
       role: "Dean, Faculty of Computing",
-      org: "Sabaragamuwa University of Sri Lanka",
+      org: "Sabaragamuwa University",
       image: "/panelDis/Picture2.png"
     },
     {
@@ -43,7 +43,7 @@ export default function ProgramDetails() {
     {
       name: "Dr. D.R. Welikanna",
       role: "Senior Lecturer, Faculty of Geomatics",
-      org: "Sabaragamuwa University of Sri Lanka",
+      org: "Sabaragamuwa University",
       image: "/panelDis/Picture3.jpeg"
     },
     {
