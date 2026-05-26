@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function HeroAndCountdown() {
   const navigate = useNavigate();
-  const targetDate = new Date('2026-05-27T00:00:00').getTime();
+  const targetDate = new Date('2026-05-27T09:00:00').getTime();
   
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -12,6 +12,7 @@ export default function HeroAndCountdown() {
     minutes: 0,
     seconds: 0,
   });
+  const [isEventStarted, setIsEventStarted] = useState(false);
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(false);
   const [showFloatingCountdown, setShowFloatingCountdown] = useState(true);
@@ -35,6 +36,8 @@ export default function HeroAndCountdown() {
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((difference % (1000 * 60)) / 1000),
         });
+      } else {
+        setIsEventStarted(true);
       }
     };
 
@@ -189,30 +192,47 @@ export default function HeroAndCountdown() {
             showFloatingCountdown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
           }`}
         >
-          <div className="bg-slate-900/95 backdrop-blur-xl border-2 border-white/20 rounded-2xl p-4 shadow-2xl">
-            <div className="text-center mb-2">
-              <p className="text-xs font-semibold text-white/70 uppercase tracking-wider">Event Starts In</p>
+          {isEventStarted ? (
+            <div className="bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 p-[2px] rounded-2xl shadow-[0_0_30px_rgba(245,158,11,0.6)] animate-pulse transition-all duration-300 hover:scale-105">
+              <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl p-4 md:p-5 flex items-center gap-4 cursor-pointer hover:bg-slate-800/95 transition-colors">
+                <div className="relative flex h-4 w-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-yellow-500"></span>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 uppercase tracking-widest">
+                    Live Now
+                  </p>
+                  <p className="text-white text-xs md:text-sm font-medium mt-0.5">Conference has started!</p>
+                </div>
+              </div>
             </div>
-            <div className="flex gap-3">
-              {[
-                { value: timeLeft.days, label: 'Days' },
-                { value: timeLeft.hours, label: 'Hrs' },
-                { value: timeLeft.minutes, label: 'Min' },
-                { value: timeLeft.seconds, label: 'Sec' },
-              ].map((item, index) => (
-                <div key={index} className="text-center">
-                  <div className="bg-slate-800/50 rounded-lg px-3 py-2 min-w-[50px]">
-                    <div className="text-2xl font-bold text-white">
-                      {String(item.value).padStart(2, '0')}
-                    </div>
-                    <div className="text-[10px] font-medium text-white/50 uppercase mt-1">
-                      {item.label}
+          ) : (
+            <div className="bg-slate-900/95 backdrop-blur-xl border-2 border-white/20 rounded-2xl p-4 shadow-2xl">
+              <div className="text-center mb-2">
+                <p className="text-xs font-semibold text-white/70 uppercase tracking-wider">Event Starts In</p>
+              </div>
+              <div className="flex gap-3">
+                {[
+                  { value: timeLeft.days, label: 'Days' },
+                  { value: timeLeft.hours, label: 'Hrs' },
+                  { value: timeLeft.minutes, label: 'Min' },
+                  { value: timeLeft.seconds, label: 'Sec' },
+                ].map((item, index) => (
+                  <div key={index} className="text-center">
+                    <div className="bg-slate-800/50 rounded-lg px-3 py-2 min-w-[50px]">
+                      <div className="text-2xl font-bold text-white">
+                        {String(item.value).padStart(2, '0')}
+                      </div>
+                      <div className="text-[10px] font-medium text-white/50 uppercase mt-1">
+                        {item.label}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -225,41 +245,74 @@ export default function HeroAndCountdown() {
         </div>
 
         <div data-aos="fade-up" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-2">
-              Event Countdown
-            </h2>
-            <p className="text-slate-400 text-sm sm:text-base">
-              Mark your calendar for this academic gathering
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto">
-            {[
-              { value: timeLeft.days, label: 'Days' },
-              { value: timeLeft.hours, label: 'Hours' },
-              { value: timeLeft.minutes, label: 'Minutes' },
-              { value: timeLeft.seconds, label: 'Seconds' },
-            ].map((item, index) => (
-              <div key={index} className="group relative">
-                <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 sm:p-8 transition-all duration-300 hover:bg-slate-800/70 hover:border-slate-600 min-w-[110px] sm:min-w-[130px]">
-                  <div className="text-center">
-                    <div className="text-5xl sm:text-6xl font-bold mb-2 text-white transition-all duration-300 group-hover:scale-105">
-                      {String(item.value).padStart(2, '0')}
-                    </div>
-                    <div className="text-xs sm:text-sm font-medium text-slate-400 uppercase tracking-wider">
-                      {item.label}
-                    </div>
-                  </div>
+          {isEventStarted ? (
+            <div className="text-center py-12 px-6 bg-gradient-to-b from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-yellow-500/30 rounded-3xl shadow-[0_0_50px_rgba(234,179,8,0.15)] relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 via-amber-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center p-4 bg-yellow-500/10 rounded-full mb-6 ring-1 ring-yellow-500/50 shadow-[0_0_20px_rgba(234,179,8,0.3)] animate-bounce">
+                  <Globe className="w-10 h-10 text-yellow-400 animate-pulse" />
                 </div>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-5 -translate-y-1/2 text-2xl font-light text-slate-600">
-                    :
-                  </div>
-                )}
+                
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 mb-6 drop-shadow-lg tracking-tight">
+                  The Conference is Live!
+                </h2>
+                
+                <p className="text-lg md:text-xl lg:text-2xl text-slate-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                  IMPETUS 2026 has officially started. Join us in steering innovation for ethical impact.
+                </p>
+                
+                <button 
+                  onClick={() => window.location.href = '#'} 
+                  className="relative inline-flex h-14 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-900 hover:scale-105 transition-transform duration-300"
+                >
+                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#FBBF24_50%,#E2CBFF_100%)]" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-900 px-8 py-1 text-lg font-bold text-white backdrop-blur-3xl hover:bg-slate-800 transition-colors gap-2 group-hover:bg-slate-800">
+                    Join Conference Now
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <>
+              <div className="text-center mb-12">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-2">
+                  Event Countdown
+                </h2>
+                <p className="text-slate-400 text-sm sm:text-base">
+                  Mark your calendar for this academic gathering
+                </p>
+              </div>
+
+              <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto">
+                {[
+                  { value: timeLeft.days, label: 'Days' },
+                  { value: timeLeft.hours, label: 'Hours' },
+                  { value: timeLeft.minutes, label: 'Minutes' },
+                  { value: timeLeft.seconds, label: 'Seconds' },
+                ].map((item, index) => (
+                  <div key={index} className="group relative">
+                    <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 sm:p-8 transition-all duration-300 hover:bg-slate-800/70 hover:border-slate-600 min-w-[110px] sm:min-w-[130px]">
+                      <div className="text-center">
+                        <div className="text-5xl sm:text-6xl font-bold mb-2 text-white transition-all duration-300 group-hover:scale-105">
+                          {String(item.value).padStart(2, '0')}
+                        </div>
+                        <div className="text-xs sm:text-sm font-medium text-slate-400 uppercase tracking-wider">
+                          {item.label}
+                        </div>
+                      </div>
+                    </div>
+                    {index < 3 && (
+                      <div className="hidden md:block absolute top-1/2 -right-5 -translate-y-1/2 text-2xl font-light text-slate-600">
+                        :
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
