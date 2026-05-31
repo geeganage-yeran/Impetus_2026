@@ -38,18 +38,15 @@ export default function SubmissionSection() {
             </p>
             
             {/* UPDATED LINK */}
-            <a 
-              href="https://cmt3.research.microsoft.com/IMPETUS2026"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-flex items-center gap-3 bg-white text-[#002b4b] px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95"
+            <button 
+              disabled
+              className="group relative inline-flex items-center gap-3 bg-white/20 text-white/50 px-10 py-4 rounded-full font-bold text-lg cursor-not-allowed"
             >
-              Submit Full Paper
-              <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </a>
+              Submission Closed
+            </button>
             
             <p className="mt-4 text-sm text-blue-200/80">
-              *Requires a Microsoft CMT account
+              *Conference has ended
             </p>
           </div>
         </div>

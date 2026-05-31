@@ -213,14 +213,14 @@ export default function Registration() {
           </div>
 
           <div className="text-center mt-12 flex flex-col items-center">
-            <Link 
-              to="/register-form" 
-              className="bg-[#005596] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-[#003b69] transition-all transform hover:scale-105 shadow-xl shadow-blue-900/20"
+            <button 
+              disabled
+              className="bg-[#005596]/50 text-white/50 px-10 py-4 rounded-full font-bold text-lg cursor-not-allowed"
             >
-              Go to Registration Form
-            </Link>
-            <p className="text-sm text-amber-700 mt-3 font-semibold bg-amber-50 px-4 py-1 rounded-full border border-amber-200">
-              (Registration will be available after May 02nd)
+              Registration Closed
+            </button>
+            <p className="text-sm text-gray-500 mt-3 font-semibold bg-gray-50 px-4 py-1 rounded-full border border-gray-200">
+              (Conference has ended)
             </p>
           </div>
         </section>

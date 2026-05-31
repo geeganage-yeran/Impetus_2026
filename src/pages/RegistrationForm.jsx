@@ -701,11 +701,11 @@ const RegistrationForm = () => {
 
             <div className="pt-6">
               <button
+                disabled
                 type="submit"
-                className={`w-full flex justify-center items-center gap-2 py-4 px-8 rounded-xl text-lg font-bold text-white transition-all duration-200 shadow-lg shadow-indigo-900/20 
-                  ${fileError ? 'bg-slate-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transform hover:-translate-y-0.5'}`}
+                className="w-full flex justify-center items-center gap-2 py-4 px-8 rounded-xl text-lg font-bold text-white/50 bg-slate-400 cursor-not-allowed transition-all duration-200 shadow-none"
               >
-                Submit Registration
+                Registration Closed
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </button>
             </div>

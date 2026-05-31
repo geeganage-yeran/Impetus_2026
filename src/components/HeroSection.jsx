@@ -170,8 +170,8 @@ export default function HeroAndCountdown() {
             
             {/* Submit Papers Button */}
             <button
-              onClick={() => navigate('/author')}
-              className="px-12 py-4 cursor-pointer bg-white/10 backdrop-blur-md border-2 border-white/50 text-white rounded-lg font-bold text-lg transition-all hover:bg-white/20 w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] shadow-lg"
+              disabled
+              className="px-12 py-4 cursor-not-allowed bg-white/5 backdrop-blur-md border-2 border-white/20 text-white/50 rounded-lg font-bold text-lg transition-all w-full sm:w-auto shadow-none"
             >
               Submit Full Paper
             </button>
@@ -196,14 +196,13 @@ export default function HeroAndCountdown() {
             <div className="bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 p-[2px] rounded-2xl shadow-[0_0_30px_rgba(245,158,11,0.6)] animate-pulse transition-all duration-300 hover:scale-105">
               <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl p-4 md:p-5 flex items-center gap-4 cursor-pointer hover:bg-slate-800/95 transition-colors">
                 <div className="relative flex h-4 w-4">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-4 w-4 bg-yellow-500"></span>
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-gray-500"></span>
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400 uppercase tracking-widest">
-                    Live Now
+                  <p className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-400 uppercase tracking-widest">
+                    Conference Ended
                   </p>
-                  <p className="text-white text-xs md:text-sm font-medium mt-0.5">Conference has started!</p>
+                  <p className="text-white text-xs md:text-sm font-medium mt-0.5">See you next year!</p>
                 </div>
               </div>
             </div>
@@ -254,22 +253,20 @@ export default function HeroAndCountdown() {
                   <Globe className="w-10 h-10 text-yellow-400 animate-pulse" />
                 </div>
                 
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 mb-6 drop-shadow-lg tracking-tight">
-                  The Conference is Live!
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 mb-6 drop-shadow-lg tracking-tight">
+                  The Conference has Ended!
                 </h2>
                 
                 <p className="text-lg md:text-xl lg:text-2xl text-slate-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
-                  IMPETUS 2026 has officially started. Join us in steering innovation for ethical impact.
+                  IMPETUS 2026 has officially concluded. See you next year!
                 </p>
                 
                 <button 
-                  onClick={() => window.location.href = '#'} 
-                  className="relative inline-flex h-14 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-900 hover:scale-105 transition-transform duration-300"
+                  disabled
+                  className="relative inline-flex h-14 overflow-hidden rounded-full p-[2px] opacity-50 cursor-not-allowed"
                 >
-                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#FBBF24_50%,#E2CBFF_100%)]" />
-                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-900 px-8 py-1 text-lg font-bold text-white backdrop-blur-3xl hover:bg-slate-800 transition-colors gap-2 group-hover:bg-slate-800">
+                  <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-slate-900 px-8 py-1 text-lg font-bold text-white/50 backdrop-blur-3xl gap-2">
                     Join Conference Now
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </button>
               </div>

@@ -28,14 +28,12 @@ export default function Home() {
             Ensure your paper follows the IEEE format.
           </p>
           {/* UPDATED LINK */}
-          <a
-            href="https://cmt3.research.microsoft.com/IMPETUS2026"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 bg-white text-[#002b4b] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors"
+          <button
+            disabled
+            className="inline-flex items-center gap-2 bg-white/20 text-white/50 px-8 py-4 rounded-full font-bold cursor-not-allowed"
           >
-            Submit Full Paper <ArrowRight className="w-5 h-5" />
-          </a>
+            Submission Closed
+          </button>
         </div>
       </section>
     </div>
